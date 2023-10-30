@@ -1,0 +1,14 @@
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\lilminirpg.exe
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\lilminirpg.deps.json
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\lilminirpg.runtimeconfig.json
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\lilminirpg.dll
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\lilminirpg.pdb
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.AssemblyInfoInputs.cache
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.AssemblyInfo.cs
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.csproj.CoreCompileInputs.cache
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.dll
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\refint\lilminirpg.dll
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.pdb
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.genruntimeconfig.cache
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\ref\lilminirpg.dll
