@@ -1,99 +1,260 @@
-﻿namespace lilminirpg
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace lilminirpg
 {
     internal class Program
     {
 
         public static void Main()
         {
-            int selectedoption = 0;
-            string menuinput = null;
-            string temp = "";
-
-            while (menuinput != "Escape")
+            // game start
+            // quit
             {
-                Console.Clear();
+                int selectedoption = 0;
+                string menuinput = null;
+                char cursor = ' ';
                 Player _player = new Player();
-                Console.WriteLine("Welcome new player! Please enter your character's name:");
-                _player.CharacterName = Console.ReadLine();
-                Console.Clear();
-                Console.CursorVisible = false;
-                while (menuinput != "Enter")
+
+                // Class choices
+                string[,] playerClasses =
                 {
-                    Console.WriteLine($"Hello {_player.CharacterName}! Next you will choose your class, a weapon, and an accessory.");
-                    Console.WriteLine("Your class choices are:");
-                    List<string> playerclasses = new List<string>()
-                {
-                    "Knight",
-                    "Thief",
-                    "Wizard",
-                    "Adventurer",
-                    "Monk"
+                    {"Knight", "The classic."},
+                    {"Thief", "Fast and stabby."},
+                    {"Wizard", "Fireworks."},
+                    {"Adventurer", "Roaming for fun."},
+                    {"Monk", "Fists of punishment."}
                 };
 
-                    for (int i = 0; i < playerclasses.Count; ++i)
+                // Weapon choices
+                string[,] playerWeapons =
+                {
+                    {"Short Sword", "A good, all-around weapon."},
+                    {"Claymore", "Slow but packs a punch."},
+                    {"Knife", "Fast and nimble."},
+                    {"Wand", "Does randomized magical damage."},
+                    {"Staff", "Excellent for defensive fighting."},
+                    {"Knuckle Wraps", "For those that like to brawl."}
+                };
+
+
+            // Accessory choices
+            string[,] playerAccessories =
+                {
+                    {"Shield", "A bit bulky, but keeps distance between You and Them."},
+                    {"Pocket Salt", "May cause the enemy to become Blinded."},
+                    {"Dancer's Shoes", "Makes it easier to dodge attacks."},
+                    {"Water Pendant", "Has a high chance of your attack inflicting Water damage."},
+                    {"Fire Ring", "Has a high chance of your attack inflicting Fire damage."},
+                    {"Lightning Brooch", "Has a high chance of your attack inflicting Lightning damage."}
+                };
+                while (menuinput != "Escape")
+                {
+                    // Set character name
+
+                    Console.CursorVisible = true;
+                    Console.WriteLine("Welcome new player! Please enter your character's name:");
+                    _player.CharacterName = Console.ReadLine();
+                    Console.Clear();
+                    selectedoption = 0;
+                    menuinput = "";
+                    cursor = ' ';
+
+                    while (menuinput != "Enter")
                     {
-                        char cursor = ' ';
-                        if (i == selectedoption)
+                        Console.CursorVisible = false;
+                        Console.WriteLine($"Hello {_player.CharacterName}! Next you will choose your class, a weapon, and an accessory.");
+                        Console.WriteLine("Your class choices are:");
+                        for (int i = 0; i < playerClasses.GetLength(0); i++)
                         {
-                            cursor = '>';
+                                if (i == selectedoption)
+                                {
+                                    cursor = '*';
+                                }
+                                else
+                                {
+                                    cursor = ' ';
+                                }
+                                Console.WriteLine($"[{cursor}] {playerClasses[i, 0]}: {playerClasses[i, 1]}");
+
                         }
-                        Console.WriteLine($"{cursor} {playerclasses[i]}");
+                        menuinput = Console.ReadKey(true).Key.ToString();
+                        if (menuinput == "UpArrow")
+                        {
+                            Console.Clear();
+                            selectedoption--;
+                            if (selectedoption < 0)
+                            {
+                                selectedoption = playerClasses.Length - 1;
+                            }
+                        }
+                        else if (menuinput == "DownArrow")
+                        {
+                            Console.Clear();
+                            selectedoption++;
+                            if (selectedoption > playerClasses.Length - 1)
+                            {
+                                selectedoption = 0;
+                            }
+                        }
                     }
-                    menuinput = Console.ReadKey(true).Key.ToString();
-                    if (menuinput == "UpArrow")
+                    if (selectedoption == 0)
                     {
-                        Console.Clear();
-                        --selectedoption;
+                        _player.ClassName = playerClasses[0,0];
                     }
-                    else if (menuinput == "DownArrow")
+                    else if (selectedoption == 1)
                     {
+                        _player.ClassName = playerClasses[1,0];
+                    }
+                    else if (selectedoption == 2)
+                    {
+                        _player.ClassName = playerClasses[2,0];
+                    }
+                    else if (selectedoption == 3)
+                    {
+                        _player.ClassName = playerClasses[3,0];
+                    }
+                    else if (selectedoption == 4)
+                    {
+                        _player.ClassName = playerClasses[4,0];
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have entered an invalid selection. Please try again.");
+                    }
+                    
+                    // Set player weapon
+                    selectedoption = 0;
+                    menuinput = "";
+
+                    while (menuinput != "Enter")
+                    {
+                        Console.CursorVisible = false;
                         Console.Clear();
-                        ++selectedoption;
+                        Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName}");
+                        Console.WriteLine("Now please choose a weapon:");
+                        for (int i = 0; i < playerWeapons.GetLength(0); i++)
+                        {
+                            if (i == selectedoption)
+                            {
+                                cursor = '*';
+                            }
+                            else
+                            {
+                                cursor = ' ';
+                            }
+                            Console.WriteLine($"[{cursor}] {playerWeapons[i, 0]}: {playerWeapons[i, 1]}");
+                        }
+                        menuinput = Console.ReadKey(true).Key.ToString();
+                        if (menuinput == "UpArrow")
+                        {
+                            Console.Clear();
+                            selectedoption--;
+                            if (selectedoption < 0)
+                            {
+                                selectedoption = playerWeapons.Length - 1;
+                            }
+                        }
+                        else if (menuinput == "DownArrow")
+                        {
+                            Console.Clear();
+                            selectedoption++;
+                            if (selectedoption > playerWeapons.Length - 1)
+                            {
+                                selectedoption = 0;
+                            }
+                        }
+                        if (selectedoption == 0)
+                        {
+                            _player.WornWeapon = playerWeapons[0, 0];
+                        }
+                        else if (selectedoption == 1)
+                        {
+                            _player.WornWeapon = playerWeapons[1, 0];
+                        }
+                        else if (selectedoption == 2)
+                        {
+                            _player.WornWeapon = playerWeapons[2, 0];
+                        }
+                        else if (selectedoption == 3)
+                        {
+                            _player.WornWeapon = playerWeapons[3, 0];
+                        }
+                        else if (selectedoption == 4)
+                        {
+                            _player.WornWeapon = playerWeapons[4, 0];
+                        }
+                        else if (selectedoption == 5)
+                        {
+                            _player.WornWeapon = playerWeapons[5, 0];
+                        }
+                    }
+
+                    selectedoption = 0;
+                    menuinput = "";
+                    while (menuinput != "Enter")
+                    {
+                        Console.CursorVisible = false;
+                        Console.Clear();
+                        Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon}");
+                        Console.WriteLine("Now please choose an accessory.");
+                        for (int i = 0; i < playerAccessories.GetLength(0); i++)
+                        {
+
+                            if (i == selectedoption)
+                            {
+                                cursor = '*';
+                            }
+                            else
+                            {
+                                cursor = ' ';
+                            }
+                            Console.WriteLine($"[{cursor}] {playerAccessories[i, 0]}: {playerAccessories[i, 1]}");
+                        }
+                        menuinput = Console.ReadKey(true).Key.ToString();
+                        if (menuinput == "UpArrow")
+                        {
+                            Console.Clear();
+                            selectedoption--;
+                            if (selectedoption < 0)
+                            {
+                                selectedoption = playerAccessories.Length - 1;
+                            }
+                        }
+                        else if (menuinput == "DownArrow")
+                        {
+                            Console.Clear();
+                            selectedoption++;
+                            if (selectedoption > playerAccessories.Length - 1)
+                            {
+                                selectedoption = 0;
+                            }
+                        }
+                        if (selectedoption == 0)
+                        {
+                            _player.WornAccessory = playerAccessories[0, 0];
+                        }
+                        else if (selectedoption == 1)
+                        {
+                            _player.WornAccessory = playerAccessories[1, 0];
+                        }
+                        else if (selectedoption == 2)
+                        {
+                            _player.WornAccessory = playerAccessories[2, 0];
+                        }
+                        else if (selectedoption == 3)
+                        {
+                            _player.WornAccessory = playerAccessories[3, 0];
+                        }
+                        else if (selectedoption == 4)
+                        {
+                            _player.WornAccessory = playerAccessories[4, 0];
+                        }
+                        else if (selectedoption == 5)
+                        {
+                            _player.WornAccessory = playerAccessories[5, 0];
+                        }
                     }
                 }
-                temp = Console.ReadLine();
-                if (temp == "Knight" || temp == "Thief" || temp == "Wizard" || temp == "Adventurer" || temp == "Monk")
-                {
-                    _player.ClassName = temp;
-                    Console.WriteLine($"You have chosen {temp}!");
-                }
-                else
-                {
-                    Console.WriteLine("You have entered an invalid selection. Please try again.");
-                }
-                _player.ClassName = Console.ReadLine();
-
-                Console.WriteLine("Now please choose a weapon:");
-                List<string> playerweapons = new List<string>()
-                {
-                    "One-Handed Sword: A good, all-around weapon.",
-                    "Two-Handed Sword: Slow but packs a punch.",
-                    "Knife: Fast and nimble.",
-                    "Wand: Does randomized magical damage.",
-                    "Staff: Excellent for defensive fighting.",
-                    "Knuckle Wraps: For those that like to brawl.",
-                };
-                foreach (string playerweapon in playerweapons)
-                {
-                    Console.WriteLine(playerweapon);
-                }
-                _player.WornWeapon = Console.ReadLine();
-                List<string> playeraccessoriess = new List<string>()
-                {
-                    "Shield: A bit bulky, but keeps distance between You and Them.",
-                    "Pocket Salt: May cause the enemy to become Blinded.",
-                    "Dancer's Shoes: Makes it easier to dodge attacks.",
-                    "Water Pendant: Has a high chance of your attack inflicting Water damage.",
-                    "Fire Ring: Has a high chance of your attack inflicting Fire damage.",
-                    "Lightning Brooch: Has a high chance of your attack inflicting Lightning damage."
-                };
-                foreach (string playeraccessory in playeraccessoriess)
-                {
-                    Console.WriteLine(playeraccessory);
-                }
-
-                _player.WornAccessory = Console.ReadLine();
-                Console.WriteLine($"You have chosen {_player.ClassName}, {_player.WornWeapon}, and {_player.WornAccessory} - is this correct?");
             }
         }
     }
