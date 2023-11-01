@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
+
 namespace lilminirpg
 {
     internal class Program
@@ -7,46 +8,19 @@ namespace lilminirpg
 
         public static void Main()
         {
-            // game start
-            // quit
+                   // game start
+                   // quit
             {
                 int selectedoption = 0;
                 string menuinput = null;
                 char cursor = ' ';
-                Player _player = new Player();
+                var _player = new Player();
+                var playerClasses = new ItemLists().PlayerClasses;
+                var playerWeapons = new ItemLists().PlayerWeapons;
+                var playerAccessories = new ItemLists().PlayerAccessories;
+                var menus = new Menus();
 
-                // Class choices
-                string[,] playerClasses =
-                {
-                    {"Knight", "The classic."},
-                    {"Thief", "Fast and stabby."},
-                    {"Wizard", "Fireworks."},
-                    {"Adventurer", "Roaming for fun."},
-                    {"Monk", "Fists of punishment."}
-                };
-
-                // Weapon choices
-                string[,] playerWeapons =
-                {
-                    {"Short Sword", "A good, all-around weapon."},
-                    {"Claymore", "Slow but packs a punch."},
-                    {"Knife", "Fast and nimble."},
-                    {"Wand", "Does randomized magical damage."},
-                    {"Staff", "Excellent for defensive fighting."},
-                    {"Knuckle Wraps", "For those that like to brawl."}
-                };
-
-
-            // Accessory choices
-            string[,] playerAccessories =
-                {
-                    {"Shield", "A bit bulky, but keeps distance between You and Them."},
-                    {"Pocket Salt", "May cause the enemy to become Blinded."},
-                    {"Dancer's Shoes", "Makes it easier to dodge attacks."},
-                    {"Water Pendant", "Has a high chance of your attack inflicting Water damage."},
-                    {"Fire Ring", "Has a high chance of your attack inflicting Fire damage."},
-                    {"Lightning Brooch", "Has a high chance of your attack inflicting Lightning damage."}
-                };
+                // Begin character creation
                 while (menuinput != "Escape")
                 {
                     // Set character name
@@ -59,6 +33,8 @@ namespace lilminirpg
                     menuinput = "";
                     cursor = ' ';
 
+
+                    // Character class
                     while (menuinput != "Enter")
                     {
                         Console.CursorVisible = false;
@@ -119,7 +95,7 @@ namespace lilminirpg
                     }
                     else
                     {
-                        Console.WriteLine("You have entered an invalid selection. Please try again.");
+                        menus.InvalidSelection();
                     }
                     
                     // Set player weapon
@@ -187,6 +163,10 @@ namespace lilminirpg
                         {
                             _player.WornWeapon = playerWeapons[5, 0];
                         }
+                        else
+                        {
+                            menus.InvalidSelection();
+                        }
                     }
 
                     selectedoption = 0;
@@ -253,7 +233,12 @@ namespace lilminirpg
                         {
                             _player.WornAccessory = playerAccessories[5, 0];
                         }
+                        else
+                        {
+                            menus.InvalidSelection();
+                        }
                     }
+                    Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon} || Accessory: {_player.WornAccessory}");
                 }
             }
         }
