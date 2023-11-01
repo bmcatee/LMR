@@ -34,7 +34,7 @@ namespace lilminirpg
         public string[,] PlayerAccessories =
             {
                     {"Shield", "A bit bulky, but keeps distance between You and Them."},
-                    {"Pocket Salt", "May cause the enemy to become Blinded."},
+                    {"Pocket Sand", "May cause the enemy to become Blinded."},
                     {"Dancer's Shoes", "Makes it easier to dodge attacks."},
                     {"Water Pendant", "Has a high chance of your attack inflicting Water damage."},
                     {"Fire Ring", "Has a high chance of your attack inflicting Fire damage."},
