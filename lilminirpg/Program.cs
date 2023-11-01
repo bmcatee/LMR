@@ -12,21 +12,22 @@ namespace lilminirpg
                 var _player = new Player();
                 var itemlists = new ItemLists();
                 var menus = new Menus();
+                var ui = new UI();
 
                 // Begin character creation
-                while (menus.MenuInput != "Escape")
+                while (ui.MenuInput != "Escape")
                 {
                     // Set character name
 
                     Console.CursorVisible = true;
                     Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
                     _player.CharacterName = Console.ReadLine();
-                  
-                    menus.SelectedOption = 0;
-                    menus.MenuInput = "";
+
+                    ui.SelectedOption = 0;
+                    ui.MenuInput = "";
 
                     // Character class
-                    while (menus.MenuInput != "Enter")
+                    while (ui.MenuInput != "Enter")
                     {
                         Console.Clear();
                         Console.CursorVisible = false;
@@ -38,31 +39,31 @@ namespace lilminirpg
 
                         for (int i = 0; i < itemlists.PlayerClasses.GetLength(0); i++)
                         {
-                            if (i == menus.SelectedOption)
+                            if (i == ui.SelectedOption)
                             {
-                                menus.Cursor = '*';
+                                ui.Cursor = '*';
                             }
                             else
                             {
-                                menus.Cursor = ' ';
+                                ui.Cursor = ' ';
                             }
-                            Console.WriteLine($"[{menus.Cursor}] {itemlists.PlayerClasses[i, 0]}: {itemlists.PlayerClasses[i, 1]}");
+                            Console.WriteLine($"[{ui.Cursor}] {itemlists.PlayerClasses[i, 0]}: {itemlists.PlayerClasses[i, 1]}");
                         }
                         Console.WriteLine("");
                         Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-                        menus.MenuInput = Console.ReadKey(true).Key.ToString();
-                        if (menus.MenuInput == "UpArrow")
+                        ui.MenuInput = Console.ReadKey(true).Key.ToString();
+                        if (ui.MenuInput == "UpArrow")
                         {
-                            menus.SelectUp();
+                            ui.SelectUp();
                         }
-                        else if (menus.MenuInput == "DownArrow")
+                        else if (ui.MenuInput == "DownArrow")
                         {
-                            menus.SelectDown();
+                            ui.SelectDown();
                         }
                     }
-                    if (menus.SelectedOption < itemlists.PlayerClasses.GetLength(0))
+                    if (ui.SelectedOption < itemlists.PlayerClasses.GetLength(0))
                     {
-                        _player.ClassName = itemlists.PlayerClasses[menus.SelectedOption, 0];
+                        _player.ClassName = itemlists.PlayerClasses[ui.SelectedOption, 0];
                     }
                     else
                     {
@@ -70,10 +71,10 @@ namespace lilminirpg
                     }
 
                     // Set player weapon
-                    menus.SelectedOption = 0;
-                    menus.MenuInput = "";
+                    ui.SelectedOption = 0;
+                    ui.MenuInput = "";
 
-                    while (menus.MenuInput != "Enter")
+                    while (ui.MenuInput != "Enter")
                     {
                         Console.Clear();
                         Console.CursorVisible = false;
@@ -84,40 +85,40 @@ namespace lilminirpg
 
                         for (int i = 0; i < itemlists.PlayerWeapons.GetLength(0); i++)
                         {
-                            if (i == menus.SelectedOption)
+                            if (i == ui.SelectedOption)
                             {
-                                menus.Cursor = '*';
+                                ui.Cursor = '*';
                             }
                             else
                             {
-                                menus.Cursor = ' ';
+                                ui.Cursor = ' ';
                             }
-                            Console.WriteLine($"[{menus.Cursor}] {itemlists.PlayerWeapons[i, 0]}: {itemlists.PlayerWeapons[i, 1]}");
+                            Console.WriteLine($"[{ui.Cursor}] {itemlists.PlayerWeapons[i, 0]}: {itemlists.PlayerWeapons[i, 1]}");
                         }
                         Console.WriteLine("");
                         Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-                        menus.MenuInput = Console.ReadKey(true).Key.ToString();
-                        if (menus.MenuInput == "UpArrow")
+                        ui.MenuInput = Console.ReadKey(true).Key.ToString();
+                        if (ui.MenuInput == "UpArrow")
                         {
-                            menus.SelectUp();
+                            ui.SelectUp();
                         }
-                        else if (menus.MenuInput == "DownArrow")
+                        else if (ui.MenuInput == "DownArrow")
                         {
-                            menus.SelectDown();
+                            ui.SelectDown();
                         }
                     }
-                    if (menus.SelectedOption < itemlists.PlayerWeapons.GetLength(0))
+                    if (ui.SelectedOption < itemlists.PlayerWeapons.GetLength(0))
                     {
-                        _player.WornWeapon = itemlists.PlayerWeapons[menus.SelectedOption, 0];
+                        _player.WornWeapon = itemlists.PlayerWeapons[ui.SelectedOption, 0];
                     }
                     else
                     {
                         menus.InvalidSelection();
                     }
 
-                    menus.SelectedOption = 0;
-                    menus.MenuInput = "";
-                    while (menus.MenuInput != "Enter")
+                    ui.SelectedOption = 0;
+                    ui.MenuInput = "";
+                    while (ui.MenuInput != "Enter")
                     {
                         Console.Clear();
                         Console.CursorVisible = false;
@@ -128,30 +129,30 @@ namespace lilminirpg
                         for (int i = 0; i < itemlists.PlayerAccessories.GetLength(0); i++)
                         {
 
-                            if (i == menus.SelectedOption)
+                            if (i == ui.SelectedOption)
                             {
-                                menus.Cursor = '*';
+                                ui.Cursor = '*';
                             }
                             else
                             {
-                                menus.Cursor = ' ';
+                                ui.Cursor = ' ';
                             }
-                            Console.WriteLine($"[{menus.Cursor}] {itemlists.PlayerAccessories[i, 0]}: {itemlists.PlayerAccessories[i, 1]}");
+                            Console.WriteLine($"[{ui.Cursor}] {itemlists.PlayerAccessories[i, 0]}: {itemlists.PlayerAccessories[i, 1]}");
                         }
                         Console.WriteLine("");
                         Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-                        menus.MenuInput = Console.ReadKey(true).Key.ToString();
-                        if (menus.MenuInput == "UpArrow")
+                        ui.MenuInput = Console.ReadKey(true).Key.ToString();
+                        if (ui.MenuInput == "UpArrow")
                         {
-                            menus.SelectUp();
+                            ui.SelectUp();
                         }
-                        else if (menus.MenuInput == "DownArrow")
+                        else if (ui.MenuInput == "DownArrow")
                         {
-                            menus.SelectDown();
+                            ui.SelectDown();
                         }
-                        if (menus.SelectedOption < itemlists.PlayerAccessories.GetLength(0))
+                        if (ui.SelectedOption < itemlists.PlayerAccessories.GetLength(0))
                         {
-                            _player.WornAccessory = itemlists.PlayerAccessories[menus.SelectedOption, 0];
+                            _player.WornAccessory = itemlists.PlayerAccessories[ui.SelectedOption, 0];
                         }
                         else
                         {
