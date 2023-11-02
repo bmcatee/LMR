@@ -9,7 +9,6 @@ namespace lilminirpg
 {
     public static class Menus
     {
-
         public static void MenuMain()
         {
             {

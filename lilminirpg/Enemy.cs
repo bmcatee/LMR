@@ -10,6 +10,5 @@ namespace lilminirpg
     {
       public int GoldDropped { get; set; }
       public int XPDropped { get; set; }
-      
     }
 }

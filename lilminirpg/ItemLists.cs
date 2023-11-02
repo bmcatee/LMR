@@ -15,6 +15,7 @@ namespace lilminirpg
                     {"Options",""},
                     {"Exit","" }
         };
+
         // Class choices
         public static string[,] PlayerClasses =
         {
@@ -35,7 +36,6 @@ namespace lilminirpg
                     {"Staff", "Excellent for defensive fighting."},
                     {"Knuckle Wraps", "For those that like to brawl."}
         };
-
 
         // Accessory choices
         public static string[,] PlayerAccessories =

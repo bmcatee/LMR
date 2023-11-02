@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-
     public class CharacterMaker
     {
-
         Player _player = new Player();
         public void MakeCharacter()
         {
@@ -24,15 +22,17 @@ namespace lilminirpg
                 Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
                 _player.CharacterName = Console.ReadLine();
 
+                // Cleanup before moving to setting the character class
                 UI.SelectedOption = 0;
                 UI.MenuInput = "";
                 UI.MenuTracker = "MenuPlayerClass";
                 UI.MenuLength = ItemLists.PlayerClasses.GetLength(0);
+
                 // TEST
                 //Console.WriteLine($"UI.MenuTracker = {UI.MenuTracker} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
                 //Console.ReadLine();
             
-                // Character class
+                // Set character class
                 while (UI.MenuInput != "Enter")
                 {
                     Console.Clear();
@@ -40,7 +40,6 @@ namespace lilminirpg
                     Console.WriteLine($"Name: {_player.CharacterName}");
                     Console.WriteLine("");
                     Console.WriteLine($"Hello {_player.CharacterName}! Next you will choose your class, a weapon, and an accessory.");
-
 
                     UI.MenuSelector();
 
@@ -79,9 +78,7 @@ namespace lilminirpg
                     Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName}");
                     Console.WriteLine("");
 
-
                     UI.MenuSelector();
-
 
                     UI.MenuInput = Console.ReadKey().Key.ToString();
                     if (UI.MenuInput == "UpArrow")
@@ -102,6 +99,7 @@ namespace lilminirpg
                     Menus.InvalidSelection();
                 }
 
+                // Set player accessory
                 UI.SelectedOption = 0;
                 UI.MenuInput = "";
                 UI.MenuTracker = "MenuAccessory";
