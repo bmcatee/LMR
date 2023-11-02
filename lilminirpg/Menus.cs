@@ -9,53 +9,56 @@ namespace lilminirpg
 {
     public static class Menus
     {
+        // Main menu seen at game start
         public static void MenuMain()
         {
+            UI.MenuLength = ItemLists.MainMenu.GetLength(0);
+            while (UI.MenuInput != "Enter")
             {
+                Console.WriteLine("Now playing: lil mini rpg");
+                Console.WriteLine("");
+                for (int i = 0; i < UI.MenuLength; i++)
                 {
-                    while (UI.MenuInput != "Enter")
+                    if (i == UI.SelectedOption)
                     {
-                        Console.WriteLine("Now playing: lil mini rpg");
-                        Console.WriteLine("");
-                        for (int i = 0; i < UI.MenuLength; i++)
-                        {
-                            if (i == UI.SelectedOption)
-                            {
-                                UI.Cursor = '*';
-                            }
-                            else
-                            {
-                                UI.Cursor = ' ';
-                            }
-                            Console.WriteLine($"[{UI.Cursor}] {ItemLists.MainMenu[i, 1]}");
-                        }
-
-                        Console.WriteLine("");
-                        Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-                        Console.WriteLine($"SelectedOption = {UI.SelectedOption} || MenuLength = {UI.MenuLength}");
-
-                        UI.MenuInput = Console.ReadKey(true).Key.ToString();
-                        if (UI.MenuInput == "UpArrow")
-                        {
-                            UI.SelectUp();
-                        }
-                        else if (UI.MenuInput == "DownArrow")
-                        {
-                            UI.SelectDown();
-                        }
-                        if (UI.SelectedOption == 0 && UI.MenuInput == "Enter")
-                        {
-                            CharacterMaker _charactermaker = new CharacterMaker();
-                            _charactermaker.MakeCharacter();
-                        }
-                        else
-                        {
-                            Menus.InvalidSelection();
-                        }
+                        UI.Cursor = '*';
                     }
+                    else
+                    {
+                        UI.Cursor = ' ';
+                    }
+                    Console.WriteLine($"[{UI.Cursor}] {ItemLists.MainMenu[i, 1]}");
+                }
+
+                Console.WriteLine("");
+                Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
+                Console.WriteLine($"SelectedOption = {UI.SelectedOption} || MenuLength = {UI.MenuLength}");
+
+                UI.MenuInput = Console.ReadKey(true).Key.ToString();
+                if (UI.MenuInput == "UpArrow")
+                {
+                    UI.SelectUp();
+                }
+                else if (UI.MenuInput == "DownArrow")
+                {
+                    UI.SelectDown();
+                }
+                else 
+                {
+                
+                }
+                if (UI.SelectedOption == 0 && UI.MenuInput == "Enter")
+                {
+                    CharacterMaker _charactermaker = new CharacterMaker();
+                    _charactermaker.MakeCharacter();
+                }
+                else if (UI.SelectedOption != 0 && UI.MenuInput == "Enter")
+                {
+                    Menus.InvalidSelection();
                 }
             }
         }
+
         public static void MenuPlayerClass()
         {
             Console.WriteLine("Your class choices are:");
@@ -75,7 +78,7 @@ namespace lilminirpg
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
         }
-        public static void MenuWeapon()
+        public static void MenuPlayerWeapon()
         {
             Console.WriteLine("Now please choose a weapon:");
             Console.WriteLine("");
@@ -94,7 +97,7 @@ namespace lilminirpg
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
         }
-        public static void MenuAccessory()
+        public static void MenuPlayerAccessory()
         {
             Console.WriteLine("Now please choose an accessory.");
             Console.WriteLine("");
@@ -112,7 +115,7 @@ namespace lilminirpg
             }
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-        }
+       }
         public static void InvalidSelection()
         {
             Console.WriteLine("You have entered an invalid selection. Please try again.");

@@ -7,10 +7,10 @@ namespace lilminirpg
         public static void Main()
         {
             // Goto main menu
-            UI.MenuTracker = "MenuMain";
-            UI.MenuLength = ItemLists.MainMenu.GetLength(0);
-            UI.MenuSelector();
+            UI.MenuSelector("MenuMain");
         }
+
+        // Save game method
         public static void SaveGame(string charactername, string classname, string wornweapon, string wornaccessory)
         {
             string[] savedata = { $"{charactername}", $"{classname}", $"{wornweapon}", $"{wornaccessory}" };
@@ -22,7 +22,14 @@ namespace lilminirpg
                     outputFile.WriteLine(s);
                 }
             Console.WriteLine("Your data has been saved!");
-            return;
+            UI.MenuInput = "";
+            UI.MenuSelector("MenuMain");
         }
     }
 }
+
+// TESTS
+// Console.WriteLine($"SelectedOption = {UI.SelectedOption} || MenuLength = {UI.MenuLength}");
+// Console.WriteLine($"UI.MenuTracker = {UI.MenuTracker} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
+// Console.ReadLine();
+
