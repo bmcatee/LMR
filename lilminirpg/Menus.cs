@@ -27,7 +27,7 @@ namespace lilminirpg
                             {
                                 UI.Cursor = ' ';
                             }
-                            Console.WriteLine($"[{UI.Cursor}] {ItemLists.MainMenu[i, 0]}");
+                            Console.WriteLine($"[{UI.Cursor}] {ItemLists.MainMenu[i, 1]}");
                         }
 
                         Console.WriteLine("");
@@ -43,7 +43,7 @@ namespace lilminirpg
                         {
                             UI.SelectDown();
                         }
-                        if (UI.SelectedOption == 0 && UI.MenuInput =="Enter")
+                        if (UI.SelectedOption == 0 && UI.MenuInput == "Enter")
                         {
                             CharacterMaker _charactermaker = new CharacterMaker();
                             _charactermaker.MakeCharacter();
@@ -70,7 +70,7 @@ namespace lilminirpg
                 {
                     UI.Cursor = ' ';
                 }
-                Console.WriteLine($"[{UI.Cursor}] {ItemLists.PlayerClasses[i, 0]}: {ItemLists.PlayerClasses[i, 1]}");
+                Console.WriteLine($"[{UI.Cursor}] {ItemLists.PlayerClasses[i, 1]}: {ItemLists.PlayerClasses[i, 2]}");
             }
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
@@ -89,7 +89,7 @@ namespace lilminirpg
                 {
                     UI.Cursor = ' ';
                 }
-                Console.WriteLine($"[{UI.Cursor}] {ItemLists.PlayerWeapons[i, 0]}: {ItemLists.PlayerWeapons[i, 1]}");
+                Console.WriteLine($"[{UI.Cursor}] {ItemLists.PlayerWeapons[i, 1]}: {ItemLists.PlayerWeapons[i, 2]}");
             }
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
@@ -108,7 +108,7 @@ namespace lilminirpg
                 {
                     UI.Cursor = ' ';
                 }
-                Console.WriteLine($"[{UI.Cursor}] {ItemLists.PlayerAccessories[i, 0]}: {ItemLists.PlayerAccessories[i, 1]}");
+                Console.WriteLine($"[{UI.Cursor}] {ItemLists.PlayerAccessories[i, 1]}: {ItemLists.PlayerAccessories[i, 2]}");
             }
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");

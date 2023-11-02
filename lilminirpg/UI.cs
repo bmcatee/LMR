@@ -45,27 +45,23 @@ namespace lilminirpg
         {
             return SelectedOption;
         }
-        public static void ShowCursor()
-        {
-
-        }
         public static void MenuSelector()
         {
-                if (MenuTracker == "MenuMain")
-                {
-                    Menus.MenuMain();
-                }
-                else if (MenuTracker == "MenuPlayerClass")
-                {
-                    Menus.MenuPlayerClass();
-                }
-                else if (MenuTracker == "MenuWeapon")
-                {
-                    Menus.MenuWeapon();                }
-                else if (MenuTracker == "MenuAccessory")
-                {
-                    Menus.MenuAccessory();
-                }            
+            if (MenuTracker == "MenuMain")
+            {
+                Menus.MenuMain();
+            }
+            else if (MenuTracker == "MenuPlayerClass")
+            {
+                Menus.MenuPlayerClass();
+            }
+            else if (MenuTracker == "MenuWeapon")
+            {
+                Menus.MenuWeapon();                }
+            else if (MenuTracker == "MenuAccessory")
+            {
+                Menus.MenuAccessory();
+            }            
         }
     }
 }

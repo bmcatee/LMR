@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,7 +59,7 @@ namespace lilminirpg
                 }
                 if (UI.SelectedOption < ItemLists.PlayerClasses.GetLength(0))
                 {
-                    _player.ClassName = ItemLists.PlayerClasses[UI.SelectedOption, 0];
+                    _player.ClassName = ItemLists.PlayerClasses[UI.SelectedOption, 1];
                 }
                 else
                 {
@@ -92,7 +93,7 @@ namespace lilminirpg
                 }
                 if (UI.SelectedOption < ItemLists.PlayerWeapons.GetLength(0))
                 {
-                    _player.WornWeapon = ItemLists.PlayerWeapons[UI.SelectedOption, 0];
+                    _player.WornWeapon = ItemLists.PlayerWeapons[UI.SelectedOption, 1];
                 }
                 else
                 {
@@ -125,7 +126,7 @@ namespace lilminirpg
                     }
                     if (UI.SelectedOption < ItemLists.PlayerAccessories.GetLength(0))
                     {
-                        _player.WornAccessory = ItemLists.PlayerAccessories[UI.SelectedOption, 0];
+                        _player.WornAccessory = ItemLists.PlayerAccessories[UI.SelectedOption, 1];
                     }
                     else
                     {
@@ -137,8 +138,12 @@ namespace lilminirpg
                 UI.MenuInput = "";
                 UI.MenuTracker = "";
                 UI.MenuLength = 0;
+
+                Program.SaveGame(_player.CharacterName, _player.ClassName, _player.WornWeapon, _player.WornAccessory);
                 return;
             }
+            
         }
+
     }
 }

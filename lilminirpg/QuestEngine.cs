@@ -8,5 +8,13 @@ namespace lilminirpg
 {
     internal class QuestEngine
     {
+        public static void FillArray()
+        {
+            int[] CurrentGameScreen = new int[10];
+            for (int i = 0; i < CurrentGameScreen.Length; ++i) 
+            { 
+                CurrentGameScreen[i] = i; 
+            }
+        }
     }
 }
