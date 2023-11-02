@@ -6,59 +6,66 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-    internal class UI 
+    internal static class UI 
     {
-        ItemLists itemlists = new ItemLists();
-        public int SelectedOption { get; set; }
-        public string MenuInput { get; set; }
-        public char Cursor = ' ';
-        public string MenuPrinter { get; set; }
+        public static char Cursor = ' ';
+        public static int SelectedOption { get; set; }
+        public static string MenuInput { get; set; }
+        public static string MenuTracker { get; set; }
+        public static int MenuLength { get; set; }
 
-        public void SelectUp()
+        public static void SelectUp()
         {
             if (SelectedOption > 0)
             {
                 Console.Clear();
-                SelectedOption--;
+                --SelectedOption;
             }
-            else if (SelectedOption < 0)
+            else if (SelectedOption == 0)
             {
                 Console.Clear();
-                SelectedOption = itemlists.PlayerClasses.GetLength(0) - 1;
+                SelectedOption = MenuLength -1;
             }
         }
 
-        public void SelectDown()
+        public static void SelectDown()
         {
-            if (SelectedOption < itemlists.PlayerClasses.GetLength(0) - 1)
+            if (SelectedOption < MenuLength - 1)
             {
                 Console.Clear();
-                SelectedOption++;
+                ++SelectedOption;
             }
-            else if (SelectedOption > itemlists.PlayerClasses.GetLength(0) - 1)
+            else if (SelectedOption == MenuLength - 1)
             {
                 Console.Clear();
                 SelectedOption = 0;
             }
         }
-        public int GetSelection()
+        public static int GetSelection()
         {
             return SelectedOption;
         }
-        public void PrintMenu()
+        public static void ShowCursor()
         {
-            for (int i = 0; i < itemlists.PlayerClasses.GetLength(0); i++)
-            {
-                if (i == SelectedOption)
+
+        }
+        public static void MenuSelector()
+        {
+                if (MenuTracker == "MenuMain")
                 {
-                    Cursor = '*';
+                    Menus.MenuMain();
                 }
-                else
+                else if (MenuTracker == "MenuPlayerClass")
                 {
-                    Cursor = ' ';
+                    Menus.MenuPlayerClass();
                 }
-                Console.WriteLine($"[{Cursor}] {itemlists.PlayerClasses[i, 0]}: {itemlists.PlayerClasses[i, 1]}");
-            }
+                else if (MenuTracker == "MenuWeapon")
+                {
+                    Menus.MenuWeapon();                }
+                else if (MenuTracker == "MenuAccessory")
+                {
+                    Menus.MenuAccessory();
+                }            
         }
     }
 }
