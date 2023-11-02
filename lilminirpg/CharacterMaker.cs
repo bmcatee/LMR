@@ -31,6 +31,8 @@ namespace lilminirpg
                 Console.Clear();
                 UI.MenuTracker = "MenuPlayerName";
                 Console.CursorVisible = true;
+                Console.WriteLine("Now playing: lil mini rpg");
+                Console.WriteLine("");
                 Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
                 _player.CharacterName = Console.ReadLine();
 
@@ -55,6 +57,7 @@ namespace lilminirpg
             {
                 Console.Clear();
                 Console.CursorVisible = false;
+                Console.WriteLine("Now playing: lil mini rpg");
                 Console.WriteLine($"Name: {_player.CharacterName}");
                 Console.WriteLine("");
                 Console.WriteLine($"Hello {_player.CharacterName}! Next you will choose your class, a weapon, and an accessory.");
@@ -100,6 +103,7 @@ namespace lilminirpg
             {
                 Console.Clear();
                 Console.CursorVisible = false;
+                Console.WriteLine("Now playing: lil mini rpg");
                 Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName}");
                 Console.WriteLine("");
 
@@ -143,6 +147,7 @@ namespace lilminirpg
             {
                 Console.Clear();
                 Console.CursorVisible = false;
+                Console.WriteLine("Now playing: lil mini rpg");
                 Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon}");
                 Console.WriteLine("");
 
@@ -181,8 +186,14 @@ namespace lilminirpg
             UI.MenuInput = "";
             UI.MenuTracker = "";
             UI.MenuLength = 0;
-
-            Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon} || Accessory: {_player.WornAccessory}");
+            Console.Clear();
+            Console.WriteLine("Now playing: lil mini rpg");
+            Console.WriteLine("");
+            Console.WriteLine("You have selected:");
+            Console.WriteLine($"[*] Name: {_player.CharacterName}");
+            Console.WriteLine($"[*] Class: {_player.ClassName}");
+            Console.WriteLine($"[*] Weapon: {_player.WornWeapon}");
+            Console.WriteLine($"[*] Accessory: {_player.WornAccessory}");
             Program.SaveGame(_player.CharacterName, _player.ClassName, _player.WornWeapon, _player.WornAccessory);
             CharacterCreation = false;
         }

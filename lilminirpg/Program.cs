@@ -6,8 +6,9 @@ namespace lilminirpg
     {
         public static void Main()
         {
+            QuestEngine.FillArray();
             // Goto main menu
-            UI.MenuSelector("MenuMain");
+           // UI.MenuSelector("MenuMain");
         }
 
         // Save game method
@@ -21,7 +22,9 @@ namespace lilminirpg
                 {
                     outputFile.WriteLine(s);
                 }
-            Console.WriteLine("Your data has been saved!");
+            Console.WriteLine("");
+            Console.WriteLine("Your data has been saved! Press Enter to continue.");
+            Console.ReadLine();
             UI.MenuInput = "";
             UI.MenuSelector("MenuMain");
         }

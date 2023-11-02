@@ -13,7 +13,7 @@ namespace lilminirpg
                     {"0", "New Game", ""},
                     {"1", "Load Game", ""},
                     {"2", "Options", ""},
-                    {"3", "Exit", "" }
+                    {"3", "Exit", ""}
         };
 
         // Class choices

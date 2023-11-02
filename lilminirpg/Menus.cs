@@ -15,6 +15,7 @@ namespace lilminirpg
             UI.MenuLength = ItemLists.MainMenu.GetLength(0);
             while (UI.MenuInput != "Enter")
             {
+                Console.Clear();
                 Console.WriteLine("Now playing: lil mini rpg");
                 Console.WriteLine("");
                 for (int i = 0; i < UI.MenuLength; i++)
@@ -32,7 +33,6 @@ namespace lilminirpg
 
                 Console.WriteLine("");
                 Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-                Console.WriteLine($"SelectedOption = {UI.SelectedOption} || MenuLength = {UI.MenuLength}");
 
                 UI.MenuInput = Console.ReadKey(true).Key.ToString();
                 if (UI.MenuInput == "UpArrow")
