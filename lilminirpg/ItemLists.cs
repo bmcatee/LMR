@@ -8,7 +8,7 @@ namespace lilminirpg
 {
     internal static class ItemLists
     {
-        public static string[,] MainMenu =
+        public static string[,] MenuMain =
         {
                     {"0", "New Game", ""},
                     {"1", "Load Game", ""},

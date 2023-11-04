@@ -8,11 +8,11 @@ namespace lilminirpg
 {
     internal class QuestEngine
     {
+        static Random randombool = new Random();
+        static bool[] CurrentGameScreen = new bool[16];
         // Create an array and fill it with on/off statements (first 5 slots are always 'off')
-        public static void FillArray()
+        public static void CreateStageArray()
         {
-            var randombool = new Random();
-            bool[] CurrentGameScreen = new bool[16];
 
             for (int i = 0; i < CurrentGameScreen.Length; ++i)
             {
@@ -24,10 +24,17 @@ namespace lilminirpg
                 {
                     CurrentGameScreen[i] = randombool.Next(2) == 1;
                 }
-               
+
                 // TESTS
-               // Console.WriteLine($"{CurrentGameScreen[i]}");
+                // Console.WriteLine($"{CurrentGameScreen[i]}");
             }
         }
+        
+        // Fills the stage array with objects
+        public static void FillStageArray() 
+        {
+            
+        }
+
     }
 }

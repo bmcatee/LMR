@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using lilminirpg;
+using System.Security.Cryptography.X509Certificates;
 
 namespace lilminirpg
 {
@@ -6,10 +7,13 @@ namespace lilminirpg
     {
         public static void Main()
         {
-            QuestEngine.FillArray();
+            // METHOD TESTS
+            // QuestEngine.CreateStageArray();
+
             // Goto main menu
-           // UI.MenuSelector("MenuMain");
+            UI.UIMenuSelector("MenuMain");
         }
+    
 
         // Save game method
         public static void SaveGame(string charactername, string classname, string wornweapon, string wornaccessory)
@@ -26,13 +30,16 @@ namespace lilminirpg
             Console.WriteLine("Your data has been saved! Press Enter to continue.");
             Console.ReadLine();
             UI.MenuInput = "";
-            UI.MenuSelector("MenuMain");
+            UI.UIMenuSelector("MenuMain");
         }
     }
 }
 
 // TESTS
-// Console.WriteLine($"SelectedOption = {UI.SelectedOption} || MenuLength = {UI.MenuLength}");
-// Console.WriteLine($"UI.MenuTracker = {UI.MenuTracker} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
-// Console.ReadLine();
 
+// Console.WriteLine($"Doop!");
+// Console.ReadLine();
+// Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
+// Console.WriteLine($"Doop! {characterCreation} + {characterCreationStage}");
+// Console.WriteLine($"local menutracker = {menutracker}");
+// Console.ReadLine();

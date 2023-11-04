@@ -8,15 +8,28 @@ namespace lilminirpg
 {
     internal static class UI
     {
-        public static char Cursor = ' ';
+        public static char CursorSymbol = ' ';
         public static int SelectedOption { get; set; }
         public static string MenuInput { get; set; }
         public static string MenuTracker { get; set; }
-
         public static int MenuLength { get; set; }
 
+        // Handles movement of menus
+        public static void UIMovement()
+        {
+            MenuInput = Console.ReadKey(true).Key.ToString();
+            if (MenuInput == "UpArrow")
+            {
+                UISelectUp();
+            }
+            else if (MenuInput == "DownArrow")
+            {
+                UISelectDown();
+            }
+        }
+
         // Menu selection UP
-        public static void SelectUp()
+        public static void UISelectUp()
         {
             if (SelectedOption > 0)
             {
@@ -31,7 +44,7 @@ namespace lilminirpg
         }
 
         // Menu selection DOWN
-        public static void SelectDown()
+        public static void UISelectDown()
         {
             if (SelectedOption < MenuLength - 1)
             {
@@ -45,38 +58,68 @@ namespace lilminirpg
             }
         }
 
+        // What the cursor looks like
+        public static void UICursor(int i)
+        {
+  
+                if (i == SelectedOption)
+                {
+                    CursorSymbol = '*';
+                }
+                else
+                {
+                    CursorSymbol = ' ';
+                }
+ 
+        }
+
         // Choose selected menu item
-        public static int GetSelection()
+        public static int UIGetSelection()
         {
             return SelectedOption;
         }
 
-        // Tracks which menu is being accessed; used primarily in character creator
-        // May not be needed once each character making section is seperated out?
-        public static void MenuSelector(string menutracker)
+        // Called when switching menus; I know there has to be a better way of doing this, and maybe I'll figure it out later. :P
+        public static void UIMenuSelector(string menutracker)
         {
             MenuTracker = menutracker;
 
             if (MenuTracker == "MenuMain")
             {
-                Menus.MenuMain();
+                MenuLength = ItemLists.MenuMain.GetLength(0);
+                Menus.MenuGeneric("MenuMain");
             }
             else if (MenuTracker == "MenuPlayerName")
             {
-                
+                CharacterMaker.SetCharacterName();
             }
             else if (MenuTracker == "MenuPlayerClass")
             {
-                Menus.MenuPlayerClass();
+                MenuLength = ItemLists.PlayerClasses.GetLength(0);
+                Menus.MenuGeneric("MenuPlayerClass");
             }
-            else if (MenuTracker == "MenuWeapon")
+            else if (MenuTracker == "MenuPlayerWeapon")
             {
-                Menus.MenuPlayerWeapon();
+                MenuLength = ItemLists.PlayerWeapons.GetLength(0);
+                Menus.MenuGeneric("MenuPlayerWeapon");
             }
-            else if (MenuTracker == "MenuAccessory")
+            else if (MenuTracker == "MenuPlayerAccessory")
             {
-                Menus.MenuPlayerAccessory();
+                MenuLength = ItemLists.PlayerAccessories.GetLength(0);
+                Menus.MenuGeneric("MenuPlayerAccessory");
             }
+        }
+
+        public static void UIHeaderGeneric()
+        {
+            Console.WriteLine("Now playing: lil mini rpg");
+            Console.WriteLine("");
+        }
+
+        public static void UIFooterGeneric()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
         }
     }
 }
