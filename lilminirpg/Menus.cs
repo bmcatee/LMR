@@ -16,9 +16,8 @@ namespace lilminirpg
                 UI.UICursor(i);
                 Console.WriteLine($"[{UI.CursorSymbol}] {ItemLists.MenuMain[i, 1]}");
             }
-
-
         }
+
         public static void MenuGeneric(string menutracker)
         {
             UI.MenuInput = "";
@@ -61,11 +60,16 @@ namespace lilminirpg
                 CharacterMaker _charactermaker = new CharacterMaker();
                 _charactermaker.MakeCharacter();
             }
+            else if (UI.SelectedOption == 1 && UI.MenuInput == "Enter")
+            {
+                SaveLoad.LoadGame();
+            }
             else if (UI.SelectedOption != 0 && UI.MenuInput == "Enter")
             {
                 Menus.InvalidSelection();
             }
         }
+
         // Default method for any invalid selections/bugs
         public static void InvalidSelection()
         {

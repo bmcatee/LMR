@@ -108,8 +108,8 @@ namespace lilminirpg
                 {
                     Menus.InvalidSelection();
                 }
-                UI.UIFooterGeneric();
 
+                UI.UIFooterGeneric();
                 UI.UIMovement();
             }
 
@@ -170,12 +170,10 @@ namespace lilminirpg
                 else if (characterCreationStage == 1)
                 {
                     SetCharacterInfo("MenuPlayerClass");
-
                 }
                 else if (characterCreationStage == 2)
                 {
                     SetCharacterInfo("MenuPlayerWeapon");
-
                 }
                 else if (characterCreationStage == 3)
                 {
@@ -202,15 +200,14 @@ namespace lilminirpg
             characterCreation = false;
             characterCreationStage = 0;
             Console.Clear();
-            Console.WriteLine("Now playing: lil mini rpg");
-            Console.WriteLine("");
+            UI.UIHeaderGeneric();
             Console.WriteLine("You have selected:");
             Console.WriteLine($"[*] Name: {_player.CharacterName}");
             Console.WriteLine($"[*] Class: {_player.ClassName}");
             Console.WriteLine($"[*] Weapon: {_player.WornWeapon}");
             Console.WriteLine($"[*] Accessory: {_player.WornAccessory}");
-            Program.SaveGame(_player.CharacterName, _player.ClassName, _player.WornWeapon, _player.WornAccessory);
-            characterCreation = false;
+            SaveLoad.SaveGame(_player.CharacterName, _player.ClassName, _player.WornWeapon, _player.WornAccessory);
+            UI.UIMenuSelector("MenuMain");
         }
     }
 }

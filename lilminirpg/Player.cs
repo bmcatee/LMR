@@ -11,6 +11,7 @@ namespace lilminirpg
         public string ClassName { get; set; }
         public int XPCurrent { get; set; }
         public int XPToLevel { get; set; }
+        public string WornWeapon { get; set; }
         public string WornClothing { get; set; }
         public string WornAccessory { get; set; }
     }

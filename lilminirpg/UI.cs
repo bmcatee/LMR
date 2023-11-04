@@ -61,7 +61,6 @@ namespace lilminirpg
         // What the cursor looks like
         public static void UICursor(int i)
         {
-  
                 if (i == SelectedOption)
                 {
                     CursorSymbol = '*';
@@ -70,8 +69,7 @@ namespace lilminirpg
                 {
                     CursorSymbol = ' ';
                 }
- 
-        }
+         }
 
         // Choose selected menu item
         public static int UIGetSelection()

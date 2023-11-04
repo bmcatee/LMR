@@ -12,6 +12,5 @@ namespace lilminirpg
         public int HealthPointsMax { get; set; }
         public int HealthPointsCurrent { get; set; }
         public int StatStrength { get; set; }
-        public string WornWeapon { get; set; }
     }
 }
