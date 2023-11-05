@@ -10,5 +10,7 @@ namespace lilminirpg
     {
       public int GoldDropped { get; set; }
       public int XPDropped { get; set; }
+      public int MonsterGroup { get; set; }
+      public int MonsterRank { get; set; }
     }
 }

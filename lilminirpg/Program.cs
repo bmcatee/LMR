@@ -8,10 +8,10 @@ namespace lilminirpg
         public static void Main()
         {
             // METHOD TESTS
-             QuestEngine.CreateStageArray();
-            QuestEngine.FillStageArray();
+            // QuestEngine.CreateStageArray();
+            // QuestEngine.FillStageArray();
             // Goto main menu
-            //   UI.UIMenuSelector("MenuMain");
+            UI.UIMenuSelector("MenuMain");
         }
     }
 }
