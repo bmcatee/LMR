@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,17 @@ namespace lilminirpg
 {
     internal class QuestEngine
     {
+        public static int CurrentGameLevel = 0;
         static Random randombool = new Random();
         static bool[] NewGameScreen = new bool[16];
+        static bool[] CurrentGameScreen = new bool[16];
+
+
         // Create an array and fill it with on/off statements (first 5 slots are always 'off')
         public static void CreateStageArray()
         {
+            CurrentGameLevel = ++CurrentGameLevel;
+            Console.WriteLine($"{CurrentGameLevel}");
 
             for (int i = 0; i < NewGameScreen.Length; ++i)
             {
@@ -25,14 +32,16 @@ namespace lilminirpg
                     NewGameScreen[i] = randombool.Next(2) == 1;
                 }
 
+                CurrentGameScreen = NewGameScreen;
+                Movement.PlayerPosition(CurrentGameScreen.Length -1);
 
             }
         }
-        
+
         // Fills the stage array with objects
-        public static void FillStageArray() 
+        public static void FillStageArray(int level)
         {
-            for (int i = 0; i <NewGameScreen.Length; ++i)
+            for (int i = 0; i < NewGameScreen.Length; ++i)
             {
                 if (NewGameScreen[i] == true)
                 {
@@ -52,10 +61,9 @@ namespace lilminirpg
                 }
             }
         }
-
     }
 }
 
 // TESTS
-// Console.WriteLine($"Array filled with{CurrentGameScreen[i]}");
+// Console.WriteLine($"Array filled with {CurrentGameScreen[i]}");
 // Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (0-70)");

@@ -71,37 +71,37 @@ namespace lilminirpg
                 else if (menutracker == "MenuPlayerClass")
                 {
                     UI.MenuTracker = "MenuPlayerClass";
-                    UI.MenuLength = ItemLists.PlayerClasses.GetLength(0);
+                    UI.MenuLength = DataLists.PlayerClasses.GetLength(0);
                     Console.WriteLine("Your class choices are:");
                     Console.WriteLine("");
-                    for (int i = 0; i < ItemLists.PlayerClasses.GetLength(0); ++i)
+                    for (int i = 0; i < DataLists.PlayerClasses.GetLength(0); ++i)
                     {
                         UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {ItemLists.PlayerClasses[i, 1]}: {ItemLists.PlayerClasses[i, 2]}");
+                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerClasses[i, 1]}: {DataLists.PlayerClasses[i, 2]}");
                     }
                 }
                 else if (menutracker == "MenuPlayerWeapon")
                 {
                     UI.MenuTracker = "MenuPlayerWeapon";
-                    UI.MenuLength = ItemLists.PlayerWeapons.GetLength(0);
+                    UI.MenuLength = DataLists.PlayerWeapons.GetLength(0);
                     Console.WriteLine("Please choose a weapon:");
                     Console.WriteLine("");
-                    for (int i = 0; i < ItemLists.PlayerWeapons.GetLength(0); ++i)
+                    for (int i = 0; i < DataLists.PlayerWeapons.GetLength(0); ++i)
                     {
                         UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {ItemLists.PlayerWeapons[i, 1]}: {ItemLists.PlayerWeapons[i, 2]}");
+                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerWeapons[i, 1]}: {DataLists.PlayerWeapons[i, 2]}");
                     }
                 }
                 else if (menutracker == "MenuPlayerAccessory")
                 {
                     UI.MenuTracker = "MenuPlayerAccessory";
-                    UI.MenuLength = ItemLists.PlayerAccessories.GetLength(0);
+                    UI.MenuLength = DataLists.PlayerAccessories.GetLength(0);
                     Console.WriteLine("Please choose an accessory.");
                     Console.WriteLine("");
-                    for (int i = 0; i < ItemLists.PlayerAccessories.GetLength(0); ++i)
+                    for (int i = 0; i < DataLists.PlayerAccessories.GetLength(0); ++i)
                     {
                         UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {ItemLists.PlayerAccessories[i, 1]}: {ItemLists.PlayerAccessories[i, 2]}");
+                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerAccessories[i, 1]}: {DataLists.PlayerAccessories[i, 2]}");
                     }
                 }
                 else
@@ -116,9 +116,9 @@ namespace lilminirpg
             // Sets the player info
             if (menutracker == "MenuPlayerClass")
             {
-                if (UI.SelectedOption < ItemLists.PlayerClasses.GetLength(0))
+                if (UI.SelectedOption < DataLists.PlayerClasses.GetLength(0))
                 {
-                    _player.ClassName = ItemLists.PlayerClasses[UI.SelectedOption, 1];
+                    _player.ClassName = DataLists.PlayerClasses[UI.SelectedOption, 1];
                 }
                 else
                 {
@@ -131,9 +131,9 @@ namespace lilminirpg
             }
             else if (menutracker == "MenuPlayerWeapon")
             {
-                if (UI.SelectedOption < ItemLists.PlayerWeapons.GetLength(0))
+                if (UI.SelectedOption < DataLists.PlayerWeapons.GetLength(0))
                 {
-                    _player.WornWeapon = ItemLists.PlayerWeapons[UI.SelectedOption, 1];
+                    _player.WornWeapon = DataLists.PlayerWeapons[UI.SelectedOption, 1];
                 }
                 else
                 {
@@ -146,9 +146,9 @@ namespace lilminirpg
             }
             else if (menutracker == "MenuPlayerAccessory")
             {
-                if (UI.SelectedOption < ItemLists.PlayerAccessories.GetLength(0))
+                if (UI.SelectedOption < DataLists.PlayerAccessories.GetLength(0))
                 {
-                    _player.WornAccessory = ItemLists.PlayerAccessories[UI.SelectedOption, 1];
+                    _player.WornAccessory = DataLists.PlayerAccessories[UI.SelectedOption, 1];
                 }
                 else
                 {

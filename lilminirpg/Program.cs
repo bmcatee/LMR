@@ -11,7 +11,7 @@ namespace lilminirpg
             // QuestEngine.CreateStageArray();
             // QuestEngine.FillStageArray();
             // Goto main menu
-            UI.UIMenuSelector("MenuMain");
+             UI.UIMenuSelector("MenuMain");
         }
     }
 }

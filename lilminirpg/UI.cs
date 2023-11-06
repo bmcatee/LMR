@@ -84,7 +84,7 @@ namespace lilminirpg
 
             if (MenuTracker == "MenuMain")
             {
-                MenuLength = ItemLists.MenuMain.GetLength(0);
+                MenuLength = DataLists.MenuMain.GetLength(0);
                 Menus.MenuGeneric("MenuMain");
             }
             else if (MenuTracker == "MenuPlayerName")
@@ -93,17 +93,17 @@ namespace lilminirpg
             }
             else if (MenuTracker == "MenuPlayerClass")
             {
-                MenuLength = ItemLists.PlayerClasses.GetLength(0);
+                MenuLength = DataLists.PlayerClasses.GetLength(0);
                 Menus.MenuGeneric("MenuPlayerClass");
             }
             else if (MenuTracker == "MenuPlayerWeapon")
             {
-                MenuLength = ItemLists.PlayerWeapons.GetLength(0);
+                MenuLength = DataLists.PlayerWeapons.GetLength(0);
                 Menus.MenuGeneric("MenuPlayerWeapon");
             }
             else if (MenuTracker == "MenuPlayerAccessory")
             {
-                MenuLength = ItemLists.PlayerAccessories.GetLength(0);
+                MenuLength = DataLists.PlayerAccessories.GetLength(0);
                 Menus.MenuGeneric("MenuPlayerAccessory");
             }
         }
@@ -118,6 +118,7 @@ namespace lilminirpg
         {
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
+            Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
         }
     }
 }

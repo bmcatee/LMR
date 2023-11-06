@@ -11,10 +11,10 @@ namespace lilminirpg
     {
         public static void MainMenu()
         {
-            for (int i = 0; i < ItemLists.MenuMain.GetLength(0); ++i)
+            for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
             {
                 UI.UICursor(i);
-                Console.WriteLine($"[{UI.CursorSymbol}] {ItemLists.MenuMain[i, 1]}");
+                Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 1]}");
             }
         }
 
