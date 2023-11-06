@@ -16,35 +16,37 @@ namespace lilminirpg
 
         public void MakeCharacter()
         {
+            // Starts the full player character creation process
             characterCreation = true;
-            // Player character creation
-            while (UI.MenuInput != "Escape")
-            {
-                SetCharacterName();
-            }
+            SetCharacterName();
         }
 
+        // Set character name
         public static void SetCharacterName()
         {
-            while (UI.MenuInput != "Escape")
+            Console.Clear();
+            UI.MenuTracker = "MenuPlayerName";
+            Console.CursorVisible = true;
+            UI.UIHeaderGeneric();
+            if (characterCreation == true)
             {
-                // Set character name
-                Console.Clear();
-                UI.MenuTracker = "MenuPlayerName";
-                Console.CursorVisible = true;
-                UI.UIHeaderGeneric();
                 Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
-                _player.CharacterName = Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Please type your character's name and press Enter:");
+            };
+                    
+            _player.CharacterName = Console.ReadLine();
 
-                if (characterCreation == true)
-                {
-                    characterCreationStage = 1;
-                    SetCharacterInfo("MenuPlayerClass");
-                }
-                else
-                {
-                    Menus.MenuGeneric("MenuMain");
-                }
+            if (characterCreation == true)
+            {
+                characterCreationStage = 1;
+                SetCharacterInfo("MenuPlayerClass");
+            }
+            else
+            {
+                Menus.MenuGeneric("MenuMain");
             }
         }
 
@@ -106,7 +108,7 @@ namespace lilminirpg
                 }
                 else
                 {
-                    Menus.InvalidSelection();
+                    UI.InvalidSelection();
                 }
 
                 UI.UIFooterGeneric();
@@ -122,7 +124,7 @@ namespace lilminirpg
                 }
                 else
                 {
-                    Menus.InvalidSelection();
+                    UI.InvalidSelection();
                 }
                 if (characterCreation == true)
                 {
@@ -137,7 +139,7 @@ namespace lilminirpg
                 }
                 else
                 {
-                    Menus.InvalidSelection();
+                    UI.InvalidSelection();
                 }
                 if (characterCreation == true)
                 {
@@ -152,7 +154,7 @@ namespace lilminirpg
                 }
                 else
                 {
-                    Menus.InvalidSelection();
+                    UI.InvalidSelection();
                 }
                 if (characterCreation == true)
                 {
@@ -207,7 +209,8 @@ namespace lilminirpg
             Console.WriteLine($"[*] Weapon: {_player.WornWeapon}");
             Console.WriteLine($"[*] Accessory: {_player.WornAccessory}");
             SaveLoad.SaveGame(_player.CharacterName, _player.ClassName, _player.WornWeapon, _player.WornAccessory);
-            UI.UIMenuSelector("MenuMain");
+            Console.WriteLine("Please press Enter to continue.");
+            Menus.MenuGeneric("MenuMain");
         }
     }
 }

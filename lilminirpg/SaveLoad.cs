@@ -30,8 +30,11 @@ namespace lilminirpg
         public static void LoadGame()
         {
             string line;
+            Console.Clear();
+            Console.WriteLine("Now loading: lmr_save_001");
+            Console.WriteLine("");
 
-                StreamReader sr = new StreamReader("C:\\Users\\bmcat\\Documents\\Projects\\lilminirpg\\lmr_save_001.txt");
+            StreamReader sr = new StreamReader("C:\\Users\\bmcat\\Documents\\Projects\\lilminirpg\\lmr_save_001.txt");
                 line = sr.ReadLine();
                 while (line != null)
                 {
@@ -43,7 +46,7 @@ namespace lilminirpg
                 Console.WriteLine("");
                 Console.WriteLine("Press Enter to continue.");
                 Console.ReadLine();
-                UI.UIMenuSelector("MenuMain");            
+                Menus.MenuGeneric("MenuMain");            
         }
 
         }

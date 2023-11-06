@@ -77,37 +77,6 @@ namespace lilminirpg
             return SelectedOption;
         }
 
-        // Called when switching menus; I know there has to be a better way of doing this, and maybe I'll figure it out later. :P
-        public static void UIMenuSelector(string menutracker)
-        {
-            MenuTracker = menutracker;
-
-            if (MenuTracker == "MenuMain")
-            {
-                MenuLength = DataLists.MenuMain.GetLength(0);
-                Menus.MenuGeneric("MenuMain");
-            }
-            else if (MenuTracker == "MenuPlayerName")
-            {
-                CharacterMaker.SetCharacterName();
-            }
-            else if (MenuTracker == "MenuPlayerClass")
-            {
-                MenuLength = DataLists.PlayerClasses.GetLength(0);
-                Menus.MenuGeneric("MenuPlayerClass");
-            }
-            else if (MenuTracker == "MenuPlayerWeapon")
-            {
-                MenuLength = DataLists.PlayerWeapons.GetLength(0);
-                Menus.MenuGeneric("MenuPlayerWeapon");
-            }
-            else if (MenuTracker == "MenuPlayerAccessory")
-            {
-                MenuLength = DataLists.PlayerAccessories.GetLength(0);
-                Menus.MenuGeneric("MenuPlayerAccessory");
-            }
-        }
-
         public static void UIHeaderGeneric()
         {
             Console.WriteLine("Now playing: lil mini rpg");
@@ -118,7 +87,15 @@ namespace lilminirpg
         {
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-            Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
+//            Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
+        }
+
+        // Default method for any invalid selections/bugs
+        public static void InvalidSelection()
+        {
+            Console.WriteLine("You have entered an invalid selection. Please press enter to restart.");
+            Console.ReadLine();
+            Program.Main();
         }
     }
 }

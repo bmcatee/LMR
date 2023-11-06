@@ -9,17 +9,9 @@ namespace lilminirpg
 {
     public static class Menus
     {
-        public static void MainMenu()
-        {
-            for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
-            {
-                UI.UICursor(i);
-                Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 1]}");
-            }
-        }
-
         public static void MenuGeneric(string menutracker)
         {
+            UI.MenuTracker = menutracker;
             UI.MenuInput = "";
             while (UI.MenuInput != "Enter")
             {
@@ -28,7 +20,12 @@ namespace lilminirpg
 
                 if (menutracker == "MenuMain")
                 {
-                    MainMenu();
+                    UI.MenuLength = DataLists.MenuMain.GetLength(0);
+                    for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
+                    {
+                        UI.UICursor(i);
+                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 1]}");
+                    }
                 }
                 else if (menutracker == "MenuPlayerName")
                 {
@@ -36,19 +33,22 @@ namespace lilminirpg
                 }
                 else if (menutracker == "MenuPlayerClass")
                 {
+                    UI.MenuLength = DataLists.PlayerClasses.GetLength(0);
                     CharacterMaker.SetCharacterInfo(menutracker);
                 }
                 else if (menutracker == "MenuPlayerWeapon")
                 {
+                    UI.MenuLength = DataLists.PlayerWeapons.GetLength(0);
                     CharacterMaker.SetCharacterInfo(menutracker);
                 }
                 else if (menutracker == "MenuPlayerAccessory")
                 {
+                    UI.MenuLength = DataLists.PlayerAccessories.GetLength(0);
                     CharacterMaker.SetCharacterInfo(menutracker);
                 }
                 else
                 {
-                    Menus.InvalidSelection();
+                    UI.InvalidSelection();
                 }
 
                 UI.UIFooterGeneric();
@@ -66,16 +66,8 @@ namespace lilminirpg
             }
             else if (UI.SelectedOption != 0 && UI.MenuInput == "Enter")
             {
-                Menus.InvalidSelection();
+                UI.InvalidSelection();
             }
-        }
-
-        // Default method for any invalid selections/bugs
-        public static void InvalidSelection()
-        {
-            Console.WriteLine("You have entered an invalid selection. Please press enter to restart.");
-            Console.ReadLine();
-            Program.Main();
         }
     }
 }
