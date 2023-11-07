@@ -18,6 +18,9 @@ namespace lilminirpg
         {
             // Starts the full player character creation process
             characterCreation = true;
+            _player.ClassName = "";
+            _player.WornWeapon = "";
+            _player.WornAccessory = "";
             SetCharacterName();
         }
 
@@ -42,7 +45,7 @@ namespace lilminirpg
             if (characterCreation == true)
             {
                 characterCreationStage = 1;
-                SetCharacterInfo("MenuPlayerClass");
+                ChooseCharacterInfo("MenuPlayerClass");
             }
             else
             {
@@ -50,71 +53,80 @@ namespace lilminirpg
             }
         }
 
-        public static void SetCharacterInfo(string menutracker)
+        public static void ChooseCharacterInfo(string menutracker)
         {
             // Set desired menu, reset other variables to initial values
             UI.MenuTracker = menutracker;
             UI.SelectedOption = 0;
             UI.MenuInput = "";
 
-            while (UI.MenuInput != "Enter")
+
+            // Clear console, print character info; dislike this, would rather the display be more elegant
+            Console.Clear();
+            Console.CursorVisible = false;
+            Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon} || Accessory: {_player.WornAccessory}");
+            Console.WriteLine("");
+
+            // Passes to the appropriate menu
+            if (menutracker == "MenuPlayerName")
             {
-                // Clear console, print character info; dislike this, would rather the display be more elegant
-                Console.Clear();
-                Console.CursorVisible = false;
-                Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon}");
+                SetCharacterName();
+            }
+            else if (menutracker == "MenuPlayerClass")
+            {
+                UI.CursorOffset = 4;
+                UI.MenuTracker = "MenuPlayerClass";
+                UI.MenuLength = DataLists.PlayerClasses.GetLength(0);
+                Console.WriteLine("Your class choices are:");
                 Console.WriteLine("");
-
-                // Passes to the appropriate menu
-                if (menutracker == "MenuPlayerName")
+                for (int i = 0; i < DataLists.PlayerClasses.GetLength(0); ++i)
                 {
-                    SetCharacterName();
+                    UI.UICursor(i);
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerClasses[i, 1]}: {DataLists.PlayerClasses[i, 2]}");
                 }
-                else if (menutracker == "MenuPlayerClass")
+            }
+            else if (menutracker == "MenuPlayerWeapon")
+            {
+                UI.CursorOffset = 4;
+                UI.MenuTracker = "MenuPlayerWeapon";
+                UI.MenuLength = DataLists.PlayerWeapons.GetLength(0);
+                Console.WriteLine("Please choose a weapon:");
+                Console.WriteLine("");
+                for (int i = 0; i < DataLists.PlayerWeapons.GetLength(0); ++i)
                 {
-                    UI.MenuTracker = "MenuPlayerClass";
-                    UI.MenuLength = DataLists.PlayerClasses.GetLength(0);
-                    Console.WriteLine("Your class choices are:");
-                    Console.WriteLine("");
-                    for (int i = 0; i < DataLists.PlayerClasses.GetLength(0); ++i)
-                    {
-                        UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerClasses[i, 1]}: {DataLists.PlayerClasses[i, 2]}");
-                    }
+                    UI.UICursor(i);
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerWeapons[i, 1]}: {DataLists.PlayerWeapons[i, 2]}");
                 }
-                else if (menutracker == "MenuPlayerWeapon")
+            }
+            else if (menutracker == "MenuPlayerAccessory")
+            {
+                UI.CursorOffset = 4;
+                UI.MenuTracker = "MenuPlayerAccessory";
+                UI.MenuLength = DataLists.PlayerAccessories.GetLength(0);
+                Console.WriteLine("Please choose an accessory.");
+                Console.WriteLine("");
+                for (int i = 0; i < DataLists.PlayerAccessories.GetLength(0); ++i)
                 {
-                    UI.MenuTracker = "MenuPlayerWeapon";
-                    UI.MenuLength = DataLists.PlayerWeapons.GetLength(0);
-                    Console.WriteLine("Please choose a weapon:");
-                    Console.WriteLine("");
-                    for (int i = 0; i < DataLists.PlayerWeapons.GetLength(0); ++i)
-                    {
-                        UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerWeapons[i, 1]}: {DataLists.PlayerWeapons[i, 2]}");
-                    }
+                    UI.UICursor(i);
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerAccessories[i, 1]}: {DataLists.PlayerAccessories[i, 2]}");
                 }
-                else if (menutracker == "MenuPlayerAccessory")
-                {
-                    UI.MenuTracker = "MenuPlayerAccessory";
-                    UI.MenuLength = DataLists.PlayerAccessories.GetLength(0);
-                    Console.WriteLine("Please choose an accessory.");
-                    Console.WriteLine("");
-                    for (int i = 0; i < DataLists.PlayerAccessories.GetLength(0); ++i)
-                    {
-                        UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerAccessories[i, 1]}: {DataLists.PlayerAccessories[i, 2]}");
-                    }
-                }
-                else
-                {
-                    UI.InvalidSelection();
-                }
-
-                UI.UIFooterGeneric();
-                UI.UIMovement();
+            }
+            else
+            {
+                UI.InvalidSelection();
             }
 
+            UI.UIFooterGeneric();
+            while (UI.MenuInput != "Enter")
+            {
+                UI.PrintCursor();
+                UI.UIMovement();
+            }
+            UI.CursorOffset = 0;
+            SetCharacterInfo(menutracker);
+        }
+        public static void SetCharacterInfo(string menutracker)
+        { 
             // Sets the player info
             if (menutracker == "MenuPlayerClass")
             {
@@ -167,19 +179,19 @@ namespace lilminirpg
             {
                 if (characterCreationStage == 0)
                 {
-                    SetCharacterInfo("MenuPlayerName");
+                    ChooseCharacterInfo("MenuPlayerName");
                 }
                 else if (characterCreationStage == 1)
                 {
-                    SetCharacterInfo("MenuPlayerClass");
+                    ChooseCharacterInfo("MenuPlayerClass");
                 }
                 else if (characterCreationStage == 2)
                 {
-                    SetCharacterInfo("MenuPlayerWeapon");
+                    ChooseCharacterInfo("MenuPlayerWeapon");
                 }
                 else if (characterCreationStage == 3)
                 {
-                    SetCharacterInfo("MenuPlayerAccessory");
+                    ChooseCharacterInfo("MenuPlayerAccessory");
                 }
                 else if (characterCreationStage == 4)
                 {
@@ -199,6 +211,7 @@ namespace lilminirpg
             UI.MenuInput = "";
             UI.MenuTracker = "";
             UI.MenuLength = 0;
+            UI.CursorOffset = 0;
             characterCreation = false;
             characterCreationStage = 0;
             Console.Clear();

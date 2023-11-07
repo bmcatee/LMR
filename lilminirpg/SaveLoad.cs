@@ -48,7 +48,6 @@ namespace lilminirpg
                 Console.ReadLine();
                 Menus.MenuGeneric("MenuMain");            
         }
-
-        }
     }
+}
 

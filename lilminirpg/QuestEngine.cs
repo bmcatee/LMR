@@ -12,7 +12,7 @@ namespace lilminirpg
         public static int CurrentGameLevel = 0;
         static Random randombool = new Random();
         static bool[] NewGameScreen = new bool[16];
-        static bool[] CurrentGameScreen = new bool[16];
+        static int[] CurrentGameScreen = new int[16];
 
 
         // Create an array and fill it with on/off statements (first 5 slots are always 'off')
@@ -26,16 +26,17 @@ namespace lilminirpg
                 if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4)
                 {
                     NewGameScreen[i] = false;
+                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
+
                 }
                 else
                 {
                     NewGameScreen[i] = randombool.Next(2) == 1;
+                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
+
                 }
-
-                CurrentGameScreen = NewGameScreen;
-                Movement.PlayerPosition(CurrentGameScreen.Length -1);
-
             }
+            FillStageArray(CurrentGameLevel);
         }
 
         // Fills the stage array with objects
@@ -43,23 +44,33 @@ namespace lilminirpg
         {
             for (int i = 0; i < NewGameScreen.Length; ++i)
             {
-                if (NewGameScreen[i] == true)
+                if (NewGameScreen[i] == false)
+                {
+                    CurrentGameScreen[i] = 1;
+                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
+                }
+                else if (NewGameScreen[i] == true)
                 {
                     DiceRoller.RollDice(1, 99);
-                    if (DiceRoller.RollResults > -1 && DiceRoller.RollResults < 71)
+                    if (DiceRoller.RollResults > -1 && DiceRoller.RollResults < 31)
                     {
-                        Console.WriteLine("MAKE MONSTER AND SLIDE IT INTO THE ARRAY");
+                        CurrentGameScreen[i] = 2;
+                        Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (0-30)");
+                        Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
                     }
-                    else
+                    else if (DiceRoller.RollResults > 30 && DiceRoller.RollResults <= 99)
                     {
-                        Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (71-99)");
+                        CurrentGameScreen[i] = 3;
+                        Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (31-99)");
+                        Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
                     }
-                }
-                else
-                {
-
                 }
             }
+            PlayerMoveThroughScreen();
+        }
+        public static void PlayerMoveThroughScreen()
+        {
+            Movement.PlayerPosition(CurrentGameScreen.Length);
         }
     }
 }

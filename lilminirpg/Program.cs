@@ -1,4 +1,5 @@
 ﻿using lilminirpg;
+using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 
 namespace lilminirpg
@@ -10,6 +11,8 @@ namespace lilminirpg
             // METHOD TESTS
             // QuestEngine.CreateStageArray();
             // QuestEngine.FillStageArray();
+            // Movement.PlayerPosition(16);
+
             // Goto main menu
              Menus.MenuGeneric("MenuMain");
         }
@@ -20,7 +23,7 @@ namespace lilminirpg
 
 // Console.WriteLine($"Doop!");
 // Console.ReadLine();
-// Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
 // Console.WriteLine($"Doop! {characterCreation} + {characterCreationStage}");
 // Console.WriteLine($"local menutracker = {menutracker}");
-// Console.ReadLine();
+// Console.WriteLine($"curL: {Console.CursorLeft}, curT: {Console.CursorTop}");
+// Console.WriteLine($"UI.CursorOffset {UI.CursorOffset} | UI.MenuTracker {UI.MenuTracker} | UI.SelectedOption {UI.SelectedOption} | UI.MenuInput {UI.MenuInput} | UI.MenuLength {UI.MenuLength}");

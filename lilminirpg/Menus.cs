@@ -11,50 +11,50 @@ namespace lilminirpg
     {
         public static void MenuGeneric(string menutracker)
         {
+            Console.Clear();
             UI.MenuTracker = menutracker;
             UI.MenuInput = "";
-            while (UI.MenuInput != "Enter")
+            UI.UIHeaderGeneric();
+            if (menutracker == "MenuMain")
             {
-                Console.Clear();
-                UI.UIHeaderGeneric();
-
-                if (menutracker == "MenuMain")
+                UI.CursorOffset = 2;
+                UI.MenuLength = DataLists.MenuMain.GetLength(0);
+                for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
                 {
-                    UI.MenuLength = DataLists.MenuMain.GetLength(0);
-                    for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
-                    {
-                        UI.UICursor(i);
-                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 1]}");
-                    }
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 1]}");
                 }
-                else if (menutracker == "MenuPlayerName")
+            }
+            else if (menutracker == "MenuPlayerName")
                 {
                     CharacterMaker.SetCharacterName();
                 }
                 else if (menutracker == "MenuPlayerClass")
                 {
-                    UI.MenuLength = DataLists.PlayerClasses.GetLength(0);
-                    CharacterMaker.SetCharacterInfo(menutracker);
+                CharacterMaker.ChooseCharacterInfo(menutracker);
                 }
                 else if (menutracker == "MenuPlayerWeapon")
                 {
-                    UI.MenuLength = DataLists.PlayerWeapons.GetLength(0);
-                    CharacterMaker.SetCharacterInfo(menutracker);
+                CharacterMaker.ChooseCharacterInfo(menutracker);
                 }
                 else if (menutracker == "MenuPlayerAccessory")
                 {
-                    UI.MenuLength = DataLists.PlayerAccessories.GetLength(0);
-                    CharacterMaker.SetCharacterInfo(menutracker);
+                CharacterMaker.ChooseCharacterInfo(menutracker);
                 }
                 else
                 {
-                    UI.InvalidSelection();
+                UI.InvalidSelection();
                 }
-
-                UI.UIFooterGeneric();
+          
+            UI.UIFooterGeneric();
+            while (UI.MenuInput != "Enter")
+            {
+                UI.PrintCursor();
                 UI.UIMovement();
             }
-            
+            MenuSelection();
+        }
+        public static void MenuSelection()
+        {
             if (UI.SelectedOption == 0 && UI.MenuInput == "Enter")
             {
                 CharacterMaker _charactermaker = new CharacterMaker();
@@ -64,7 +64,7 @@ namespace lilminirpg
             {
                 SaveLoad.LoadGame();
             }
-            else if (UI.SelectedOption != 0 && UI.MenuInput == "Enter")
+            else if (UI.SelectedOption > 1 && UI.MenuInput == "Enter")
             {
                 UI.InvalidSelection();
             }
