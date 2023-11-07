@@ -39,7 +39,7 @@ namespace lilminirpg
             {
                 Console.WriteLine("Please type your character's name and press Enter:");
             };
-                    
+
             _player.CharacterName = Console.ReadLine();
 
             if (characterCreation == true)
@@ -126,7 +126,7 @@ namespace lilminirpg
             SetCharacterInfo(menutracker);
         }
         public static void SetCharacterInfo(string menutracker)
-        { 
+        {
             // Sets the player info
             if (menutracker == "MenuPlayerClass")
             {

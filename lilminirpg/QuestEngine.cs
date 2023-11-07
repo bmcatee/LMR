@@ -10,16 +10,15 @@ namespace lilminirpg
     internal class QuestEngine
     {
         public static int CurrentGameLevel = 0;
-        static Random randombool = new Random();
-        static bool[] NewGameScreen = new bool[16];
-        static int[] CurrentGameScreen = new int[16];
-
+        public static Random randombool = new Random();
+        public static bool[] NewGameScreen = new bool[16];
+        public static int[] CurrentGameScreen = new int[16];
 
         // Create an array and fill it with on/off statements (first 5 slots are always 'off')
         public static void CreateStageArray()
         {
             CurrentGameLevel = ++CurrentGameLevel;
-            Console.WriteLine($"{CurrentGameLevel}");
+            Console.WriteLine($"                    Generating Level {CurrentGameLevel}");
 
             for (int i = 0; i < NewGameScreen.Length; ++i)
             {
@@ -27,15 +26,15 @@ namespace lilminirpg
                 {
                     NewGameScreen[i] = false;
                     Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
-
                 }
                 else
                 {
                     NewGameScreen[i] = randombool.Next(2) == 1;
                     Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
-
                 }
             }
+
+            Console.WriteLine($"                    Filling Level {CurrentGameLevel}");
             FillStageArray(CurrentGameLevel);
         }
 
@@ -46,7 +45,7 @@ namespace lilminirpg
             {
                 if (NewGameScreen[i] == false)
                 {
-                    CurrentGameScreen[i] = 1;
+                    CurrentGameScreen[i] = 0;
                     Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
                 }
                 else if (NewGameScreen[i] == true)
@@ -54,11 +53,17 @@ namespace lilminirpg
                     DiceRoller.RollDice(1, 99);
                     if (DiceRoller.RollResults > -1 && DiceRoller.RollResults < 31)
                     {
-                        CurrentGameScreen[i] = 2;
+                        CurrentGameScreen[i] = 1;
                         Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (0-30)");
                         Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
                     }
-                    else if (DiceRoller.RollResults > 30 && DiceRoller.RollResults <= 99)
+                    else if (DiceRoller.RollResults > 30 && DiceRoller.RollResults < 61)
+                    {
+                        CurrentGameScreen[i] = 2;
+                        Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (31-99)");
+                        Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
+                    }
+                    else if (DiceRoller.RollResults > 60 && DiceRoller.RollResults <= 99)
                     {
                         CurrentGameScreen[i] = 3;
                         Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (31-99)");
@@ -66,11 +71,15 @@ namespace lilminirpg
                     }
                 }
             }
+
+            Console.WriteLine($"Press Enter to continue");
+            Console.ReadLine();
             PlayerMoveThroughScreen();
         }
+
         public static void PlayerMoveThroughScreen()
         {
-            Movement.PlayerPosition(CurrentGameScreen.Length);
+            Movement.PlayerPosition(CurrentGameScreen.Length - 1);
         }
     }
 }

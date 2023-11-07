@@ -25,26 +25,30 @@ namespace lilminirpg
                 }
             }
             else if (menutracker == "MenuPlayerName")
-                {
-                    CharacterMaker.SetCharacterName();
-                }
-                else if (menutracker == "MenuPlayerClass")
-                {
+            {
+                CharacterMaker.SetCharacterName();
+            }
+            else if (menutracker == "MenuPlayerClass")
+            {
                 CharacterMaker.ChooseCharacterInfo(menutracker);
-                }
-                else if (menutracker == "MenuPlayerWeapon")
-                {
+            }
+            else if (menutracker == "MenuPlayerWeapon")
+            {
                 CharacterMaker.ChooseCharacterInfo(menutracker);
-                }
-                else if (menutracker == "MenuPlayerAccessory")
-                {
+            }
+            else if (menutracker == "MenuPlayerAccessory")
+            {
                 CharacterMaker.ChooseCharacterInfo(menutracker);
-                }
-                else
-                {
+            }
+            else if (menutracker == "MenuTest")
+            {
                 UI.InvalidSelection();
-                }
-          
+            }
+            else
+            {
+                UI.InvalidSelection();
+            }
+
             UI.UIFooterGeneric();
             while (UI.MenuInput != "Enter")
             {
@@ -64,9 +68,24 @@ namespace lilminirpg
             {
                 SaveLoad.LoadGame();
             }
-            else if (UI.SelectedOption > 1 && UI.MenuInput == "Enter")
+            else if (UI.SelectedOption == 2 && UI.MenuInput == "Enter")
             {
                 UI.InvalidSelection();
+            }
+            else if (UI.SelectedOption == 3 && UI.MenuInput == "Enter")
+            {
+                UI.InvalidSelection();
+            }
+            else if (UI.SelectedOption == 4 && UI.MenuInput == "Enter")
+            {
+                // METHOD TESTS
+                // QuestEngine.CreateStageArray();
+                // Console.ReadKey();
+                // QuestEngine.FillStageArray();
+                // Movement.PlayerPosition(2);
+
+                QuestEngine.CreateStageArray();
+                Console.ReadKey();
             }
         }
     }

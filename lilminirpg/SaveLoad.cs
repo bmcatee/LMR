@@ -35,18 +35,18 @@ namespace lilminirpg
             Console.WriteLine("");
 
             StreamReader sr = new StreamReader("C:\\Users\\bmcat\\Documents\\Projects\\lilminirpg\\lmr_save_001.txt");
+            line = sr.ReadLine();
+            while (line != null)
+            {
+                Console.WriteLine($"{line}");
                 line = sr.ReadLine();
-                while (line != null)
-                {
-                    Console.WriteLine($"{line}");
-                    line = sr.ReadLine();
-                }
-                sr.Close();
+            }
+            sr.Close();
 
-                Console.WriteLine("");
-                Console.WriteLine("Press Enter to continue.");
-                Console.ReadLine();
-                Menus.MenuGeneric("MenuMain");            
+            Console.WriteLine("");
+            Console.WriteLine("Press Enter to continue.");
+            Console.ReadLine();
+            Menus.MenuGeneric("MenuMain");
         }
     }
 }

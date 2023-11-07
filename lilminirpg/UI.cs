@@ -36,6 +36,7 @@ namespace lilminirpg
 
         public static void PrintCursor()
         {
+            Console.CursorVisible = false;
             // Sets cursor position to 0
             UI.CurrentCursorRow = Console.CursorLeft;
             UI.CurrentCursorColumn = Console.CursorTop;
@@ -57,6 +58,7 @@ namespace lilminirpg
             Console.SetCursorPosition(UI.CurrentCursorRow, UI.CurrentCursorColumn);
             UI.CurrentCursorRow = 0;
             UI.CurrentCursorColumn = 0;
+            Console.CursorVisible = true;
         }
 
         // Handles movement of menus
@@ -140,7 +142,7 @@ namespace lilminirpg
         {
             Console.WriteLine("You have entered an invalid selection. Please press enter to restart.");
             Console.ReadLine();
-            //            Program.Main();
+            Program.Main();
         }
 
 

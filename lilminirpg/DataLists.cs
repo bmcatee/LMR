@@ -10,10 +10,11 @@ namespace lilminirpg
     {
         public static string[,] MenuMain =
         {
-                    {"0", "New Game", ""},
-                    {"1", "Load Game", ""},
-                    {"2", "Options", ""},
-                    {"3", "Exit", ""}
+                    {"0", "New Game"},
+                    {"1", "Load Game"},
+                    {"2", "Options"},
+                    {"3", "Exit"},
+                    {"4", "Test QE"}
         };
 
         // Class choices
@@ -50,10 +51,10 @@ namespace lilminirpg
 
         // Enemies
         public static string[,] EnemiesList =
-{
+        {
                     // Key:
                         // ID#, Name, Desc,
-                        // HPMax, STR, MonsterAttackInterval,
+                        // HPMax, STR, AttackSpeed,
                         // MonsterPerk1, MonsterPerk2, MonsterPerk3,
                         // Gold, XP,
                         // MonsterFamily, MonsterEnvironment, MonsterRank
@@ -67,7 +68,7 @@ namespace lilminirpg
                     "0", "Slime", "Classicly adorable ankle-melter.",
                     "5", "1", "1",
                     "0", "0", "0",
-                    "5", "10", 
+                    "5", "10",
                     "1", "1", "1"
         },
 
@@ -76,7 +77,8 @@ namespace lilminirpg
                     "5", "1", "1",
                     "0", "0", "0",
                     "5", "10",
-                    "1", "1", "1"        },
+                    "1", "1", "1"
+        },
 
         {
                     "2", "Harpy", "Stays aloft and away from melee attacks.",
