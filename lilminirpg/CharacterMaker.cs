@@ -82,7 +82,7 @@ namespace lilminirpg
                 for (int i = 0; i < DataLists.PlayerClasses.GetLength(0); ++i)
                 {
                     UI.UICursor(i);
-                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerClasses[i, 1]}: {DataLists.PlayerClasses[i, 2]}");
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerClasses[i, 0]}: {DataLists.PlayerClasses[i, 1]}");
                 }
             }
             else if (menutracker == "MenuPlayerWeapon")
@@ -95,7 +95,7 @@ namespace lilminirpg
                 for (int i = 0; i < DataLists.PlayerWeapons.GetLength(0); ++i)
                 {
                     UI.UICursor(i);
-                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerWeapons[i, 1]}: {DataLists.PlayerWeapons[i, 2]}");
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerWeapons[i, 0]}: {DataLists.PlayerWeapons[i, 1]}");
                 }
             }
             else if (menutracker == "MenuPlayerAccessory")
@@ -108,7 +108,7 @@ namespace lilminirpg
                 for (int i = 0; i < DataLists.PlayerAccessories.GetLength(0); ++i)
                 {
                     UI.UICursor(i);
-                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerAccessories[i, 1]}: {DataLists.PlayerAccessories[i, 2]}");
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerAccessories[i, 0]}: {DataLists.PlayerAccessories[i, 1]}");
                 }
             }
             else
@@ -132,7 +132,7 @@ namespace lilminirpg
             {
                 if (UI.SelectedOption < DataLists.PlayerClasses.GetLength(0))
                 {
-                    _player.ClassName = DataLists.PlayerClasses[UI.SelectedOption, 1];
+                    _player.ClassName = DataLists.PlayerClasses[UI.SelectedOption, 0];
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace lilminirpg
             {
                 if (UI.SelectedOption < DataLists.PlayerWeapons.GetLength(0))
                 {
-                    _player.WornWeapon = DataLists.PlayerWeapons[UI.SelectedOption, 1];
+                    _player.WornWeapon = DataLists.PlayerWeapons[UI.SelectedOption, 0];
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace lilminirpg
             {
                 if (UI.SelectedOption < DataLists.PlayerAccessories.GetLength(0))
                 {
-                    _player.WornAccessory = DataLists.PlayerAccessories[UI.SelectedOption, 1];
+                    _player.WornAccessory = DataLists.PlayerAccessories[UI.SelectedOption, 0];
                 }
                 else
                 {

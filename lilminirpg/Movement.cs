@@ -18,17 +18,17 @@ namespace lilminirpg
 
             for (int i = 0; i < length; ++i)
             {
-                await PlayerMovement(1, QuestEngine.CurrentGameScreen[i]);
+                Console.WriteLine($"Player at position {PlayerPos}, moving to {PlayerPos+1} || Enemy on Current Tile: {QuestEngine.EnemiesOnScreen[PlayerPos].CharacterName}");
+                await PlayerMovement(1);
             }
             QuestEngine.CreateStageArray();
 
         }
 
-        public async static Task PlayerMovement(int delay, int gameobject)
+        public async static Task PlayerMovement(int delay)
         {
             await Task.Delay(delay * 1000);
             ++PlayerPos;
-            Console.WriteLine($"Player at position {PlayerPos} & array filled with {gameobject}");
         }
 
     }

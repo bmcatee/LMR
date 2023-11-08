@@ -21,7 +21,7 @@ namespace lilminirpg
                 UI.MenuLength = DataLists.MenuMain.GetLength(0);
                 for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
                 {
-                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 1]}");
+                    Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 0]}");
                 }
             }
             else if (menutracker == "MenuPlayerName")
@@ -79,13 +79,12 @@ namespace lilminirpg
             else if (UI.SelectedOption == 4 && UI.MenuInput == "Enter")
             {
                 // METHOD TESTS
-                // QuestEngine.CreateStageArray();
-                // Console.ReadKey();
+                 QuestEngine.CreateStageArray();
+                 Console.ReadKey();
                 // QuestEngine.FillStageArray();
                 // Movement.PlayerPosition(2);
-
-                QuestEngine.CreateStageArray();
-                Console.ReadKey();
+                // Program.PrintLists();
+                // EnemyMaker.MakeEnemy(1);
             }
         }
     }

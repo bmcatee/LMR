@@ -1,4 +1,5 @@
 ﻿using lilminirpg;
+using System.Collections;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 
@@ -10,6 +11,17 @@ namespace lilminirpg
         {
             // Goto main menu
             Menus.MenuGeneric("MenuMain");
+        }
+
+        public static void PrintLists()
+        {
+            for (int i = 0; i < DataLists.EnemiesList.GetLength(0); ++i)
+            {
+                for (int j = 0; j < DataLists.EnemiesList.GetLength(1); ++j)
+                {
+                    Console.WriteLine($"{DataLists.EnemiesList[i, j]}");
+                }
+            }
         }
     }
 }
