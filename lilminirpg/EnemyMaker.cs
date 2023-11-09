@@ -8,81 +8,81 @@ namespace lilminirpg
 {
     internal class EnemyMaker
     {
-        public static Enemy NewEnemy = new Enemy();
-
-        public Enemy MakeEnemy(int enemybaseid)
+        public Enemy MakeEnemy(int enemyBaseID)
         {
-            NewEnemy.CurrentLevel = 0;
+            Enemy createdEnemy = new Enemy();
+
+            createdEnemy.CurrentLevel = 0;
             for (int i = 0; i < DataLists.EnemiesList.GetLength(1); ++i)
             {
-                SetStat(enemybaseid, i);
+                SetStat(enemyBaseID, i, createdEnemy);
             }
-            return NewEnemy;
+            return createdEnemy;
         }
-        public static void SetStat(int enemybaseid, int statposition)
-        { 
-            if (statposition == 0)
+        private static void SetStat(int enemyBaseID, int statPosition, Enemy createdEnemy)
+        {
+            if (statPosition == 0)
             {
-                NewEnemy.CharacterName = DataLists.EnemiesList[enemybaseid, statposition];
-                Console.WriteLine($"Creating: {NewEnemy.CharacterName}");
+                createdEnemy.CharacterName = DataLists.EnemiesList[enemyBaseID, statPosition];
+                Console.WriteLine($"Creating: {createdEnemy.CharacterName}");
             }
-            else if (statposition == 1)
+            else if (statPosition == 1)
             {
 
             }
-            else if (statposition == 2)
+            else if (statPosition == 2)
             {
-                NewEnemy.HealthPointsMax = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.HealthPointsMax = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.HealthPointsMax}");
             }
-            else if (statposition == 3)
+            else if (statPosition == 3)
             {
-                NewEnemy.StatStrength = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.StatStrength = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.StatStrength}");
             }
-            else if (statposition == 4)
+            else if (statPosition == 4)
             {
-                NewEnemy.StatAtkSpeed = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.StatAtkSpeed = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.StatAtkSpeed}");
             }
-            else if (statposition == 5)
+            else if (statPosition == 5)
             {
-                NewEnemy.MonsterPerk1 = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.MonsterPerk1 = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
              //   Console.WriteLine($"CharName: {NewEnemy.MonsterPerk1}");
             }
-            else if (statposition == 6)
+            else if (statPosition == 6)
             {
-                NewEnemy.MonsterPerk2 = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.MonsterPerk2 = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.MonsterPerk2}");
             }
-            else if (statposition == 7)
+            else if (statPosition == 7)
             {
-                NewEnemy.MonsterPerk3 = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.MonsterPerk3 = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.MonsterPerk3}");
             }
-            else if (statposition == 8)
+            else if (statPosition == 8)
             {
-                NewEnemy.GoldDropped = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.GoldDropped = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
              //   Console.WriteLine($"CharName: {NewEnemy.GoldDropped}");
             }
-            else if (statposition == 9)
+            else if (statPosition == 9)
             {
-                NewEnemy.XPDropped = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.XPDropped = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.XPDropped}");
             }
-            else if (statposition == 10)
+            else if (statPosition == 10)
             {
-                NewEnemy.MonsterFamily = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.MonsterFamily = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.MonsterFamily}");
             }
-            else if (statposition == 11)
+            else if (statPosition == 11)
             {
-                NewEnemy.MonsterEnvironment = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.MonsterEnvironment = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.MonsterEnvironment}");
             }
-            else if (statposition == 12)
+            else if (statPosition == 12)
             {
-                NewEnemy.MonsterRank = Int32.Parse(DataLists.EnemiesList[enemybaseid, statposition]);
+                createdEnemy.MonsterRank = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
             //    Console.WriteLine($"CharName: {NewEnemy.MonsterRank}");
             }
             else

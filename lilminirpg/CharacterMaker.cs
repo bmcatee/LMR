@@ -10,17 +10,17 @@ namespace lilminirpg
 {
     public class CharacterMaker
     {
-        static Player _player = new Player();
-        static bool characterCreation = false;
-        static int characterCreationStage = 0;
+        static Player newPlayer = new Player();
+        private static bool _characterCreation = false;
+        private static int _characterCreationStage = 0;
 
         public void MakeCharacter()
         {
             // Starts the full player character creation process
-            characterCreation = true;
-            _player.ClassName = "";
-            _player.WornWeapon = "";
-            _player.WornAccessory = "";
+            _characterCreation = true;
+            newPlayer.ClassName = "";
+            newPlayer.WornWeapon = "";
+            newPlayer.WornAccessory = "";
             SetCharacterName();
         }
 
@@ -31,7 +31,7 @@ namespace lilminirpg
             UI.MenuTracker = "MenuPlayerName";
             Console.CursorVisible = true;
             UI.UIHeaderGeneric();
-            if (characterCreation == true)
+            if (_characterCreation == true)
             {
                 Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
             }
@@ -40,11 +40,11 @@ namespace lilminirpg
                 Console.WriteLine("Please type your character's name and press Enter:");
             };
 
-            _player.CharacterName = Console.ReadLine();
+            newPlayer.CharacterName = Console.ReadLine();
 
-            if (characterCreation == true)
+            if (_characterCreation == true)
             {
-                characterCreationStage = 1;
+                _characterCreationStage = 1;
                 ChooseCharacterInfo("MenuPlayerClass");
             }
             else
@@ -53,10 +53,10 @@ namespace lilminirpg
             }
         }
 
-        public static void ChooseCharacterInfo(string menutracker)
+        public static void ChooseCharacterInfo(string menuTracker)
         {
             // Set desired menu, reset other variables to initial values
-            UI.MenuTracker = menutracker;
+            UI.MenuTracker = menuTracker;
             UI.SelectedOption = 0;
             UI.MenuInput = "";
 
@@ -64,15 +64,15 @@ namespace lilminirpg
             // Clear console, print character info; dislike this, would rather the display be more elegant
             Console.Clear();
             Console.CursorVisible = false;
-            Console.WriteLine($"Name: {_player.CharacterName} || Class: {_player.ClassName} || Weapon: {_player.WornWeapon} || Accessory: {_player.WornAccessory}");
+            Console.WriteLine($"Name: {newPlayer.CharacterName} || Class: {newPlayer.ClassName} || Weapon: {newPlayer.WornWeapon} || Accessory: {newPlayer.WornAccessory}");
             Console.WriteLine("");
 
             // Passes to the appropriate menu
-            if (menutracker == "MenuPlayerName")
+            if (menuTracker == "MenuPlayerName")
             {
                 SetCharacterName();
             }
-            else if (menutracker == "MenuPlayerClass")
+            else if (menuTracker == "MenuPlayerClass")
             {
                 UI.CursorOffset = 4;
                 UI.MenuTracker = "MenuPlayerClass";
@@ -85,7 +85,7 @@ namespace lilminirpg
                     Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerClasses[i, 0]}: {DataLists.PlayerClasses[i, 1]}");
                 }
             }
-            else if (menutracker == "MenuPlayerWeapon")
+            else if (menuTracker == "MenuPlayerWeapon")
             {
                 UI.CursorOffset = 4;
                 UI.MenuTracker = "MenuPlayerWeapon";
@@ -98,7 +98,7 @@ namespace lilminirpg
                     Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.PlayerWeapons[i, 0]}: {DataLists.PlayerWeapons[i, 1]}");
                 }
             }
-            else if (menutracker == "MenuPlayerAccessory")
+            else if (menuTracker == "MenuPlayerAccessory")
             {
                 UI.CursorOffset = 4;
                 UI.MenuTracker = "MenuPlayerAccessory";
@@ -123,77 +123,77 @@ namespace lilminirpg
                 UI.UIMovement();
             }
             UI.CursorOffset = 0;
-            SetCharacterInfo(menutracker);
+            SetCharacterInfo(menuTracker);
         }
-        public static void SetCharacterInfo(string menutracker)
+        public static void SetCharacterInfo(string menuTracker)
         {
             // Sets the player info
-            if (menutracker == "MenuPlayerClass")
+            if (menuTracker == "MenuPlayerClass")
             {
                 if (UI.SelectedOption < DataLists.PlayerClasses.GetLength(0))
                 {
-                    _player.ClassName = DataLists.PlayerClasses[UI.SelectedOption, 0];
+                    newPlayer.ClassName = DataLists.PlayerClasses[UI.SelectedOption, 0];
                 }
                 else
                 {
                     UI.InvalidSelection();
                 }
-                if (characterCreation == true)
+                if (_characterCreation == true)
                 {
-                    characterCreationStage = 2;
+                    _characterCreationStage = 2;
                 }
             }
-            else if (menutracker == "MenuPlayerWeapon")
+            else if (menuTracker == "MenuPlayerWeapon")
             {
                 if (UI.SelectedOption < DataLists.PlayerWeapons.GetLength(0))
                 {
-                    _player.WornWeapon = DataLists.PlayerWeapons[UI.SelectedOption, 0];
+                    newPlayer.WornWeapon = DataLists.PlayerWeapons[UI.SelectedOption, 0];
                 }
                 else
                 {
                     UI.InvalidSelection();
                 }
-                if (characterCreation == true)
+                if (_characterCreation == true)
                 {
-                    characterCreationStage = 3;
+                    _characterCreationStage = 3;
                 }
             }
-            else if (menutracker == "MenuPlayerAccessory")
+            else if (menuTracker == "MenuPlayerAccessory")
             {
                 if (UI.SelectedOption < DataLists.PlayerAccessories.GetLength(0))
                 {
-                    _player.WornAccessory = DataLists.PlayerAccessories[UI.SelectedOption, 0];
+                    newPlayer.WornAccessory = DataLists.PlayerAccessories[UI.SelectedOption, 0];
                 }
                 else
                 {
                     UI.InvalidSelection();
                 }
-                if (characterCreation == true)
+                if (_characterCreation == true)
                 {
-                    characterCreationStage = 4;
+                    _characterCreationStage = 4;
                 }
             }
 
             // Moves to next step in character creation
-            if (characterCreation == true)
+            if (_characterCreation == true)
             {
-                if (characterCreationStage == 0)
+                if (_characterCreationStage == 0)
                 {
                     ChooseCharacterInfo("MenuPlayerName");
                 }
-                else if (characterCreationStage == 1)
+                else if (_characterCreationStage == 1)
                 {
                     ChooseCharacterInfo("MenuPlayerClass");
                 }
-                else if (characterCreationStage == 2)
+                else if (_characterCreationStage == 2)
                 {
                     ChooseCharacterInfo("MenuPlayerWeapon");
                 }
-                else if (characterCreationStage == 3)
+                else if (_characterCreationStage == 3)
                 {
                     ChooseCharacterInfo("MenuPlayerAccessory");
                 }
-                else if (characterCreationStage == 4)
+                else if (_characterCreationStage == 4)
                 {
                     EndCharacterCreation();
                 }
@@ -212,16 +212,16 @@ namespace lilminirpg
             UI.MenuTracker = "";
             UI.MenuLength = 0;
             UI.CursorOffset = 0;
-            characterCreation = false;
-            characterCreationStage = 0;
+            _characterCreation = false;
+            _characterCreationStage = 0;
             Console.Clear();
             UI.UIHeaderGeneric();
             Console.WriteLine("You have selected:");
-            Console.WriteLine($"[*] Name: {_player.CharacterName}");
-            Console.WriteLine($"[*] Class: {_player.ClassName}");
-            Console.WriteLine($"[*] Weapon: {_player.WornWeapon}");
-            Console.WriteLine($"[*] Accessory: {_player.WornAccessory}");
-            SaveLoad.SaveGame(_player.CharacterName, _player.ClassName, _player.WornWeapon, _player.WornAccessory);
+            Console.WriteLine($"[*] Name: {newPlayer.CharacterName}");
+            Console.WriteLine($"[*] Class: {newPlayer.ClassName}");
+            Console.WriteLine($"[*] Weapon: {newPlayer.WornWeapon}");
+            Console.WriteLine($"[*] Accessory: {newPlayer.WornAccessory}");
+            SaveLoad.SaveGame(newPlayer.CharacterName, newPlayer.ClassName, newPlayer.WornWeapon, newPlayer.WornAccessory);
             Console.WriteLine("Please press Enter to continue.");
             Menus.MenuGeneric("MenuMain");
         }

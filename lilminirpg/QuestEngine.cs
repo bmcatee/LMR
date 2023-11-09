@@ -10,7 +10,7 @@ namespace lilminirpg
     internal class QuestEngine
     {
         public static int CurrentGameLevel = 0;
-        public static Random randombool = new Random();
+        private static Random _randombool = new Random();
         public static bool[] NewGameScreen = new bool[16];
         public static int[] CurrentGameScreen = new int[16];
         public static Enemy[] EnemiesOnScreen = new Enemy[16];
@@ -27,12 +27,12 @@ namespace lilminirpg
                 if (i == 0 || i == 1 || i == 2 || i == 3)
                 {
                     NewGameScreen[i] = false;
-                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
+                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]}");
                 }
                 else
                 {
-                    NewGameScreen[i] = randombool.Next(2) == 1;
-                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || CurrentGameScreen = {CurrentGameScreen[i]}");
+                    NewGameScreen[i] = _randombool.Next(2) == 1;
+                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]}");
                 }
             }
 
@@ -43,13 +43,13 @@ namespace lilminirpg
         // Fills the stage array with objects
         public static void FillStageArray(int level)
         {
+            var createdenemy0 = new EnemyMaker();
 
             // fill with dummy data first
             for (int i = 0; i < NewGameScreen.Length; ++i)
-            {        
-                EnemyMaker NewEnemyMaker = new EnemyMaker();
-                Enemy createdenemy0 = NewEnemyMaker.MakeEnemy(0);
-                EnemiesOnScreen[i] = createdenemy0;
+            {
+                EnemiesOnScreen[i] = createdenemy0.MakeEnemy(0);
+                Console.WriteLine($"NewGameScreen {i} = {CurrentGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
             }
 
             // now populate
@@ -58,40 +58,34 @@ namespace lilminirpg
                 if (NewGameScreen[i] == false)
                 {
                     CurrentGameScreen[i] = 0;
-                    Console.WriteLine($"NewGameScreen {i} = {NewGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
+                    Console.WriteLine($"NewGameScreen {i} = {CurrentGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
                 }
                 else if (NewGameScreen[i] == true)
                 {
                     DiceRoller.RollDice(1, 99);
                     if (DiceRoller.RollResults > -1 && DiceRoller.RollResults < 31)
                     {
-                        EnemyMaker NewEnemyMaker = new EnemyMaker();
-
-                        Enemy createdenemy1 = NewEnemyMaker.MakeEnemy(1);
-                        EnemiesOnScreen[i] = createdenemy1;
+                        var createdenemy1 = new EnemyMaker();
+                        EnemiesOnScreen[i] = createdenemy1.MakeEnemy(1);
                         CurrentGameScreen[i] = 1;
                         Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (0-30)");
-                        Console.WriteLine($"Tile: {i} = {NewGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
+                        Console.WriteLine($"Tile: {i} = {CurrentGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
                     }
                     else if (DiceRoller.RollResults > 30 && DiceRoller.RollResults < 61)
                     {
-                        EnemyMaker NewEnemyMaker = new EnemyMaker();
-
-                        Enemy createdenemy2 = NewEnemyMaker.MakeEnemy(2);
-                        EnemiesOnScreen[i] = createdenemy2;
+                        var createdenemy2 = new EnemyMaker();
+                        EnemiesOnScreen[i] = createdenemy2.MakeEnemy(2);
                         CurrentGameScreen[i] = 2;
                         Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (31-64)");
-                        Console.WriteLine($"Tile: {i} = {NewGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
+                        Console.WriteLine($"Tile: {i} = {CurrentGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
                     }
                     else if (DiceRoller.RollResults > 60 && DiceRoller.RollResults <= 99)
                     {
-                        EnemyMaker NewEnemyMaker = new EnemyMaker();
-
-                        Enemy createdenemy3 = NewEnemyMaker.MakeEnemy(3);
-                        EnemiesOnScreen[i] = createdenemy3;
+                        var createdenemy3 = new EnemyMaker();
+                        EnemiesOnScreen[i] = createdenemy3.MakeEnemy(3);
                         CurrentGameScreen[i] = 3;
                         Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (65-99)");
-                        Console.WriteLine($"Tile: {i} = {NewGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
+                        Console.WriteLine($"Tile: {i} = {CurrentGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");
                     }
                     //for (int j = 0; j < EnemiesOnScreen.Length; j++)
                     //{

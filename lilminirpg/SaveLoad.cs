@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-    internal class SaveLoad
+    public class SaveLoad
     {
         // Save game method
-        public static void SaveGame(string charactername, string classname, string wornweapon, string wornaccessory)
+        public static void SaveGame(string characterName, string className, string wornWeapon, string wornAccessory)
         {
-            string[] savedata = { $"{charactername}", $"{classname}", $"{wornweapon}", $"{wornaccessory}" };
+            string[] savedata = { $"{characterName}", $"{className}", $"{wornWeapon}", $"{wornAccessory}" };
             string folder = "C:\\Users\\bmcat\\Documents\\Projects\\lilminirpg\\";
             string filename = "lmr_save_001.txt";
             string savepath = folder + filename;

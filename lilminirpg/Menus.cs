@@ -9,13 +9,13 @@ namespace lilminirpg
 {
     public static class Menus
     {
-        public static void MenuGeneric(string menutracker)
+        public static void MenuGeneric(string menuTracker)
         {
             Console.Clear();
-            UI.MenuTracker = menutracker;
+            UI.MenuTracker = menuTracker;
             UI.MenuInput = "";
             UI.UIHeaderGeneric();
-            if (menutracker == "MenuMain")
+            if (menuTracker == "MenuMain")
             {
                 UI.CursorOffset = 2;
                 UI.MenuLength = DataLists.MenuMain.GetLength(0);
@@ -24,23 +24,23 @@ namespace lilminirpg
                     Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 0]}");
                 }
             }
-            else if (menutracker == "MenuPlayerName")
+            else if (menuTracker == "MenuPlayerName")
             {
                 CharacterMaker.SetCharacterName();
             }
-            else if (menutracker == "MenuPlayerClass")
+            else if (menuTracker == "MenuPlayerClass")
             {
-                CharacterMaker.ChooseCharacterInfo(menutracker);
+                CharacterMaker.ChooseCharacterInfo(menuTracker);
             }
-            else if (menutracker == "MenuPlayerWeapon")
+            else if (menuTracker == "MenuPlayerWeapon")
             {
-                CharacterMaker.ChooseCharacterInfo(menutracker);
+                CharacterMaker.ChooseCharacterInfo(menuTracker);
             }
-            else if (menutracker == "MenuPlayerAccessory")
+            else if (menuTracker == "MenuPlayerAccessory")
             {
-                CharacterMaker.ChooseCharacterInfo(menutracker);
+                CharacterMaker.ChooseCharacterInfo(menuTracker);
             }
-            else if (menutracker == "MenuTest")
+            else if (menuTracker == "MenuTest")
             {
                 UI.InvalidSelection();
             }
