@@ -24,7 +24,7 @@ namespace lilminirpg
             if (statPosition == 0)
             {
                 createdEnemy.CharacterName = DataLists.EnemiesList[enemyBaseID, statPosition];
-                Console.WriteLine($"Creating: {createdEnemy.CharacterName}");
+//                Console.WriteLine($"Creating: {createdEnemy.CharacterName}");
             }
             else if (statPosition == 1)
             {

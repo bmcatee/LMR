@@ -8,12 +8,11 @@ namespace lilminirpg
 {
     internal class DiceRoller
     {
-        public static int RollResults = 0;
-        public static void RollDice(int min, int max)
-        {
+        public int RollDice(int min, int max)
+        {        
             var random = new Random();
             int roll = random.Next(min, max);
-            RollResults = roll;
+            return roll;
         }
     }
 }

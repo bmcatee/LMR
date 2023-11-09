@@ -66,11 +66,11 @@ namespace lilminirpg
             // Total Elements: 8
 
         {
-                "Dummy", "",
-                "0", "0", "0",
-                "0", "0", "0",
-                "0", "0",
-                "0", "0", "0"
+                    "Empty Ground", "",
+                    "0", "0", "0",
+                    "0", "0", "0",
+                    "0", "0",
+                    "0", "0", "0"
         },
         {
                     "G.Slime", "Green - Classicly adorable ankle-melter.",
@@ -81,91 +81,91 @@ namespace lilminirpg
         },
         {
                     "R.Slime", "Red - Classicly adorable ankle-melter.",
-                    "5", "1", "1",
+                    "8", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "A.Slime", "Aqua - Classicly adorable ankle-melter.",
-                    "5", "1", "1",
+                    "12", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "S.Slime", "Shock - Classicly adorable ankle-melter.",
-                    "5", "1", "1",
+                    "7", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "L.Slime", "Lava - Classicly adorable ankle-melter.",
-                    "5", "1", "1",
+                    "8", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "R.Slime", "Rock - Classicly adorable ankle-melter.",
-                    "5", "1", "5",
+                    "6", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
         },
         {
                     "D.Slime", "Demon - Classicly adorable ankle-melter.",
-                    "5", "1", "5",
+                    "15", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
         },
         {
                     "H.Slime", "Holy - Classicly adorable ankle-melter.",
-                    "5", "1", "5",
+                    "205", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
         },
         {
                     "Goblin Fighter", "Small, but not harmless.",
-                    "5", "1", "1",
+                    "8", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Goblin Defender", "Small, but not harmless.",
-                    "5", "1", "1",
+                    "15", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Goblin Spellcaster", "Loves it when things go boom.",
-                    "5", "1", "5",
+                    "4", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
         },
         {
                     "Goblin Beasttamer", "Loves it when things go boom.",
-                    "5", "1", "5",
+                    "6", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
         },
         {
                     "Goblin Berserker", "Loves it when things go boom.",
-                    "5", "1", "5",
+                    "7", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
         },
         {
                     "Goblin Thief", "Loves it when things go boom.",
-                    "5", "1", "5",
+                    "4", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"
@@ -179,105 +179,105 @@ namespace lilminirpg
         },
         {
                     "Dire Eagle", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
+                    "9", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Wasp", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
+                    "2", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Flying Squirrel", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
+                    "4", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Locust", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
+                    "3", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Pixie", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
+                    "8", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Wyrm", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
+                    "12", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Minotaur", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "25", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Bear", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "20", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Bird Bear", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "22", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Golem", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "30", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Living Doll", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "9", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Moai Head", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "18", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Racoon", "Big and brutally strong.",
-                    "5", "1", "1",
+                    "6", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Evil Clown", ". . . ",
-                    "5", "1", "1",
+                    "7", "1", "1",
                     "0", "0", "0",
                     "5", "10",
                     "1", "1", "1"
         },
         {
                     "Fish", "Just floppin' around.",
-                    "5", "1", "5",
+                    "4", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"

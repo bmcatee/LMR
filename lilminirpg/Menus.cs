@@ -85,6 +85,7 @@ namespace lilminirpg
                 // Movement.PlayerPosition(2);
                 // Program.PrintLists();
                 // EnemyMaker.MakeEnemy(1);
+                // Program.PrintColorList();
             }
         }
     }

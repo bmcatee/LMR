@@ -144,22 +144,5 @@ namespace lilminirpg
             Console.ReadLine();
             Program.Main();
         }
-
-
-
-
-
-        //public static void PrintColorList()
-        //{
-        //    ConsoleColor[] consoleColors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
-        //    Console.WriteLine("List of available " + "Console Colors:");
-
-        //    for (int i = 0; i < consoleColors.Length; ++i)
-        //    {
-        //        Console.ForegroundColor = consoleColors[i];
-        //        Console.WriteLine($"Hello, World: {consoleColors[i]}");
-        //    }
-        //    Console.ReadLine();
-        //}
     }
 }
