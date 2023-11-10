@@ -18,28 +18,30 @@ namespace lilminirpg
 
             for (int i = 0; i < length; ++i)
             {
-                Console.WriteLine("Doop-Forloop!");
-
                 if (currentEnemies[_playerPos + 1].CharacterName == "Empty Ground")
                 {
                     Console.WriteLine($"Player at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {currentEnemies[_playerPos + 1].CharacterName}");
-                    await PlayerMovement(1);
                 }
-                else if (currentEnemies[_playerPos + i].CharacterName != "Empty Ground")
+                else 
                 {
                     Enemy currentEnemy = currentEnemies[_playerPos +1];
-                    Console.WriteLine($"Player at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {currentEnemy.CharacterName}");
-                    Console.WriteLine($"Fight! The {currentEnemies[_playerPos + 1].CharacterName} has {currentEnemy.HealthPointsCurrent} HP.");
-                    await PlayerAttack(3, currentEnemies[_playerPos + 1].HealthPointsCurrent, currentEnemy);
+                    while (currentEnemy.HealthPointsCurrent > 0)
+                    {
+                        Console.WriteLine($"Player at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {currentEnemy.CharacterName}");
+                        Console.WriteLine($"Fight! The {currentEnemies[_playerPos + 1].CharacterName} has {currentEnemy.HealthPointsCurrent} HP.");
+                        await PlayerAttack(0, currentEnemies[_playerPos + 1].HealthPointsCurrent, currentEnemy);
+                    }
                 }
+                await PlayerMovement(0);
             }
+            _playerPos = 0;
             QuestEngine.CurrentGameLevel = ++QuestEngine.CurrentGameLevel;
-            QuestEngine.CreateStageArray(QuestEngine.CurrentGameLevel);
+            QuestEngine.InitStageArray();
+            Console.ReadKey();
         }
 
         public async static Task PlayerMovement(int delay)
         {
- //           Console.WriteLine("Doop-PlayerMovement!");            
             await Task.Delay(delay * 1000);
             ++_playerPos;
         }
@@ -61,7 +63,6 @@ namespace lilminirpg
             {
                 Console.WriteLine("You win!");
                 await Task.Delay(delay * 1000);
-              //  PlayerMovement(1);
             }
         }
     }

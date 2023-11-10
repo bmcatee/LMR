@@ -45,30 +45,27 @@ namespace lilminirpg
                 }
                 else if (fillPositionRoll == 1 && i > 3)
                 {
+                    createdenemy = new EnemyMaker();
 
-                    if (placeEnemyRoll > -1 && placeEnemyRoll < 31)
+                    switch (placeEnemyRoll)
                     {
-                        createdenemy = new EnemyMaker();
-                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
-                        CurrentGameScreen[i] = 1;
-                    }
-                    else if (placeEnemyRoll > 30 && placeEnemyRoll < 61)
-                    {
-                        createdenemy = new EnemyMaker();
-                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
-                        CurrentGameScreen[i] = 2;
-                    }
-                    else if (placeEnemyRoll > 60 && placeEnemyRoll <= 99)
-                    {
-                        createdenemy = new EnemyMaker();
-                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
-                        CurrentGameScreen[i] = 3;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Roll: {placeEnemyRoll} - YOU SHOULD NOT BE HERE");
-                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(0);
-                        CurrentGameScreen[i] = 0;
+                        case int n when (n > -1 && n < 31):
+                            _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
+                            CurrentGameScreen[i] = 1;
+                            break;
+                        case int n when (n > 30 && n < 61):
+                            _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
+                            CurrentGameScreen[i] = 2;
+                            break;
+                        case int n when (n > 60 && n <= 99):
+                            _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
+                            CurrentGameScreen[i] = 3;
+                            break;
+                        default:
+                            Console.WriteLine($"Roll: {placeEnemyRoll} - YOU SHOULD NOT BE HERE");
+                            _enemiesOnScreen[i] = createdenemy.MakeEnemy(0);
+                            CurrentGameScreen[i] = 0;
+                            break;
                     }
                 }
             }

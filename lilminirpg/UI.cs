@@ -18,8 +18,12 @@ namespace lilminirpg
         private static int consoleWindowTopColumn = 0;
         private static int CurrentCursorRow;
         private static int CurrentCursorColumn;
-        private static int CursorOffset;
+        public static int CursorOffset;
 
+        public class UserInterface
+        {
+
+        }
         public static void WriteFromTop(string s, int x, int y)
         {
             try
