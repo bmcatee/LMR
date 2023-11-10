@@ -15,6 +15,5 @@ namespace lilminirpg
         public string WornClothing { get; set; }
         public string WornAccessory { get; set; }
         public int StatMove { get; set; }
-
     }
 }

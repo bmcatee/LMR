@@ -14,11 +14,11 @@ namespace lilminirpg
         public static string MenuInput { get; set; }
         public static string MenuTracker { get; set; }
         public static int MenuLength { get; set; }
-        public static int consoleWindowTopRow = 0;
-        public static int consoleWindowTopColumn = 0;
-        public static int CurrentCursorRow;
-        public static int CurrentCursorColumn;
-        public static int CursorOffset;
+        private static int consoleWindowTopRow = 0;
+        private static int consoleWindowTopColumn = 0;
+        private static int CurrentCursorRow;
+        private static int CurrentCursorColumn;
+        private static int CursorOffset;
 
         public static void WriteFromTop(string s, int x, int y)
         {
@@ -124,6 +124,7 @@ namespace lilminirpg
             return SelectedOption;
         }
 
+        // Header/footer
         public static void UIHeaderGeneric()
         {
             Console.WriteLine("Now playing: lil mini rpg");

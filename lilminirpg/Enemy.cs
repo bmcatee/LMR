@@ -16,7 +16,5 @@ namespace lilminirpg
         public int MonsterFamily { get; set; }
         public int MonsterEnvironment { get; set; }
         public int MonsterRank { get; set; }
-
-
     }
 }

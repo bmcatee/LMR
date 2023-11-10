@@ -11,13 +11,23 @@ namespace lilminirpg
     {
         public static int CurrentGameLevel = 0;
         public static int[] CurrentGameScreen = new int[16];
-        public static Enemy[] EnemiesOnScreen = new Enemy[16];
+        public Enemy[] EnemiesOnScreen = new Enemy[16];
 
-        public static void CreateStageArray()
+        public static void InitStageArray()
         {
+            Enemy[] _enemiesOnScreen = CreateStageArray(CurrentGameLevel);
+            for (int i = 0; i < _enemiesOnScreen.Length; i++)
+            {
+                Console.WriteLine($"Enemy on Current Tile {i}: {_enemiesOnScreen[i].CharacterName} - HP = {_enemiesOnScreen[i].HealthPointsMax}");
+            }
+            Console.WriteLine($"Press Enter to continue");
+            Console.ReadLine();
+            PlayerMoveThroughScreen(_enemiesOnScreen);
+        }
 
-            CurrentGameLevel = ++CurrentGameLevel;
-
+        public static Enemy[] CreateStageArray(int gamelevel)
+        {
+            Enemy[] _enemiesOnScreen = new Enemy[16];
             for (int i = 0; i < CurrentGameScreen.Length; ++i)
             {
                 DiceRoller _diceRoller = new DiceRoller();
@@ -30,7 +40,7 @@ namespace lilminirpg
 
                 if (fillPositionRoll == 0 || i <= 3)
                 {
-                    EnemiesOnScreen[i] = createdenemy.MakeEnemy(0);
+                    _enemiesOnScreen[i] = createdenemy.MakeEnemy(0);
                     CurrentGameScreen[i] = 0;
                 }
                 else if (fillPositionRoll == 1 && i > 3)
@@ -39,41 +49,40 @@ namespace lilminirpg
                     if (placeEnemyRoll > -1 && placeEnemyRoll < 31)
                     {
                         createdenemy = new EnemyMaker();
-                        EnemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
+                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
                         CurrentGameScreen[i] = 1;
                     }
                     else if (placeEnemyRoll > 30 && placeEnemyRoll < 61)
                     {
                         createdenemy = new EnemyMaker();
-                        EnemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
+                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
                         CurrentGameScreen[i] = 2;
                     }
                     else if (placeEnemyRoll > 60 && placeEnemyRoll <= 99)
                     {
                         createdenemy = new EnemyMaker();
-                        EnemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
+                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
                         CurrentGameScreen[i] = 3;
                     }
                     else
                     {
                         Console.WriteLine($"Roll: {placeEnemyRoll} - YOU SHOULD NOT BE HERE");
-                        EnemiesOnScreen[i] = createdenemy.MakeEnemy(0);
+                        _enemiesOnScreen[i] = createdenemy.MakeEnemy(0);
                         CurrentGameScreen[i] = 0;
                     }
                 }
             }
-            for (int i = 0; i < EnemiesOnScreen.Length; i++)
-            {
-                Console.WriteLine($"Enemy on Current Tile {i}: {EnemiesOnScreen[i].CharacterName}");
-            }
-            Console.WriteLine($"Press Enter to continue");
-            Console.ReadLine();
-            PlayerMoveThroughScreen();
+                return _enemiesOnScreen;
         }
 
-        public static void PlayerMoveThroughScreen()
+        public static void PlayerMoveThroughScreen(Enemy[] createdEnemies)
         {
-            Movement.PlayerPosition(CurrentGameScreen.Length - 1);
+            Movement.PlayerPosition(CurrentGameScreen.Length - 1, createdEnemies);
+        }
+
+        public static void IncrementStageLevel()
+        {
+            CurrentGameLevel = ++CurrentGameLevel;
         }
     }
 }

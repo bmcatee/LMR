@@ -79,7 +79,7 @@ namespace lilminirpg
             else if (UI.SelectedOption == 4 && UI.MenuInput == "Enter")
             {
                 // METHOD TESTS
-                 QuestEngine.CreateStageArray();
+                 QuestEngine.InitStageArray();
                  Console.ReadKey();
                 // QuestEngine.FillStageArray();
                 // Movement.PlayerPosition(2);
