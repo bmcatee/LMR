@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json.Serialization;
 
 namespace lilminirpg
 {
@@ -40,6 +41,8 @@ namespace lilminirpg
         }
         public static void PrintColorList()
         {
+            
+
             ConsoleColor[] consoleColors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
             Console.WriteLine("List of available " + "Console Colors:");
 

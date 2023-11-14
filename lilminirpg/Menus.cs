@@ -44,7 +44,7 @@ namespace lilminirpg
                     break;
                 case "MenuTest":
                     TestMenu();
-                        break;
+                    break;
                 default:
                     UI.InvalidSelection();
                     break;
@@ -60,7 +60,7 @@ namespace lilminirpg
 
         public static void MenuSelection(int selectedoption)
         {
-                switch(selectedoption)
+            switch (selectedoption)
             {
                 case 0:
                     CharacterMaker _charactermaker = new CharacterMaker();
@@ -69,13 +69,13 @@ namespace lilminirpg
                 case 1:
                     SaveLoad.LoadGame();
                     break;
-                    case 2:
+                case 2:
                     UI.InvalidSelection();
                     break;
-                    case 3:
+                case 3:
                     UI.InvalidSelection();
                     break;
-                    case 4:
+                case 4:
                     Menus.TestMenu();
                     break;
                 default:
@@ -103,38 +103,30 @@ namespace lilminirpg
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
             }
-            TestMenuSelection();
+            TestMenuSelection(userInterface.SelectedOption);
         }
 
-        public static void TestMenuSelection()
+        public static void TestMenuSelection(int selectedoption)
         {
-            UI userInterface = new(0, "", "", 0);
-
-            if (userInterface.MenuInput != "Enter")
+            switch (selectedoption)
             {
-
-            }
-            else
-            {
-                switch (userInterface.SelectedOption)
-                {
-                    case 0:
-                        QuestEngine.InitStageArray();
-                        Console.ReadLine();
-                        break;
-                    case 1:
-                        Program.PrintLists();
-                        break;
-                    case 2:
-                        Program.PrintColorList();
-                        break;
-                    case 3:
-                        Menus.MenuGeneric("MenuMain");
-                        break;
-                    default:
-                        UI.InvalidSelection();
-                        break;
-                }
+                case 0:
+                    Console.WriteLine("Doop");
+                    QuestEngine.InitStageArray();
+                    Console.ReadLine();
+                    break;
+                case 1:
+                    Program.PrintLists();
+                    break;
+                case 2:
+                    Program.PrintColorList();
+                    break;
+                case 3:
+                    Menus.MenuGeneric("MenuMain");
+                    break;
+                default:
+                    UI.InvalidSelection();
+                    break;
             }
         }
     }

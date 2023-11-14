@@ -68,7 +68,7 @@ namespace lilminirpg
             // MonsterPerk1, MonsterPerk2, MonsterPerk3,
             // Gold, XP,
             // MonsterFamily, MonsterEnvironment, MonsterRank
-            // MonsterFamily, MonsterEnvironment, & MonsterRank are used for populating stages;
+            // ^^^ are used for populating stages;
             // MF is an overall 'grouping' of monsters, IE: "all slimes"
             // ME is the type of environment they prefer (lava, ice, desert, forest, etc)
             // MR is how far into the game they should appear (EX: rank 1 monsters do not spawn in the first ~50 stages)
@@ -152,7 +152,7 @@ namespace lilminirpg
                     "1", "1", "1"
         },
         {
-                    "Goblin Spellcaster", "Loves it when things go boom.",
+                    "` ", "Loves it when things go boom.",
                     "4", "1", "5",
                     "0", "0", "0",
                     "0", "10",

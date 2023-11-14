@@ -1,0 +1,114 @@
+[
+  {
+    "Slashing": [
+      {
+        "Name": "Short Sword",
+        "Description": "A good, all-around weapon",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      },
+      {
+        "Name": "Claymore",
+        "Description": "Slow but packs a punch",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      }
+    ],
+    "Piercing": [
+      {
+        "Name": "Knife",
+        "Description": "Fast and nimble",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      },
+      {
+        "Name": "Spear",
+        "Description": "Slow, but good for evade",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      }
+    ],
+    "Bashing": [
+      {
+        "Name": "Hammer",
+        "Description": "Solid smasher",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      },
+      {
+        "Name": "Club",
+        "Description": "Simple and no frills",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      }
+    ],
+    "Ranged": [
+      {
+        "Name": "Bow",
+        "Description": "Shoot from a distance",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      },
+      {
+        "Name": "Throwing darts",
+        "Description": "Dependable but low damage",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      }
+    ],
+    "Magical": [
+      {
+        "Name": "Wand",
+        "Description": "Compact magical powers",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      },
+      {
+        "Name": "Staff",
+        "Description": "A spellcaster's best friend",
+        "Strength": 5,
+        "Dexterity": 5,
+        "Intelligence": 5,
+        "MoveSpeed": 5,
+        "AttackSpeed": 5,
+        "WeaponPerk": ""
+      }
+    ]
+  }
+]

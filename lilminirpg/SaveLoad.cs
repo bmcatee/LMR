@@ -1,39 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace lilminirpg
 {
     public class SaveLoad
     {
         // Save game method
-        public static void SaveGame(string characterName, string className, string wornWeapon, string wornAccessory)
+        public static void SaveGame(Player newPlayer)
         {
-            string[] savedata = { $"{characterName}", $"{className}", $"{wornWeapon}", $"{wornAccessory}" };
-            string folder = "C:\\Users\\bmcat\\Documents\\Projects\\lilminirpg\\";
-            string filename = "lmr_save_001.txt";
+            string savedata = JsonSerializer.Serialize<Player>(newPlayer, new JsonSerializerOptions { WriteIndented = true });
+
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\lmr_save_001.json";
             string savepath = folder + filename;
-            using (StreamWriter outputFile = new StreamWriter(savepath))
-                foreach (string s in savedata)
-                {
-                    outputFile.WriteLine(s);
-                }
+   
+            File.WriteAllText(savepath, savedata);
+
             Console.WriteLine("");
-            Console.WriteLine("Your data has been saved! Press Enter to continue.");
+            Console.WriteLine($"Your data has been saved to {Path.Combine(Directory.GetCurrentDirectory())}/{filename}! Press Enter to continue.");
             Console.ReadLine();
         }
 
         [STAThread]
         public static void LoadGame()
         {
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\lmr_save_001.json";
             string line;
             Console.Clear();
             Console.WriteLine("Now loading: lmr_save_001");
             Console.WriteLine("");
 
-            StreamReader sr = new StreamReader("C:\\Users\\bmcat\\Documents\\Projects\\lilminirpg\\lmr_save_001.txt");
+            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
+ 
             line = sr.ReadLine();
             while (line != null)
             {
@@ -50,3 +55,6 @@ namespace lilminirpg
     }
 }
 
+// TESTS
+// Console.WriteLine($"{path} - {folder} - {filename} - {savepath}");
+// Console.ReadLine();

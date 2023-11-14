@@ -214,7 +214,7 @@ namespace lilminirpg
             Console.WriteLine($"[*] Class: {newPlayer.ClassName}");
             Console.WriteLine($"[*] Weapon: {newPlayer.WornWeapon}");
             Console.WriteLine($"[*] Accessory: {newPlayer.WornAccessory}");
-            SaveLoad.SaveGame(newPlayer.CharacterName, newPlayer.ClassName, newPlayer.WornWeapon, newPlayer.WornAccessory);
+            SaveLoad.SaveGame(newPlayer);
             Console.WriteLine("Please press Enter to continue.");
             Menus.MenuGeneric("MenuMain");
         }

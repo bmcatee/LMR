@@ -40,7 +40,7 @@ namespace lilminirpg
 //                    Console.WriteLine($"Str: {createdEnemy.StatStrength}");
                     break;
                 case 4:
-                    createdEnemy.StatAtkSpeed = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
+                    createdEnemy.StatAttackSpeed = Int32.Parse(DataLists.EnemiesList[enemyBaseID, statPosition]);
 //                    Console.WriteLine($"AtkSpd: {createdEnemy.StatAtkSpeed}");
                     break;
                 case 5:

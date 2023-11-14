@@ -1,0 +1,19 @@
+{
+  "ClassName": "Wizard",
+  "XPCurrent": 0,
+  "XPToLevel": 0,
+  "WornWeapon": "Wand",
+  "WornClothing": null,
+  "WornAccessory": "Water Pendant",
+  "StatMove": 0,
+  "CharacterName": "dfsdsd",
+  "CharacterDescription": null,
+  "CurrentLevel": 0,
+  "HealthPointsMax": 0,
+  "HealthPointsCurrent": 0,
+  "StatStrength": 0,
+  "StatDexterity": 0,
+  "StatIntelligence": 0,
+  "StatMoveSpeed": 0,
+  "StatAttackSpeed": 0
+}
