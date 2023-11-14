@@ -15,10 +15,11 @@ namespace lilminirpg
 
         public static void InitStageArray()
         {
+            IncrementStageLevel();
             Enemy[] _enemiesOnScreen = CreateStageArray(CurrentGameLevel);
             for (int i = 0; i < _enemiesOnScreen.Length; i++)
             {
-                Console.WriteLine($"Enemy on Current Tile {i}: {_enemiesOnScreen[i].CharacterName} - HP = {_enemiesOnScreen[i].HealthPointsMax}");
+                Console.WriteLine($"Level: {CurrentGameLevel} - Enemy on Current Tile {i}: {_enemiesOnScreen[i].CharacterName} - HP = {_enemiesOnScreen[i].HealthPointsMax}");
             }
             Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
@@ -35,8 +36,8 @@ namespace lilminirpg
                 int placeEnemyRoll = _diceRoller.RollDice(0, 100);
                 int selectEnemyRoll = _diceRoller.RollDice(0, DataLists.EnemiesList.GetLength(0));
                 EnemyMaker createdenemy = new EnemyMaker();
-                Console.WriteLine($"Roll: {fillPositionRoll}");
-                Console.WriteLine($"Roll: {placeEnemyRoll}");
+//                Console.WriteLine($"Position Roll: {fillPositionRoll}");
+//                Console.WriteLine($"Enemy Roll: {placeEnemyRoll}");
 
                 if (fillPositionRoll == 0 || i <= 3)
                 {

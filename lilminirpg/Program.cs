@@ -13,15 +13,30 @@ namespace lilminirpg
             Menus.MenuGeneric("MenuMain");
         }
 
+        //public static Player NewPlayer()
+        //{
+        //    Player newPlayer = new Player();
+        //    return newPlayer;
+        //}
+
+        //public static void PrintPlayer()
+        //{
+            
+        //}
+
         public static void PrintLists()
         {
             for (int i = 0; i < DataLists.EnemiesList.GetLength(0); ++i)
             {
                 for (int j = 0; j < DataLists.EnemiesList.GetLength(1); ++j)
                 {
-                    Console.WriteLine($"{DataLists.EnemiesList[i, j]}");
+                    Console.Write($"{DataLists.EnemiesList[i, j]} - ");
                 }
+                Console.WriteLine("");
             }
+            Console.WriteLine($"Press Enter to continue");
+            Console.ReadLine();
+            Menus.TestMenu();
         }
         public static void PrintColorList()
         {
@@ -33,7 +48,9 @@ namespace lilminirpg
                 Console.ForegroundColor = consoleColors[i];
                 Console.WriteLine($"Hello, World: {consoleColors[i]}");
             }
+            Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
+            Menus.TestMenu();
         }
     }
 }

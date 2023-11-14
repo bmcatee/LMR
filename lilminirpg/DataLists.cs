@@ -14,7 +14,16 @@ namespace lilminirpg
                     {"Load Game"},
                     {"Options"},
                     {"Exit"},
-                    {"Test QE"}
+                    {"Debug Menu"}
+        };
+
+        public static string[,] MenuTest =
+        {
+            {"InitStageArray"},
+            {"Check Player Status"},
+            {"PrintLists"},
+            {"PrintColorList"},
+            {"Exit to Main Menu"}
         };
 
         // Class choices
@@ -63,7 +72,7 @@ namespace lilminirpg
             // MF is an overall 'grouping' of monsters, IE: "all slimes"
             // ME is the type of environment they prefer (lava, ice, desert, forest, etc)
             // MR is how far into the game they should appear (EX: rank 1 monsters do not spawn in the first ~50 stages)
-            // Total Elements: 8
+            // Total Elements: 13
 
         {
                     "Empty Ground", "",
@@ -123,7 +132,7 @@ namespace lilminirpg
         },
         {
                     "H.Slime", "Holy - Classicly adorable ankle-melter.",
-                    "205", "1", "5",
+                    "20", "1", "5",
                     "0", "0", "0",
                     "0", "10",
                     "1", "1", "1"

@@ -7,23 +7,27 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-    internal static class UI
+    internal class UI 
     {
-        public static char CursorSymbol = ' ';
-        public static int SelectedOption { get; set; }
-        public static string MenuInput { get; set; }
-        public static string MenuTracker { get; set; }
-        public static int MenuLength { get; set; }
+        public char CursorSymbol = ' ';
+        public int SelectedOption { get; set; }
+        public string MenuInput { get; set; }
+        public string MenuTracker { get; set; }
+        public int MenuLength { get; set; }
         private static int consoleWindowTopRow = 0;
         private static int consoleWindowTopColumn = 0;
-        private static int CurrentCursorRow;
-        private static int CurrentCursorColumn;
-        public static int CursorOffset;
+        public int CurrentCursorRow;
+        public int CurrentCursorColumn;
+        public int CursorOffset;
 
-        public class UserInterface
+        public UI(int selectedOption = 0, string menuInput = "", string menuTracker = "", int menuLength = 0)
         {
-
+            SelectedOption = selectedOption;
+            MenuInput = menuInput;
+            MenuTracker = menuTracker;
+            MenuLength = menuLength;
         }
+
         public static void WriteFromTop(string s, int x, int y)
         {
             try
@@ -38,12 +42,12 @@ namespace lilminirpg
             }
         }
 
-        public static void PrintCursor()
+        public void PrintCursor()
         {
             Console.CursorVisible = false;
             // Sets cursor position to 0
-            UI.CurrentCursorRow = Console.CursorLeft;
-            UI.CurrentCursorColumn = Console.CursorTop;
+            CurrentCursorRow = Console.CursorLeft;
+            CurrentCursorColumn = Console.CursorTop;
             Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
 
             // Draws the cursor at the selected coordinates
@@ -59,14 +63,14 @@ namespace lilminirpg
                     WriteFromTop(" ", 1, (i + CursorOffset));
                 }
             }
-            Console.SetCursorPosition(UI.CurrentCursorRow, UI.CurrentCursorColumn);
-            UI.CurrentCursorRow = 0;
-            UI.CurrentCursorColumn = 0;
+            Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
+            CurrentCursorRow = 0;
+            CurrentCursorColumn = 0;
             Console.CursorVisible = true;
         }
 
         // Handles movement of menus
-        public static void UIMovement()
+        public void UIMovement()
         {
             MenuInput = Console.ReadKey(true).Key.ToString();
             if (MenuInput == "UpArrow")
@@ -80,7 +84,7 @@ namespace lilminirpg
         }
 
         // Menu selection UP
-        public static void UISelectUp()
+        public void UISelectUp()
         {
             if (SelectedOption > 0)
             {
@@ -95,7 +99,7 @@ namespace lilminirpg
         }
 
         // Menu selection DOWN
-        public static void UISelectDown()
+        public void UISelectDown()
         {
             if (SelectedOption < MenuLength - 1)
             {
@@ -110,7 +114,7 @@ namespace lilminirpg
         }
 
         // What the cursor looks like
-        public static void UICursor(int i)
+        public void UICursor(int i)
         {
             if (i == SelectedOption)
             {
@@ -123,7 +127,7 @@ namespace lilminirpg
         }
 
         // Choose selected menu item
-        public static int UIGetSelection()
+        public int UIGetSelection()
         {
             return SelectedOption;
         }

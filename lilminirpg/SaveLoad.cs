@@ -23,7 +23,6 @@ namespace lilminirpg
             Console.WriteLine("");
             Console.WriteLine("Your data has been saved! Press Enter to continue.");
             Console.ReadLine();
-            UI.MenuInput = "";
         }
 
         [STAThread]

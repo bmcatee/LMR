@@ -7,23 +7,27 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-    public static class Menus
+    public class Menus
     {
+
         public static void MenuGeneric(string menuTracker)
         {
+            UI userInterface = new(0, "", "", 0);
+
+            userInterface.MenuTracker = menuTracker;
+            userInterface.MenuInput = "";
             Console.Clear();
-            UI.MenuTracker = menuTracker;
-            UI.MenuInput = "";
+
             UI.UIHeaderGeneric();
 
-            switch (menuTracker)
+            switch (userInterface.MenuTracker)
             {
                 case "MenuMain":
-                    UI.CursorOffset = 2;
-                    UI.MenuLength = DataLists.MenuMain.GetLength(0);
+                    userInterface.CursorOffset = 2;
+                    userInterface.MenuLength = DataLists.MenuMain.GetLength(0);
                     for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
                     {
-                        Console.WriteLine($"[{UI.CursorSymbol}] {DataLists.MenuMain[i, 0]}");
+                        Console.WriteLine($"[{userInterface.CursorSymbol}] {DataLists.MenuMain[i, 0]}");
                     }
                     break;
                 case "MenuPlayerName":
@@ -39,52 +43,93 @@ namespace lilminirpg
                     CharacterMaker.ChooseCharacterInfo(menuTracker);
                     break;
                 case "MenuTest":
-                    UI.InvalidSelection();
-                    break;
+                    TestMenu();
+                        break;
                 default:
                     UI.InvalidSelection();
                     break;
             }
             UI.UIFooterGeneric();
-            while (UI.MenuInput != "Enter")
+            while (userInterface.MenuInput != "Enter")
             {
-                UI.PrintCursor();
-                UI.UIMovement();
+                userInterface.PrintCursor();
+                userInterface.UIMovement();
             }
-            MenuSelection();
+            MenuSelection(userInterface.SelectedOption);
         }
-        public static void MenuSelection()
+
+        public static void MenuSelection(int selectedoption)
         {
-            if (UI.MenuInput != "Enter")
+                switch(selectedoption)
             {
-                
+                case 0:
+                    CharacterMaker _charactermaker = new CharacterMaker();
+                    _charactermaker.MakeCharacter();
+                    break;
+                case 1:
+                    SaveLoad.LoadGame();
+                    break;
+                    case 2:
+                    UI.InvalidSelection();
+                    break;
+                    case 3:
+                    UI.InvalidSelection();
+                    break;
+                    case 4:
+                    Menus.TestMenu();
+                    break;
+                default:
+                    UI.InvalidSelection();
+                    break;
+            }
+        }
+        public static void TestMenu()
+        {
+            UI userInterface = new(0, "", "", 0);
+
+            userInterface.CursorOffset = 2;
+            userInterface.SelectedOption = 0;
+            Console.Clear();
+            userInterface.MenuInput = "";
+            UI.UIHeaderGeneric();
+            userInterface.MenuLength = DataLists.MenuTest.GetLength(0);
+            for (int i = 0; i < DataLists.MenuTest.GetLength(0); ++i)
+            {
+                Console.WriteLine($"[{userInterface.CursorSymbol}] {DataLists.MenuTest[i, 0]}");
+            }
+            UI.UIFooterGeneric();
+            while (userInterface.MenuInput != "Enter")
+            {
+                userInterface.PrintCursor();
+                userInterface.UIMovement();
+            }
+            TestMenuSelection();
+        }
+
+        public static void TestMenuSelection()
+        {
+            UI userInterface = new(0, "", "", 0);
+
+            if (userInterface.MenuInput != "Enter")
+            {
+
             }
             else
             {
-                switch(UI.SelectedOption)
+                switch (userInterface.SelectedOption)
                 {
                     case 0:
-                        CharacterMaker _charactermaker = new CharacterMaker();
-                        _charactermaker.MakeCharacter();
+                        QuestEngine.InitStageArray();
+                        Console.ReadLine();
                         break;
                     case 1:
-                        SaveLoad.LoadGame();
+                        Program.PrintLists();
                         break;
-                     case 2:
-                        UI.InvalidSelection();
+                    case 2:
+                        Program.PrintColorList();
                         break;
-                     case 3:
-                        UI.InvalidSelection();
-                        break;
-                     case 4:
-                        // METHOD TESTS
-                        QuestEngine.InitStageArray();
-                        Console.ReadKey();
-                        // QuestEngine.FillStageArray();
-                        // Movement.PlayerPosition(2);
-                        // Program.PrintLists();
-                        // EnemyMaker.MakeEnemy(1);
-                        // Program.PrintColorList();
+                    case 3:
+                        Menus.MenuGeneric("MenuMain");
                         break;
                     default:
                         UI.InvalidSelection();
@@ -94,4 +139,5 @@ namespace lilminirpg
         }
     }
 }
+
 
