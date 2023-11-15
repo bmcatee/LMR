@@ -12,7 +12,7 @@ namespace lilminirpg
 
         public static void MenuGeneric(string menuTracker)
         {
-            UI userInterface = new(0, "", "", 0);
+            UI userInterface = new();
 
             userInterface.MenuTracker = menuTracker;
             userInterface.MenuInput = "";
@@ -85,7 +85,7 @@ namespace lilminirpg
         }
         public static void TestMenu()
         {
-            UI userInterface = new(0, "", "", 0);
+            UI userInterface = new();
 
             userInterface.CursorOffset = 2;
             userInterface.SelectedOption = 0;

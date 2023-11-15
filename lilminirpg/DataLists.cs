@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace lilminirpg
 {
-    internal static class DataLists
+    public class DataLists
     {
         public static string[,] MenuMain =
         {
@@ -19,45 +23,155 @@ namespace lilminirpg
 
         public static string[,] MenuTest =
         {
-            {"InitStageArray"},
-            {"Check Player Status"},
-            {"PrintLists"},
-            {"PrintColorList"},
-            {"Exit to Main Menu"}
+                    {"InitStageArray"},
+                    {"Check Player Status"},
+                    {"PrintLists"},
+                    {"PrintColorList"},
+                    {"Exit to Main Menu"}
         };
+        public class PlayerClass
+        {
+            public List<PlayerClass> playerClasses { get; set; }
+        }
+        public class PlayerClassInfo
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string StrengthGrowth { get; set; }
+            public int DexterityGrowth { get; set; }
+            public int IntelligenceGrowth { get; set; }
+            public int MoveSpeed { get; set; }
+            public int AttackSpeed { get; set; }
+            public string ClassPerk { get; set; }
+            public string ClassAbility001 { get; set; }
+            public string ClassAbility002 { get; set; }
+            public string ClassAbility003 { get; set; }
+            public string ClassAbility004 { get; set; }
+            public string ClassAbility005 { get; set; }
+            public string ClassAbility006 { get; set; }
+            public string ClassAbility007 { get; set; }
+            public string ClassAbility008 { get; set; }
+            public string ClassAbility009 { get; set; }
+            public string ClassAbility010 { get; set; }
+        }
+        public class PlayerWeapon
+        {
+            public List<PlayerWeapon> playerWeapons { get; set; }
+        }
+        public class PlayerWeaponList
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string AttackType { get; set; }
+            public string ElementType { get; set; }
+            public string AttackStat1 { get; set; }
+            public string AttackStat2 { get; set; }
+            public string AttackStat3 { get; set; }
+            public int StatStrength { get; set; }
+            public int StatDexterity { get; set; }
+            public int StatIntelligence { get; set; }
+            public int MoveSpeed { get; set; }
+            public int AttackSpeed { get; set; }
+            public string WeaponPerk { get; set; }
+        }
+        public class PlayerAccessory
+        {
+            public List<PlayerAccessory> playerAccessories { get; set; }
+        }
+        public class PlayerAccessoryInfo
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public int StatStrength { get; set; }
+            public int StatDexterity { get; set; }
+            public int StatIntelligence { get; set; }
+            public int MoveSpeed { get; set; }
+            public int AttackSpeed { get; set; }
+            public string AccessoryPerk { get; set; }
+        }
+
+        public class Clothing
+        {
+            // coming soon
+        }
+
 
         // Class choices
-        public static string[,] PlayerClasses =
+        public List <PlayerClassInfo> PlayerClasses()
         {
-                    {"Knight", "The classic."},
-                    {"Thief", "Fast and stabby."},
-                    {"Wizard", "Fireworks."},
-                    {"Adventurer", "Roaming for fun."},
-                    {"Monk", "Fists of punishment."},
-//                    {"5", "Warrior", "High attack, low health."}
-        };
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\ClassesList.json";
+            List<PlayerClassInfo> PlayerClasses = JsonSerializer.Deserialize<List<PlayerClassInfo>>(folder);
+            Console.WriteLine($"{PlayerClasses}");
+            Console.ReadLine();
+
+            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
+            string line;
+
+            //line = sr.ReadLine();
+            //while (line != null)
+            //{
+            //    Console.WriteLine($"{line}");
+            //    line = sr.ReadLine();
+            //}
+            //sr.Close();
+            //Console.ReadLine();
+            return PlayerClasses;
+        }
 
         // Weapon choices
-        public static string[,] PlayerWeapons =
+        public List<PlayerWeaponList> WeaponList()
         {
-                    {"Short Sword", "A good, all-around weapon."},
-                    {"Claymore", "Slow but packs a punch."},
-                    {"Knife", "Fast and nimble."},
-                    {"Wand", "Does randomized magical damage."},
-                    {"Staff", "Excellent for defensive fighting."},
-                    {"Knuckle Wraps", "For those that like to brawl."}
-        };
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\WeaponsList.json";
+            List<PlayerWeaponList> PlayerWeapons = new List<PlayerWeaponList>();
+            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
+            string line;
+
+            using (StreamReader r = new StreamReader(Path.Combine(folder, filename)))
+            {
+                string json = r.ReadToEnd();
+                PlayerWeapons = JsonSerializer.Deserialize<List<PlayerWeaponList>>(json);
+            }
+
+            //line = sr.ReadLine();
+            //while (line != null)
+            //{
+            //    Console.WriteLine($"{line}");
+            //    line = sr.ReadLine();
+            //}
+            //sr.Close();
+            //Console.ReadLine();
+            return PlayerWeapons;
+        }
+
 
         // Accessory choices
-        public static string[,] PlayerAccessories =
+        public List<PlayerAccessoryInfo> AccessoryList()
         {
-                    {"Shield", "A bit bulky, but keeps distance between You and Them."},
-                    {"Pocket Sand", "May cause the enemy to become Blinded."},
-                    {"Dancer's Shoes", "Makes it easier to dodge attacks."},
-                    {"Water Pendant", "Has a high chance of your attack inflicting Water damage."},
-                    {"Fire Ring", "Has a high chance of your attack inflicting Fire damage."},
-                    {"Lightning Brooch", "Has a high chance of your attack inflicting Lightning damage."}
-        };
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\AccessoriesList.json";
+            List<PlayerAccessoryInfo> PlayerAccessories = new List<PlayerAccessoryInfo>();
+            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
+            string line;
+
+            using (StreamReader r = new StreamReader(Path.Combine(folder, filename)))
+            {
+                string json = r.ReadToEnd();
+                PlayerAccessories = JsonSerializer.Deserialize<List<PlayerAccessoryInfo>>(json);
+            }
+
+            //line = sr.ReadLine();
+            //while (line != null)
+            //{
+            //    Console.WriteLine($"{line}");
+            //    line = sr.ReadLine();
+            //}
+            //sr.Close();
+            //Console.ReadLine();
+            return PlayerAccessories;
+        }
+
 
         // Enemies
         public static string[,] EnemiesList =
@@ -73,229 +187,6 @@ namespace lilminirpg
             // ME is the type of environment they prefer (lava, ice, desert, forest, etc)
             // MR is how far into the game they should appear (EX: rank 1 monsters do not spawn in the first ~50 stages)
             // Total Elements: 13
-
-        {
-                    "Empty Ground", "",
-                    "0", "0", "0",
-                    "0", "0", "0",
-                    "0", "0",
-                    "0", "0", "0"
-        },
-        {
-                    "G.Slime", "Green - Classicly adorable ankle-melter.",
-                    "5", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "R.Slime", "Red - Classicly adorable ankle-melter.",
-                    "8", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "A.Slime", "Aqua - Classicly adorable ankle-melter.",
-                    "12", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "S.Slime", "Shock - Classicly adorable ankle-melter.",
-                    "7", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "L.Slime", "Lava - Classicly adorable ankle-melter.",
-                    "8", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "R.Slime", "Rock - Classicly adorable ankle-melter.",
-                    "6", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "D.Slime", "Demon - Classicly adorable ankle-melter.",
-                    "15", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "H.Slime", "Holy - Classicly adorable ankle-melter.",
-                    "20", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Goblin Fighter", "Small, but not harmless.",
-                    "8", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Goblin Defender", "Small, but not harmless.",
-                    "15", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "` ", "Loves it when things go boom.",
-                    "4", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Goblin Beasttamer", "Loves it when things go boom.",
-                    "6", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Goblin Berserker", "Loves it when things go boom.",
-                    "7", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Goblin Thief", "Loves it when things go boom.",
-                    "4", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Harpy", "Stays aloft and away from melee attacks.",
-                    "5", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Dire Eagle", "Stays aloft and away from melee attacks.",
-                    "9", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Wasp", "Stays aloft and away from melee attacks.",
-                    "2", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Flying Squirrel", "Stays aloft and away from melee attacks.",
-                    "4", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Locust", "Stays aloft and away from melee attacks.",
-                    "3", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Pixie", "Stays aloft and away from melee attacks.",
-                    "8", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Wyrm", "Stays aloft and away from melee attacks.",
-                    "12", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Minotaur", "Big and brutally strong.",
-                    "25", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Bear", "Big and brutally strong.",
-                    "20", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Bird Bear", "Big and brutally strong.",
-                    "22", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Golem", "Big and brutally strong.",
-                    "30", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Living Doll", "Big and brutally strong.",
-                    "9", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Moai Head", "Big and brutally strong.",
-                    "18", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Racoon", "Big and brutally strong.",
-                    "6", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Evil Clown", ". . . ",
-                    "7", "1", "1",
-                    "0", "0", "0",
-                    "5", "10",
-                    "1", "1", "1"
-        },
-        {
-                    "Fish", "Just floppin' around.",
-                    "4", "1", "5",
-                    "0", "0", "0",
-                    "0", "10",
-                    "1", "1", "1"
-        },
-
-
-
-
-
         };
-    }
+     }
 }

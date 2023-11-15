@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static lilminirpg.DataLists;
 
 namespace lilminirpg
 {
@@ -14,14 +15,13 @@ namespace lilminirpg
         private static bool _characterCreation = false;
         private static int _characterCreationStage = 0;
 
-
         public void MakeCharacter()
         {
             // Starts the full player character creation process
             _characterCreation = true;
-            newPlayer.ClassName = "";
-            newPlayer.WornWeapon = "";
-            newPlayer.WornAccessory = "";
+            newPlayer.PlayerClass = new DataLists.PlayerClassInfo();
+            newPlayer.WornWeapon = new DataLists.PlayerWeaponList();
+            newPlayer.WornAccessory = new DataLists.PlayerAccessoryInfo();
             SetCharacterName();
         }
 
@@ -55,19 +55,24 @@ namespace lilminirpg
 
         public static void ChooseCharacterInfo(string menuTracker)
         {
-            UI userInterface = new(0, "", "", 0);
+            UI userInterface = new();
 
             // Set desired menu, reset other variables to initial values
             userInterface.MenuTracker = menuTracker;
             userInterface.SelectedOption = 0;
             userInterface.MenuInput = "";
-            string[,] DataListString = DataLists.MenuMain;
+            List<PlayerClassInfo> _listPlayerClasses = new DataLists().PlayerClasses();
+            List<PlayerWeaponList> _listWeapons = new DataLists().WeaponList();
+            List<PlayerAccessoryInfo> _listAccessories = new DataLists().AccessoryList();
+            int listCount = 0;
+            var chosenList = "";
+            // string[,] DataListString = DataLists.MenuMain;
 
 
-            // Clear console, print character info; dislike this, would rather the display be more elegant
+            // Clear console, print character info
             Console.Clear();
             Console.CursorVisible = false;
-            Console.WriteLine($"Name: {newPlayer.CharacterName} || Class: {newPlayer.ClassName} || Weapon: {newPlayer.WornWeapon} || Accessory: {newPlayer.WornAccessory}");
+            Console.WriteLine($"Name: {newPlayer.CharacterName} || Class: {newPlayer.PlayerClass.Name} || PlayerWeaponList: {newPlayer.WornWeapon.Name} || PlayerAccessoryInfo: {newPlayer.WornAccessory.Name}");
 
             Console.WriteLine("");
 
@@ -81,17 +86,17 @@ namespace lilminirpg
                     break;
                 case "MenuPlayerClass":
                     userInterface.CursorOffset = 4;
-                    DataListString = DataLists.PlayerClasses;
+                    listCount = _listPlayerClasses.Count;
                     userInterface.MenuTracker = "MenuPlayerClass";
                     break;
                 case "MenuPlayerWeapon":
                     userInterface.CursorOffset = 4;
-                    DataListString = DataLists.PlayerWeapons;
+                    listCount = _listWeapons.Count;
                     userInterface.MenuTracker = "MenuPlayerWeapon";
                     break;
                 case "MenuPlayerAccessory":
                     userInterface.CursorOffset = 4;
-                    DataListString = DataLists.PlayerAccessories;
+                    listCount = _listAccessories.Count;
                     userInterface.MenuTracker = "MenuPlayerAccessory";
                     break;
                 default:
@@ -99,14 +104,28 @@ namespace lilminirpg
                     break;
             }
 
-            userInterface.MenuLength = DataListString.GetLength(0);
+            userInterface.MenuLength = listCount;
             Console.WriteLine("Your class choices are:");
                 Console.WriteLine("");
-                for (int i = 0; i < DataListString.GetLength(0); ++i)
+                for (int i = 0; i < listCount; ++i)
                 {
                 userInterface.UICursor(i);
-                    Console.WriteLine($"[{userInterface.CursorSymbol}] {DataListString[i, 0]}: {DataListString[i, 1]}");
+                switch (menuTracker)
+                {
+                    case "MenuPlayerClass":
+                        Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerClasses[i].Name}: {_listPlayerClasses[i].Description}");
+                        break;
+                    case "MenuPlayerWeapon":
+                        Console.WriteLine($"[{userInterface.CursorSymbol}] {_listWeapons[i].Name}: {_listWeapons[i].Description}");
+                        break;
+                    case "MenuPlayerAccessory":
+                        Console.WriteLine($"[{userInterface.CursorSymbol}] {_listAccessories[i].Name}: {_listAccessories[i].Description}");
+                        break;
+                    default:
+                        UI.InvalidSelection();
+                        break;
                 }
+            }
 
             UI.UIFooterGeneric();
             while (userInterface.MenuInput != "Enter")
@@ -123,14 +142,19 @@ namespace lilminirpg
         // Sets the player info
         public static void SetCharacterInfo(string menuTracker, int selectedOption)
         {            // Sets the player info
-            UI userInterface = new(0, "", "", 0);
+            UI userInterface = new();
+            List<PlayerClassInfo> _listPlayerClasses = new DataLists().PlayerClasses();
+            List<PlayerWeaponList> _listWeapons = new DataLists().WeaponList();
+            List<PlayerAccessoryInfo> _listAccessories = new DataLists().AccessoryList();
+            int weaponlength = _listWeapons.Count;
+            int accessorylength = _listAccessories.Count;
 
             switch (menuTracker)
             {
                 case "MenuPlayerClass":
-                    if (selectedOption < DataLists.PlayerClasses.GetLength(0))
+                    if (selectedOption < _listPlayerClasses.Count)
                     {
-                        newPlayer.ClassName = DataLists.PlayerClasses[selectedOption, 0];
+                        newPlayer.PlayerClass = _listPlayerClasses[selectedOption];
                     }
                     else
                     {
@@ -142,9 +166,9 @@ namespace lilminirpg
                     }
                     break;
                 case "MenuPlayerWeapon":
-                    if (selectedOption < DataLists.PlayerWeapons.GetLength(0))
+                    if (selectedOption < weaponlength)
                     {
-                        newPlayer.WornWeapon = DataLists.PlayerWeapons[selectedOption, 0];
+                        newPlayer.WornWeapon = _listWeapons[selectedOption];
                     }
                     else
                     {
@@ -156,9 +180,9 @@ namespace lilminirpg
                     }
                     break;
                 case "MenuPlayerAccessory":
-                    if (selectedOption < DataLists.PlayerAccessories.GetLength(0))
+                    if (selectedOption < accessorylength)
                     {
-                        newPlayer.WornAccessory = DataLists.PlayerAccessories[selectedOption, 0];
+                        newPlayer.WornAccessory = _listAccessories[selectedOption];
                     }
                     else
                     {
@@ -211,11 +235,13 @@ namespace lilminirpg
             UI.UIHeaderGeneric();
             Console.WriteLine("You have selected:");
             Console.WriteLine($"[*] Name: {newPlayer.CharacterName}");
-            Console.WriteLine($"[*] Class: {newPlayer.ClassName}");
-            Console.WriteLine($"[*] Weapon: {newPlayer.WornWeapon}");
-            Console.WriteLine($"[*] Accessory: {newPlayer.WornAccessory}");
+            Console.WriteLine($"[*] Class: {newPlayer.PlayerClass.Name}");
+            Console.WriteLine($"[*] PlayerWeaponList: {newPlayer.WornWeapon.Name}");
+            Console.WriteLine($"[*] PlayerAccessoryInfo: {newPlayer.WornAccessory.Name}");
             SaveLoad.SaveGame(newPlayer);
+            Console.WriteLine("");
             Console.WriteLine("Please press Enter to continue.");
+            Console.ReadLine();
             Menus.MenuGeneric("MenuMain");
         }
     }

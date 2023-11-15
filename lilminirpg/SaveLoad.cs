@@ -19,13 +19,13 @@ namespace lilminirpg
             string folder = Environment.CurrentDirectory;
             string filename = "\\lmr_save_001.json";
             string savepath = folder + filename;
-   
+            //Console.WriteLine($"{folder} + {filename}");
+            //Console.WriteLine($"{savepath}");
+            //Console.ReadLine();
             File.WriteAllText(savepath, savedata);
 
             Console.WriteLine("");
-            Console.WriteLine($"Your data has been saved to {Path.Combine(Directory.GetCurrentDirectory())}/{filename}! Press Enter to continue.");
-            Console.ReadLine();
-        }
+            Console.WriteLine($"Your data has been saved to {Path.Combine(Directory.GetCurrentDirectory())}/{filename}!");        }
 
         [STAThread]
         public static void LoadGame()
@@ -38,7 +38,8 @@ namespace lilminirpg
             Console.WriteLine("");
 
             StreamReader sr = new StreamReader(Path.Combine(folder, filename));
- 
+
+
             line = sr.ReadLine();
             while (line != null)
             {

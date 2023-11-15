@@ -11,19 +11,9 @@ namespace lilminirpg
         public static void Main()
         {
             // Goto main menu
+           // List<DataLists.Weapon> weaponlist = new DataLists.WeaponList();
             Menus.MenuGeneric("MenuMain");
         }
-
-        //public static Player NewPlayer()
-        //{
-        //    Player newPlayer = new Player();
-        //    return newPlayer;
-        //}
-
-        //public static void PrintPlayer()
-        //{
-            
-        //}
 
         public static void PrintLists()
         {

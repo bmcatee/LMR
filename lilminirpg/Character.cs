@@ -23,13 +23,12 @@ namespace lilminirpg
 
     public class Player : Character
     {
-        public string ClassName { get; set; }
+        public DataLists.PlayerClassInfo PlayerClass { get; set; }
         public int XPCurrent { get; set; }
         public int XPToLevel { get; set; }
-        public string WornWeapon { get; set; }
-        public string WornClothing { get; set; }
-        public string WornAccessory { get; set; }
-        public int StatMove { get; set; }
+        public DataLists.PlayerWeaponList WornWeapon { get; set; }
+        public DataLists.Clothing WornClothing { get; set; }
+        public DataLists.PlayerAccessoryInfo WornAccessory { get; set; }
     }
 
     public class Enemy : Character

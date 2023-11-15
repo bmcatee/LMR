@@ -16,16 +16,13 @@ namespace lilminirpg
         public int MenuLength { get; set; }
         private static int consoleWindowTopRow = 0;
         private static int consoleWindowTopColumn = 0;
-        public int CurrentCursorRow;
-        public int CurrentCursorColumn;
-        public int CursorOffset;
+        public int CurrentCursorRow { get; set; }
+        public int CurrentCursorColumn { get; set; }
+        public int CursorOffset { get; set; }
 
-        public UI(int selectedOption = 0, string menuInput = "", string menuTracker = "", int menuLength = 0)
+        public UI()
         {
-            SelectedOption = selectedOption;
-            MenuInput = menuInput;
-            MenuTracker = menuTracker;
-            MenuLength = menuLength;
+
         }
 
         public static void WriteFromTop(string s, int x, int y)
