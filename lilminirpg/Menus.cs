@@ -10,7 +10,7 @@ namespace lilminirpg
     public class Menus
     {
 
-        public static void MenuGeneric(string menuTracker)
+        public async static Task MenuGeneric(string menuTracker)
         {
             UI userInterface = new();
 
@@ -43,7 +43,7 @@ namespace lilminirpg
                     CharacterMaker.ChooseCharacterInfo(menuTracker);
                     break;
                 case "MenuTest":
-                    TestMenu();
+                    await TestMenu();
                     break;
                 default:
                     UI.InvalidSelection();
@@ -55,10 +55,10 @@ namespace lilminirpg
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
             }
-            MenuSelection(userInterface.SelectedOption);
+            await MenuSelection(userInterface.SelectedOption);
         }
 
-        public static void MenuSelection(int selectedoption)
+        public async static Task MenuSelection(int selectedoption)
         {
             switch (selectedoption)
             {
@@ -68,6 +68,7 @@ namespace lilminirpg
                     break;
                 case 1:
                     SaveLoad.LoadGame();
+                    MenuGeneric("MenuMain");
                     break;
                 case 2:
                     UI.InvalidSelection();
@@ -76,14 +77,14 @@ namespace lilminirpg
                     UI.InvalidSelection();
                     break;
                 case 4:
-                    Menus.TestMenu();
+                    await Menus.TestMenu();
                     break;
                 default:
                     UI.InvalidSelection();
                     break;
             }
         }
-        public static void TestMenu()
+        public async static Task TestMenu()
         {
             UI userInterface = new();
 
@@ -103,16 +104,15 @@ namespace lilminirpg
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
             }
-            TestMenuSelection(userInterface.SelectedOption);
+            await TestMenuSelection(userInterface.SelectedOption);
         }
 
-        public static void TestMenuSelection(int selectedoption)
+        public async static Task TestMenuSelection(int selectedoption)
         {
             switch (selectedoption)
             {
                 case 0:
-                    Console.WriteLine("Doop");
-                    QuestEngine.InitStageArray();
+                    await QuestEngine.InitStageArray(SaveLoad.LoadGame());
                     Console.ReadLine();
                     break;
                 case 1:

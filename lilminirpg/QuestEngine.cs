@@ -9,25 +9,22 @@ namespace lilminirpg
 {
     internal class QuestEngine
     {
-        public static int CurrentGameLevel = 0;
-        public static int[] CurrentGameScreen = new int[16];
-        public Enemy[] EnemiesOnScreen = new Enemy[16];
-
-        public static void InitStageArray()
+        public async static Task InitStageArray(Player currentplayer)
         {
-            IncrementStageLevel();
-            Enemy[] _enemiesOnScreen = CreateStageArray(CurrentGameLevel);
+            int currentStage = currentplayer.CurrentStage;
+            Enemy[] _enemiesOnScreen = CreateStageArray(currentStage);
             for (int i = 0; i < _enemiesOnScreen.Length; i++)
             {
-                Console.WriteLine($"Level: {CurrentGameLevel} - Enemy on Current Tile {i}: {_enemiesOnScreen[i].CharacterName} - HP = {_enemiesOnScreen[i].HealthPointsMax}");
+                Console.WriteLine($"Level: {currentStage} - Enemy on Current Tile {i}: {_enemiesOnScreen[i].Name} - HP = {_enemiesOnScreen[i].HealthPointsMax}");
             }
             Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
-            PlayerMoveThroughScreen(_enemiesOnScreen);
+            await PlayerMoveThroughScreen(_enemiesOnScreen);
         }
 
-        public static Enemy[] CreateStageArray(int gamelevel)
+        public static Enemy[] CreateStageArray(int gamestage)
         {
+            int[] CurrentGameScreen = new int[16];
             Enemy[] _enemiesOnScreen = new Enemy[16];
             for (int i = 0; i < CurrentGameScreen.Length; ++i)
             {
@@ -73,15 +70,16 @@ namespace lilminirpg
                 return _enemiesOnScreen;
         }
 
-        public static void PlayerMoveThroughScreen(Enemy[] createdEnemies)
+        public async static Task PlayerMoveThroughScreen(Enemy[] createdEnemies)
         {
-            Movement.PlayerPosition(CurrentGameScreen.Length - 1, createdEnemies);
+            int[] CurrentGameScreen = new int[16];
+            await Movement.PlayerPosition(CurrentGameScreen.Length - 1, createdEnemies);
         }
 
-        public static void IncrementStageLevel()
-        {
-            CurrentGameLevel = ++CurrentGameLevel;
-        }
+        //public static void IncrementStageLevel()
+        //{
+        //    CurrentGameLevel = ++CurrentGameLevel;
+        //}
     }
 }
 

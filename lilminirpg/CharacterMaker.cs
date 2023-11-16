@@ -19,9 +19,9 @@ namespace lilminirpg
         {
             // Starts the full player character creation process
             _characterCreation = true;
-            newPlayer.PlayerClass = new DataLists.PlayerClassInfo();
-            newPlayer.WornWeapon = new DataLists.PlayerWeaponList();
-            newPlayer.WornAccessory = new DataLists.PlayerAccessoryInfo();
+            newPlayer.PlayerClass = new DataLists.PlayerClassStats();
+            newPlayer.WornWeapon = new DataLists.PlayerWeaponStats();
+            newPlayer.WornAccessory = new DataLists.PlayerAccessoryStats();
             SetCharacterName();
         }
 
@@ -40,7 +40,7 @@ namespace lilminirpg
                 Console.WriteLine("Please type your character's name and press Enter:");
             };
 
-            newPlayer.CharacterName = Console.ReadLine();
+            newPlayer.Name = Console.ReadLine();
 
             if (_characterCreation == true)
             {
@@ -61,9 +61,9 @@ namespace lilminirpg
             userInterface.MenuTracker = menuTracker;
             userInterface.SelectedOption = 0;
             userInterface.MenuInput = "";
-            List<PlayerClassInfo> _listPlayerClasses = new DataLists().PlayerClasses();
-            List<PlayerWeaponList> _listWeapons = new DataLists().WeaponList();
-            List<PlayerAccessoryInfo> _listAccessories = new DataLists().AccessoryList();
+            List<PlayerClassStats> _listPlayerClasses = new DataLists().FetchPlayerClasses();
+            List<PlayerWeaponStats> _listWeapons = new DataLists().FetchWeapons();
+            List<PlayerAccessoryStats> _listAccessories = new DataLists().FetchAccessories();
             int listCount = 0;
             var chosenList = "";
             // string[,] DataListString = DataLists.MenuMain;
@@ -72,7 +72,7 @@ namespace lilminirpg
             // Clear console, print character info
             Console.Clear();
             Console.CursorVisible = false;
-            Console.WriteLine($"Name: {newPlayer.CharacterName} || Class: {newPlayer.PlayerClass.Name} || PlayerWeaponList: {newPlayer.WornWeapon.Name} || PlayerAccessoryInfo: {newPlayer.WornAccessory.Name}");
+            Console.WriteLine($"Name: {newPlayer.Name} || Class: {newPlayer.PlayerClass.Name} || PlayerWeaponStats: {newPlayer.WornWeapon.Name} || PlayerAccessoryStats: {newPlayer.WornAccessory.Name}");
 
             Console.WriteLine("");
 
@@ -143,9 +143,9 @@ namespace lilminirpg
         public static void SetCharacterInfo(string menuTracker, int selectedOption)
         {            // Sets the player info
             UI userInterface = new();
-            List<PlayerClassInfo> _listPlayerClasses = new DataLists().PlayerClasses();
-            List<PlayerWeaponList> _listWeapons = new DataLists().WeaponList();
-            List<PlayerAccessoryInfo> _listAccessories = new DataLists().AccessoryList();
+            List<PlayerClassStats> _listPlayerClasses = new DataLists().FetchPlayerClasses();
+            List<PlayerWeaponStats> _listWeapons = new DataLists().FetchWeapons();
+            List<PlayerAccessoryStats> _listAccessories = new DataLists().FetchAccessories();
             int weaponlength = _listWeapons.Count;
             int accessorylength = _listAccessories.Count;
 
@@ -225,19 +225,34 @@ namespace lilminirpg
                 Menus.MenuGeneric("MenuMain");
             }
         }
+        public static void SetLevelOne()
+        {
+            newPlayer.CurrentLevel = 1;
+            newPlayer.CurrentStage = 1;
+            newPlayer.HealthPointsMax = newPlayer.PlayerClass.HealthPointsGrowth;
+            newPlayer.HealthPointsCurrent = newPlayer.HealthPointsMax;
+            newPlayer.StatStrength = newPlayer.PlayerClass.StrengthGrowth;
+            newPlayer.StatDexterity = newPlayer.PlayerClass.DexterityGrowth;
+            newPlayer.StatIntelligence = newPlayer.PlayerClass.IntelligenceGrowth;
+            newPlayer.StatLuck = newPlayer.PlayerClass.LuckGrowth;
+            newPlayer.StatMoveSpeed = newPlayer.PlayerClass.MoveSpeed;
+            newPlayer.StatAttackSpeed = newPlayer.PlayerClass.AttackSpeed;
+        }
 
         // Resets variables, prints selection, saves game, goes back to Main Menu
         public static void EndCharacterCreation()
         {
+            SetLevelOne();
             _characterCreation = false;
             _characterCreationStage = 0;
             Console.Clear();
             UI.UIHeaderGeneric();
             Console.WriteLine("You have selected:");
-            Console.WriteLine($"[*] Name: {newPlayer.CharacterName}");
+            Console.WriteLine("");
+            Console.WriteLine($"[*] Name: {newPlayer.Name}");
             Console.WriteLine($"[*] Class: {newPlayer.PlayerClass.Name}");
-            Console.WriteLine($"[*] PlayerWeaponList: {newPlayer.WornWeapon.Name}");
-            Console.WriteLine($"[*] PlayerAccessoryInfo: {newPlayer.WornAccessory.Name}");
+            Console.WriteLine($"[*] Weapon: {newPlayer.WornWeapon.Name}");
+            Console.WriteLine($"[*] Accessory: {newPlayer.WornAccessory.Name}");
             SaveLoad.SaveGame(newPlayer);
             Console.WriteLine("");
             Console.WriteLine("Please press Enter to continue.");

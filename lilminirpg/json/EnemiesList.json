@@ -1,22 +1,24 @@
 [
-  {
-    "Dummies": [
       {
         "Name": "Empty Ground",
         "Description": "A flat patch of land",
-        "HPMax": 0,
-        "STR": 0,
-        "AttackSpeed": 0,
+        "CurrentLevel": 0,
+        "HealthPointsMax": 0,
+        "HealthPointsCurrent": 0,
+        "StatStrength": 0,
+        "StatDexterity": 0,
+        "StatIntelligence": 0,
+        "StatMoveSpeed": 0,
+        "StatAttackSpeed": 0,
         "MonsterPerk1": "",
         "MonsterPerk2": "",
         "MonsterPerk3": "",
-        "Gold": 5,
+        "GoldDropped": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Dummy",
         "MonsterEnvironment": "",
         "MonsterRank": ""
-      }
-    ],
-    "Slimes": [
+      },
       {
         "Name": "Slime",
         "Description": "Classicly adorable ankle melter",
@@ -28,6 +30,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Slime",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -42,6 +45,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Slime",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -56,11 +60,10 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Slime",
         "MonsterEnvironment": "",
         "MonsterRank": 1
-      }
-    ],
-    "Goblins": [
+      },
       {
         "Name": "Goblin Fighter",
         "Description": "Small, but not harmless",
@@ -72,6 +75,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Goblin",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -86,6 +90,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Goblin",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -100,11 +105,10 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Goblin",
         "MonsterEnvironment": "",
         "MonsterRank": 1
-      }
-    ],
-    "Animals": [
+      },
       {
         "Name": "Dire Eagle",
         "Description": "Stays aloft and away from melee attacks",
@@ -116,6 +120,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -130,6 +135,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -144,6 +150,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -158,11 +165,10 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": 1
-      }
-    ],
-    "Vegetables": [
+      },
       {
         "Name": "Vampire Carrot",
         "Description": "Avid juice drinker",
@@ -174,6 +180,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -188,12 +195,13 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
       {
         "Name": "Elder Berry",
-        "Description": "Faithful servant of K'BLR",
+        "Description": "Faithful servant of the ancient one K'BLR",
         "HPMax": 5,
         "STR": 5,
         "AttackSpeed": 5,
@@ -202,6 +210,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -216,11 +225,10 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": 1
-      }
-    ],
-    "Magic": [
+      },
       {
         "Name": "Golem",
         "Description": "Big and brutally strong",
@@ -232,6 +240,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -246,6 +255,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -260,6 +270,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -274,6 +285,7 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": 1
       },
@@ -288,9 +300,8 @@
         "MonsterPerk3": "",
         "Gold": 5,
         "XPDropped": 5,
+        "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": 1
-      }
-    ]
   }
 ]

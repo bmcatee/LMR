@@ -7,15 +7,15 @@ using System.Text.Json.Serialization;
 namespace lilminirpg
 {
     internal class Program
-    {
-        public static void Main()
+    { 
+        public async static Task Main()
         {
             // Goto main menu
            // List<DataLists.Weapon> weaponlist = new DataLists.WeaponList();
-            Menus.MenuGeneric("MenuMain");
+            await Menus.MenuGeneric("MenuMain");
         }
 
-        public static void PrintLists()
+        public async static Task PrintLists()
         {
             for (int i = 0; i < DataLists.EnemiesList.GetLength(0); ++i)
             {
@@ -27,12 +27,10 @@ namespace lilminirpg
             }
             Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
-            Menus.TestMenu();
+            await Menus.TestMenu();
         }
         public static void PrintColorList()
         {
-            
-
             ConsoleColor[] consoleColors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
             Console.WriteLine("List of available " + "Console Colors:");
 

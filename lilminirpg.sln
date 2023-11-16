@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lilminirpg", "lilminirpg\lilminirpg.csproj", "{1D6804AD-A315-41CE-A042-19C5567DFF79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lilminirpg", "lilminirpg\lilminirpg.csproj", "{56F70A23-6256-4884-A754-01EDCC4FD74F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D6804AD-A315-41CE-A042-19C5567DFF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D6804AD-A315-41CE-A042-19C5567DFF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D6804AD-A315-41CE-A042-19C5567DFF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D6804AD-A315-41CE-A042-19C5567DFF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56F70A23-6256-4884-A754-01EDCC4FD74F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F70A23-6256-4884-A754-01EDCC4FD74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F70A23-6256-4884-A754-01EDCC4FD74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F70A23-6256-4884-A754-01EDCC4FD74F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7151CEB4-9281-4C44-A9E7-0E6BD462C44F}
+		SolutionGuid = {AEDCE1A2-6A49-4D20-B79E-68496A4930CD}
 	EndGlobalSection
 EndGlobal

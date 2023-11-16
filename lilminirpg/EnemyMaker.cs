@@ -24,7 +24,7 @@ namespace lilminirpg
             switch (statPosition)
             {
                 case 0:
-                    createdEnemy.CharacterName = DataLists.EnemiesList[enemyBaseID, statPosition];
+                    createdEnemy.Name = DataLists.EnemiesList[enemyBaseID, statPosition];
 //                    Console.WriteLine($"Creating: {createdEnemy.CharacterName}");
                     break;
                 case 1:
