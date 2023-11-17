@@ -12,6 +12,7 @@ namespace lilminirpg
 
         public async static Task MenuGeneric(string menuTracker)
         {
+            Player currentPlayer = new Player();
             UI userInterface = new();
 
             userInterface.MenuTracker = menuTracker;
@@ -31,16 +32,16 @@ namespace lilminirpg
                     }
                     break;
                 case "MenuPlayerName":
-                    CharacterMaker.SetCharacterName();
+//                    CharacterMaker.SetCharacterName();
                     break;
                 case "MenuPlayerClass":
-                    CharacterMaker.ChooseCharacterInfo(menuTracker);
+//                    currentPlayer.PlayerJob = JobMethods.SetPlayerJob(currentPlayer);
                     break;
                 case "MenuPlayerWeapon":
-                    CharacterMaker.ChooseCharacterInfo(menuTracker);
+//                    CharacterMaker.ChooseCharacterInfo(menuTracker);
                     break;
                 case "MenuPlayerAccessory":
-                    CharacterMaker.ChooseCharacterInfo(menuTracker);
+//                    CharacterMaker.ChooseCharacterInfo(menuTracker);
                     break;
                 case "MenuTest":
                     await TestMenu();

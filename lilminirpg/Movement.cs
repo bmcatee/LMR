@@ -19,7 +19,7 @@ namespace lilminirpg
 
             for (int i = 0; i < length; ++i)
             {
-                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerClass.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {currentEnemies[_playerPos + 1].Name}");
+                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {currentEnemies[_playerPos + 1].Name}");
                 if (currentEnemies[_playerPos + 1].Name == "Empty Ground")
                 {
                     await PlayerMovement(1, currentPlayer);
@@ -60,7 +60,7 @@ namespace lilminirpg
             if (enemyhp < 1) 
             {
                 Console.WriteLine("You win!");
-                Console.WriteLine($"{currentplayer.Name} the {currentplayer.PlayerClass.Name} at position {_playerPos}, moving to {_playerPos + 1}");
+                Console.WriteLine($"{currentplayer.Name} the {currentplayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1}");
             }
             await Task.Delay(delay * 1000);
         }

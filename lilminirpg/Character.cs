@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-    public class CharacterStatList
-    {
-        public List<CharacterStatList> characterStats { get; set; }
-    }
     public class Character
     {
         public string Name { get; set; }
@@ -30,10 +26,10 @@ namespace lilminirpg
     {
         public int XPCurrent { get; set; }
         public int XPToLevel { get; set; }
-        public DataLists.PlayerClassStats PlayerClass { get; set; }
-        public DataLists.PlayerWeaponStats WornWeapon { get; set; }
-        public DataLists.Clothing WornClothing { get; set; }
-        public DataLists.PlayerAccessoryStats WornAccessory { get; set; }
+        public Job PlayerJob { get; set; }
+        public Weapon WornWeapon { get; set; }
+//        public DataLists.Clothing WornClothing { get; set; }
+        public Accessory WornAccessory { get; set; }
     }
 
     public class Enemy : Character
@@ -46,5 +42,9 @@ namespace lilminirpg
         public int MonsterFamily { get; set; }
         public int MonsterEnvironment { get; set; }
         public int MonsterRank { get; set; }
+    }
+    public class CharacterStatList
+    {
+        public List<CharacterStatList> characterStats { get; set; }
     }
 }

@@ -9,13 +9,14 @@ namespace lilminirpg
 {
     internal class UI 
     {
+        private static int consoleWindowTopRow = 0;
+        private static int consoleWindowTopColumn = 0;
+
         public char CursorSymbol = ' ';
         public int SelectedOption { get; set; }
         public string MenuInput { get; set; }
         public string MenuTracker { get; set; }
         public int MenuLength { get; set; }
-        private static int consoleWindowTopRow = 0;
-        private static int consoleWindowTopColumn = 0;
         public int CurrentCursorRow { get; set; }
         public int CurrentCursorColumn { get; set; }
         public int CursorOffset { get; set; }
@@ -140,7 +141,7 @@ namespace lilminirpg
         {
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-            //            Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
+//          Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
         }
 
         // Default method for any invalid selections/bugs

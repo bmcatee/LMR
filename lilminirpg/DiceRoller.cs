@@ -8,6 +8,8 @@ namespace lilminirpg
 {
     internal class DiceRoller
     {
+
+        Accessory _accessory = new Accessory();
         public int RollDice(int min, int max)
         {
             var random = new Random();
@@ -17,9 +19,9 @@ namespace lilminirpg
 
         public int DamageRoller(Player player)
         {
-            int totalStr = player.StatStrength + player.WornWeapon.StatStrength;
-            int totalDex = player.StatDexterity + player.WornWeapon.StatDexterity;
-            int totalInt = player.StatIntelligence + player.WornWeapon.StatIntelligence;
+            int totalStr = player.StatStrength + player.WornWeapon.StatStrength + player.WornAccessory.StatStrength;
+            int totalDex = player.StatDexterity + player.WornWeapon.StatDexterity + player.WornAccessory.StatStrength;
+            int totalInt = player.StatIntelligence + player.WornWeapon.StatIntelligence + player.WornAccessory.StatStrength;
 
             string attackStat1 = player.WornWeapon.AttackStat1;
             string attackStat2 = player.WornWeapon.AttackStat2;

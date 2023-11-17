@@ -31,117 +31,14 @@ namespace lilminirpg
                     {"PrintColorList"},
                     {"Exit to Main Menu"}
         };
-        public class PlayerClassList
-        {
-            public List<PlayerClassList> playerClasses { get; set; }
-        }
-        public class PlayerClassStats
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public int HealthPointsGrowth { get; set; }
-            public int StrengthGrowth { get; set; }
-            public int DexterityGrowth { get; set; }
-            public int IntelligenceGrowth { get; set; }
-            public int LuckGrowth { get; set; }
-            public int MoveSpeed { get; set; }
-            public int AttackSpeed { get; set; }
-            public string ClassPerk { get; set; }
-            public string ClassAbility001 { get; set; }
-            public string ClassAbility002 { get; set; }
-            public string ClassAbility003 { get; set; }
-            public string ClassAbility004 { get; set; }
-            public string ClassAbility005 { get; set; }
-            public string ClassAbility006 { get; set; }
-            public string ClassAbility007 { get; set; }
-            public string ClassAbility008 { get; set; }
-            public string ClassAbility009 { get; set; }
-            public string ClassAbility010 { get; set; }
-        }
-        public class PlayerWeaponList
-        {
-            public List<PlayerWeaponList> playerWeapons { get; set; }
-        }
-        public class PlayerWeaponStats
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string AttackType { get; set; }
-            public string ElementType { get; set; }
-            public string AttackStat1 { get; set; }
-            public string AttackStat2 { get; set; }
-            public int StatStrength { get; set; }
-            public int StatDexterity { get; set; }
-            public int StatIntelligence { get; set; }
-            public int StatLuck { get; set; }
-            public int MoveSpeed { get; set; }
-            public int AttackSpeed { get; set; }
-            public string WeaponPerk { get; set; }
-        }
-        public class PlayerAccessoryList
-        {
-            public List<PlayerAccessoryList> playerAccessories { get; set; }
-        }
-        public class PlayerAccessoryStats
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public int StatStrength { get; set; }
-            public int StatDexterity { get; set; }
-            public int StatIntelligence { get; set; }
-            public int StatLuck { get; set; }
-            public int MoveSpeed { get; set; }
-            public int AttackSpeed { get; set; }
-            public string AccessoryPerk { get; set; }
-        }
+
+
+  
 
         public class Clothing
         {
             // coming soon
         }
-
-        // Class choices
-        public List<PlayerClassStats> FetchPlayerClasses()
-        {
-            string workingDirectory = Environment.CurrentDirectory;
-            string folder = System.IO.Directory.GetCurrentDirectory();
-            string filename = "\\ClassesList.json";
-
-            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
-            string json = sr.ReadToEnd();
-            List<PlayerClassStats> PlayerClasses = JsonSerializer.Deserialize<List<PlayerClassStats>>(json);
-
-            return PlayerClasses;
-
-        }
-
-        // Weapon choices
-        public List<PlayerWeaponStats> FetchWeapons()
-        {
-            //C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\json
-            string folder = Environment.CurrentDirectory;
-            string filename = "\\WeaponsList.json";
-
-            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
-            string json = sr.ReadToEnd();
-            List<PlayerWeaponStats> PlayerWeapons = JsonSerializer.Deserialize<List<PlayerWeaponStats>>(json);
-            return PlayerWeapons;
-        }
-
-
-        // Accessory choices
-        public List<PlayerAccessoryStats> FetchAccessories()
-        {
-            string folder = Environment.CurrentDirectory;
-            string filename = "\\AccessoriesList.json";
-
-            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
-            string json = sr.ReadToEnd();
-            List<PlayerAccessoryStats> PlayerAccessories = JsonSerializer.Deserialize<List<PlayerAccessoryStats>>(json);
-
-            return PlayerAccessories;
-        }
-
 
         // Enemies
         public static string[,] EnemiesList =
