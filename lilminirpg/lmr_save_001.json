@@ -2,8 +2,8 @@
   "XPCurrent": 0,
   "XPToLevel": 0,
   "PlayerJob": {
-    "Name": "Adventurer",
-    "Description": "Roaming for fun",
+    "Name": "Paladin",
+    "Description": "Crusader of faith",
     "HealthPointsGrowth": 10,
     "StrengthGrowth": 5,
     "DexterityGrowth": 5,
@@ -24,12 +24,12 @@
     "JobAbility010": null
   },
   "WornWeapon": {
-    "Name": "Throwing darts",
-    "Description": "Dependable but low damage",
-    "AttackType": "Ranged",
+    "Name": "Hammer",
+    "Description": "Solid smasher",
+    "AttackType": "Bashing",
     "ElementType": "Neutral",
-    "AttackStat1": "StatDexterity",
-    "AttackStat2": "StatIntelligence",
+    "AttackStat1": "StatStrength",
+    "AttackStat2": "StatStrength",
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -39,8 +39,8 @@
     "WeaponPerk": ""
   },
   "WornAccessory": {
-    "Name": "Pocket Sand",
-    "Description": "May cause the enemy to become Blinded",
+    "Name": "Dancer\u0027s Shoes",
+    "Description": "Makes it easier to dodge attacks",
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -49,7 +49,7 @@
     "AttackSpeed": 5,
     "AccessoryPerk": ""
   },
-  "Name": "Mustard",
+  "Name": "Squatch",
   "Description": null,
   "CurrentStage": 1,
   "CurrentLevel": 1,

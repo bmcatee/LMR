@@ -16,9 +16,10 @@ namespace lilminirpg
     {
         public static string[,] MenuMain =
         {
-                    {"New Game"},
-                    {"Load Game"},
-                    {"Options"},
+                    {"Play Game"},
+                    {"Make New Character"},
+                    {"Load Character"},
+                    {"Edit Character & Equipment"},
                     {"Exit"},
                     {"Debug Menu"}
         };
@@ -32,8 +33,15 @@ namespace lilminirpg
                     {"Exit to Main Menu"}
         };
 
+        public static string[,] MenuEdit =
+        {   
+                    {"Change Character Name"},
+                    {"Change Job"},
+                    {"Change Weapon"},
+                    {"Change Accessory"},
+                    {"Exit to Main Menu"}
+        };
 
-  
 
         public class Clothing
         {

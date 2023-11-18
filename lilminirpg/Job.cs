@@ -38,15 +38,20 @@ namespace lilminirpg
         }
         public static List<Job> FetchPlayerJobs()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string folder = System.IO.Directory.GetCurrentDirectory();
-            string filename = "\\ClassesList.json";
-
-            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
-            string json = sr.ReadToEnd();
-            List<Job> PlayerClasses = JsonSerializer.Deserialize<List<Job>>(json);
-
-            return PlayerClasses;
+            // FIX - Directory
+            //string folder = Environment.CurrentDirectory;
+            string folder = Environment.CurrentDirectory;
+            string filename = "JobsList.json";
+            List<Job> playerJobs = new List<Job>();
+            using (StreamReader sr = new StreamReader(Path.Combine(folder, filename)))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string json = sr.ReadToEnd();
+                    playerJobs = JsonSerializer.Deserialize<List<Job>>(json);
+                }
+            }
+            return playerJobs;
         }
         public static Job SetPlayerJob(Player currentPlayer)
         {
@@ -58,15 +63,15 @@ namespace lilminirpg
 
             List<Job> _listPlayerJobs = JobMethods.FetchPlayerJobs();
 
-            Console.WriteLine($"Name: {currentPlayer.Name} || Class: {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name}");
-            Console.WriteLine("");
+            UI.UICharacterInfo(currentPlayer);
+
             userInterface.MenuLength = _listPlayerJobs.Count;
-            Console.WriteLine("Your class choices are:");
+            Console.WriteLine("Your Job choices are:");
             Console.WriteLine("");
 
             for (int i = 0; i < _listPlayerJobs.Count; ++i)
             {
-                Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerJobs[i].Name}");
+                Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerJobs[i].Name}: {_listPlayerJobs[i].Description}");
             }
             UI.UIFooterGeneric();
             while (userInterface.MenuInput != "Enter")
@@ -82,6 +87,10 @@ namespace lilminirpg
             else
             {
                 UI.InvalidSelection();
+            }
+            if (CharacterMaker._characterCreation != true)
+            {
+                SaveLoad.SaveGame(currentPlayer);
             }
             return currentPlayer.PlayerJob;
         }

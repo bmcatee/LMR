@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +13,8 @@ namespace lilminirpg
 
         public async static Task MenuGeneric(string menuTracker)
         {
-            Player currentPlayer = new Player();
-            UI userInterface = new();
+            Player currentPlayer = SaveLoad.LoadGame();
+                        UI userInterface = new();
 
             userInterface.MenuTracker = menuTracker;
             userInterface.MenuInput = "";
@@ -31,26 +32,30 @@ namespace lilminirpg
                         Console.WriteLine($"[{userInterface.CursorSymbol}] {DataLists.MenuMain[i, 0]}");
                     }
                     break;
-                case "MenuPlayerName":
-//                    CharacterMaker.SetCharacterName();
-                    break;
-                case "MenuPlayerClass":
-//                    currentPlayer.PlayerJob = JobMethods.SetPlayerJob(currentPlayer);
-                    break;
-                case "MenuPlayerWeapon":
-//                    CharacterMaker.ChooseCharacterInfo(menuTracker);
-                    break;
-                case "MenuPlayerAccessory":
-//                    CharacterMaker.ChooseCharacterInfo(menuTracker);
+                case "MenuEdit":
+                    EditCharacterMenu();
                     break;
                 case "MenuTest":
                     await TestMenu();
+                    break;
+                case "MenuPlayerName":
+                    CharacterMaker.SetCharacterName(currentPlayer);
+                    break;
+                case "MenuPlayerClass":
+                    JobMethods.SetPlayerJob(currentPlayer);
+                    break;
+                case "MenuPlayerWeapon":
+                    WeaponMethods.SetPlayerWeapon(currentPlayer);
+                    break;
+                case "MenuPlayerAccessory":
+                    AccessoryMethods.SetPlayerAccessory(currentPlayer);
                     break;
                 default:
                     UI.InvalidSelection();
                     break;
             }
             UI.UIFooterGeneric();
+            UI.UICharacterInfo(currentPlayer);
             while (userInterface.MenuInput != "Enter")
             {
                 userInterface.PrintCursor();
@@ -64,20 +69,23 @@ namespace lilminirpg
             switch (selectedoption)
             {
                 case 0:
+                    await QuestEngine.InitStageArray(SaveLoad.LoadGame());
+                    break;
+                case 1:
                     CharacterMaker _charactermaker = new CharacterMaker();
                     _charactermaker.MakeCharacter();
                     break;
-                case 1:
+                case 2:
                     SaveLoad.LoadGame();
                     MenuGeneric("MenuMain");
                     break;
-                case 2:
-                    UI.InvalidSelection();
-                    break;
                 case 3:
-                    UI.InvalidSelection();
+                    EditCharacterMenu();
                     break;
                 case 4:
+                    UI.InvalidSelection();
+                    break;
+                case 5:
                     await Menus.TestMenu();
                     break;
                 default:
@@ -88,6 +96,7 @@ namespace lilminirpg
         public async static Task TestMenu()
         {
             UI userInterface = new();
+            Player currentPlayer = SaveLoad.LoadGame();
 
             userInterface.CursorOffset = 2;
             userInterface.SelectedOption = 0;
@@ -100,6 +109,8 @@ namespace lilminirpg
                 Console.WriteLine($"[{userInterface.CursorSymbol}] {DataLists.MenuTest[i, 0]}");
             }
             UI.UIFooterGeneric();
+            UI.UICharacterInfo(currentPlayer);
+
             while (userInterface.MenuInput != "Enter")
             {
                 userInterface.PrintCursor();
@@ -123,6 +134,61 @@ namespace lilminirpg
                     Program.PrintColorList();
                     break;
                 case 3:
+                    Menus.MenuGeneric("MenuMain");
+                    break;
+                default:
+                    UI.InvalidSelection();
+                    break;
+            }
+        }
+        public static void EditCharacterMenu()
+        {
+            UI userInterface = new();
+            Player currentPlayer = SaveLoad.LoadGame();
+
+            userInterface.CursorOffset = 2;
+            userInterface.SelectedOption = 0;
+            Console.Clear();
+            userInterface.MenuInput = "";
+            UI.UIHeaderGeneric();
+            userInterface.MenuLength = DataLists.MenuEdit.GetLength(0);
+            for (int i = 0; i < DataLists.MenuEdit.GetLength(0); ++i)
+            {
+                Console.WriteLine($"[{userInterface.CursorSymbol}] {DataLists.MenuEdit[i, 0]}");
+            }
+            UI.UIFooterGeneric();
+            UI.UICharacterInfo(currentPlayer);
+
+            while (userInterface.MenuInput != "Enter")
+            {
+                userInterface.PrintCursor();
+                userInterface.UIMovement();
+            }
+            EditMenuSelection(userInterface.SelectedOption);
+        }
+
+        public static void EditMenuSelection(int selectedoption)
+        {
+            Player currentPlayer = SaveLoad.LoadGame();
+            switch (selectedoption)
+            {
+                case 0:
+                    currentPlayer = CharacterMaker.SetCharacterName(currentPlayer);
+                    EditCharacterMenu();
+                    break;
+                case 1:
+                    currentPlayer.PlayerJob = JobMethods.SetPlayerJob(currentPlayer);
+                    EditCharacterMenu();
+                    break;
+                case 2:
+                    currentPlayer.WornWeapon = WeaponMethods.SetPlayerWeapon(currentPlayer);
+                    EditCharacterMenu();
+                    break;
+                case 3:
+                    currentPlayer.WornAccessory = AccessoryMethods.SetPlayerAccessory(currentPlayer);
+                    EditCharacterMenu();
+                    break;
+                case 4:
                     Menus.MenuGeneric("MenuMain");
                     break;
                 default:

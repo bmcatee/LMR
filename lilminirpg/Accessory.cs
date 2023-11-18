@@ -27,16 +27,22 @@ namespace lilminirpg
         }
         public static List<Accessory> FetchAccessories()
         {
+            // FIX - Directory
+            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
-            string filename = "\\AccessoriesList.json";
-
-            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
-            string json = sr.ReadToEnd();
-            List<Accessory> PlayerAccessories = JsonSerializer.Deserialize<List<Accessory>>(json);
-
-            return PlayerAccessories;
+            string filename = "AccessoriesList.json";
+            List<Accessory> playerAccessories = new List<Accessory>();
+            using (StreamReader sr = new StreamReader(Path.Combine(folder, filename)))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string json = sr.ReadToEnd();
+                    playerAccessories = JsonSerializer.Deserialize<List<Accessory>>(json);
+                }
+            }
+            return playerAccessories;
         }
-        public static Accessory SetPlayerAccessory(Player currentplayer)
+        public static Accessory SetPlayerAccessory(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
@@ -46,14 +52,14 @@ namespace lilminirpg
 
             List<Accessory> _listPlayerAccessories = AccessoryMethods.FetchAccessories();
 
-            Console.WriteLine($"Name: {currentplayer.Name} || Class: {currentplayer.PlayerJob.Name} || Weapon: {currentplayer.WornWeapon.Name} || Accessory: {currentplayer.WornAccessory.Name}");
-            Console.WriteLine("");
+            UI.UICharacterInfo(currentPlayer);
+
             userInterface.MenuLength = _listPlayerAccessories.Count;
-            Console.WriteLine("Your class choices are:");
+            Console.WriteLine("Please choose an Accessory:");
             Console.WriteLine("");
             for (int i = 0; i < _listPlayerAccessories.Count; ++i)
             {
-                Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerAccessories[i].Name}");
+                Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerAccessories[i].Name}: {_listPlayerAccessories[i].Description}");
             }
 
             UI.UIFooterGeneric();
@@ -61,17 +67,21 @@ namespace lilminirpg
             {
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
-//                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
+                //                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
             }
             if (userInterface.SelectedOption < _listPlayerAccessories.Count)
             {
-                currentplayer.WornAccessory = _listPlayerAccessories[userInterface.SelectedOption];
+                currentPlayer.WornAccessory = _listPlayerAccessories[userInterface.SelectedOption];
             }
             else
             {
                 UI.InvalidSelection();
             }
-            return currentplayer.WornAccessory;
+            if (CharacterMaker._characterCreation != true)
+            {
+                SaveLoad.SaveGame(currentPlayer);
+            }
+            return currentPlayer.WornAccessory;
         }
     }
 }

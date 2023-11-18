@@ -11,7 +11,7 @@ namespace lilminirpg
 {
     public class CharacterMaker
     {
-        private static bool _characterCreation = false;
+        public static bool _characterCreation = false;
         public void MakeCharacter()
         {
             // Starts the full player character creation process
@@ -44,6 +44,7 @@ namespace lilminirpg
             };
 
             currentPlayer.Name = Console.ReadLine();
+            SaveLoad.SaveGame(currentPlayer);
             return currentPlayer;
         }
 

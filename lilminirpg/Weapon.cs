@@ -9,19 +9,19 @@ namespace lilminirpg
 {
     public class Weapon
     {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string AttackType { get; set; }
-            public string ElementType { get; set; }
-            public string AttackStat1 { get; set; }
-            public string AttackStat2 { get; set; }
-            public int StatStrength { get; set; }
-            public int StatDexterity { get; set; }
-            public int StatIntelligence { get; set; }
-            public int StatLuck { get; set; }
-            public int MoveSpeed { get; set; }
-            public int AttackSpeed { get; set; }
-            public string WeaponPerk { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string AttackType { get; set; }
+        public string ElementType { get; set; }
+        public string AttackStat1 { get; set; }
+        public string AttackStat2 { get; set; }
+        public int StatStrength { get; set; }
+        public int StatDexterity { get; set; }
+        public int StatIntelligence { get; set; }
+        public int StatLuck { get; set; }
+        public int MoveSpeed { get; set; }
+        public int AttackSpeed { get; set; }
+        public string WeaponPerk { get; set; }
     }
     public class WeaponMethods
     {
@@ -32,16 +32,22 @@ namespace lilminirpg
 
         public static List<Weapon> FetchWeapons()
         {
-            //C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\json
+            // FIX - Directory
+            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
-            string filename = "\\WeaponsList.json";
-
-            StreamReader sr = new StreamReader(Path.Combine(folder, filename));
-            string json = sr.ReadToEnd();
-            List<Weapon> PlayerWeapons = JsonSerializer.Deserialize<List<Weapon>>(json);
-            return PlayerWeapons;
+            string filename = "WeaponsList.json";
+            List<Weapon> playerWeapons = new List<Weapon>();
+            using (StreamReader sr = new StreamReader(Path.Combine(folder, filename)))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string json = sr.ReadToEnd();
+                    playerWeapons = JsonSerializer.Deserialize<List<Weapon>>(json);
+                }
+            }
+            return playerWeapons;
         }
-        public static Weapon SetPlayerWeapon(Player currentplayer)
+        public static Weapon SetPlayerWeapon(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
@@ -51,15 +57,15 @@ namespace lilminirpg
 
             List<Weapon> _listPlayerWeapons = WeaponMethods.FetchWeapons();
 
-            Console.WriteLine($"Name: {currentplayer.Name} || Class: {currentplayer.PlayerJob.Name} || Weapon: {currentplayer.WornWeapon.Name} || Accessory: {currentplayer.WornAccessory.Name}");
-            Console.WriteLine("");
+            UI.UICharacterInfo(currentPlayer);
+
             userInterface.MenuLength = _listPlayerWeapons.Count;
-            Console.WriteLine("Your class choices are:");
+            Console.WriteLine("Your Weapon choices are:");
             Console.WriteLine("");
 
             for (int i = 0; i < _listPlayerWeapons.Count; ++i)
             {
-                Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerWeapons[i].Name}");
+                Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerWeapons[i].Name}: {_listPlayerWeapons[i].Description}");
             }
 
             UI.UIFooterGeneric();
@@ -67,17 +73,21 @@ namespace lilminirpg
             {
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
-//                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
+                //                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
             }
             if (userInterface.SelectedOption < _listPlayerWeapons.Count)
             {
-                currentplayer.WornWeapon = _listPlayerWeapons[userInterface.SelectedOption];
+                currentPlayer.WornWeapon = _listPlayerWeapons[userInterface.SelectedOption];
             }
             else
             {
                 UI.InvalidSelection();
             }
-            return currentplayer.WornWeapon;
+            if (CharacterMaker._characterCreation != true)
+            {
+                SaveLoad.SaveGame(currentPlayer);
+            }
+            return currentPlayer.WornWeapon;
         }
     }
 }

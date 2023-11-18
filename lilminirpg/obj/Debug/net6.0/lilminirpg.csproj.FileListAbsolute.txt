@@ -12,7 +12,3 @@ C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net
 C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.pdb
 C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.genruntimeconfig.cache
 C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\ref\lilminirpg.dll
-C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\json\AccessoriesList.json
-C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\json\ClassesList.json
-C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\json\EnemiesList.json
-C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\json\WeaponsList.json

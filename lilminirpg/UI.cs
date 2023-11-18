@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lilminirpg
 {
-    internal class UI 
+    internal class UI
     {
         private static int consoleWindowTopRow = 0;
         private static int consoleWindowTopColumn = 0;
@@ -136,8 +136,13 @@ namespace lilminirpg
             Console.WriteLine("Now playing: lil mini rpg");
             Console.WriteLine("");
         }
+        public static void UICharacterInfo(Player currentPlayer)
+        {
+            Console.WriteLine($"Name: {currentPlayer.Name} || Class: {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name}");
+            Console.WriteLine("");
+        }
 
-        public static void UIFooterGeneric()
+    public static void UIFooterGeneric()
         {
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
