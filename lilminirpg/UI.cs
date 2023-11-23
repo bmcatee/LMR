@@ -138,8 +138,15 @@ namespace lilminirpg
         }
         public static void UICharacterInfo(Player currentPlayer)
         {
-            Console.WriteLine($"Name: {currentPlayer.Name} || Class: {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name}");
-            Console.WriteLine("");
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\lmr_save_001.json";
+            string loadpath = folder + filename;
+
+            if (File.Exists(loadpath))
+            {
+                Console.WriteLine($"Character: {currentPlayer.Name}, the Level {currentPlayer.CurrentLevel} {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name} || {currentPlayer.XPCurrent} XP, {currentPlayer.GoldCurrent} GP, max Stage: {currentPlayer.MaximumStage}");
+                Console.WriteLine("");
+            }
         }
 
     public static void UIFooterGeneric()

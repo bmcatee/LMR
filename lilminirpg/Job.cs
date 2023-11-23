@@ -9,37 +9,35 @@ namespace lilminirpg
 {
     public class Job
     {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public int HealthPointsGrowth { get; set; }
-            public int StrengthGrowth { get; set; }
-            public int DexterityGrowth { get; set; }
-            public int IntelligenceGrowth { get; set; }
-            public int LuckGrowth { get; set; }
-            public int MoveSpeed { get; set; }
-            public int AttackSpeed { get; set; }
-            public string JobPerk { get; set; }
-            public string JobAbility001 { get; set; }
-            public string JobAbility002 { get; set; }
-            public string JobAbility003 { get; set; }
-            public string JobAbility004 { get; set; }
-            public string JobAbility005 { get; set; }
-            public string JobAbility006 { get; set; }
-            public string JobAbility007 { get; set; }
-            public string JobAbility008 { get; set; }
-            public string JobAbility009 { get; set; }
-            public string JobAbility010 { get; set; }
+        public string? Name { get; set; } = "";
+        public string? Description { get; set; } = "";
+        public int HealthPointsGrowth { get; set; } = 0;
+        public int StrengthGrowth { get; set; } = 0;
+        public int DexterityGrowth { get; set; } = 0;
+        public int IntelligenceGrowth { get; set; } = 0;
+        public int LuckGrowth { get; set; } = 0;
+        public int MoveSpeed { get; set; } = 0;
+        public int AttackSpeed { get; set; } = 0;
+        public string? JobPerk { get; set; } = "";
+        public string? JobAbility001 { get; set; } = "";
+        public string? JobAbility002 { get; set; } = "";
+        public string? JobAbility003 { get; set; } = "";
+        public string? JobAbility004 { get; set; } = "";
+        public string? JobAbility005 { get; set; } = "";
+        public string? JobAbility006 { get; set; } = "";
+        public string? JobAbility007 { get; set; } = "";
+        public string? JobAbility008 { get; set; } = "";
+        public string? JobAbility009 { get; set; } = "";
+        public string? JobAbility010 { get; set; } = "";
     }
     public class JobMethods
     {
         public class PlayerJobList
         {
-            public List<PlayerJobList> playerJobs { get; set; }
+            public List<PlayerJobList>? playerJobs { get; set; }
         }
         public static List<Job> FetchPlayerJobs()
         {
-            // FIX - Directory
-            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
             string filename = "JobsList.json";
             List<Job> playerJobs = new List<Job>();
@@ -78,7 +76,7 @@ namespace lilminirpg
             {
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
-//                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
+                //                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
             }
             if (userInterface.SelectedOption < _listPlayerJobs.Count)
             {

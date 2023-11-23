@@ -9,31 +9,29 @@ namespace lilminirpg
 {
     public class Weapon
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string AttackType { get; set; }
-        public string ElementType { get; set; }
-        public string AttackStat1 { get; set; }
-        public string AttackStat2 { get; set; }
-        public int StatStrength { get; set; }
-        public int StatDexterity { get; set; }
-        public int StatIntelligence { get; set; }
-        public int StatLuck { get; set; }
-        public int MoveSpeed { get; set; }
-        public int AttackSpeed { get; set; }
-        public string WeaponPerk { get; set; }
+        public string? Name { get; set; } = "";
+        public string? Description { get; set; } = "";
+        public string? AttackType { get; set; } = "";
+        public string? ElementType { get; set; } = "";
+        public string? AttackStat1 { get; set; } = "";
+        public string? AttackStat2 { get; set; } = "";
+        public int StatStrength { get; set; } = 0;
+        public int StatDexterity { get; set; } = 0;
+        public int StatIntelligence { get; set; } = 0;
+        public int StatLuck { get; set; } = 0;
+        public int MoveSpeed { get; set; } = 0;
+        public int AttackSpeed { get; set; } = 0;
+        public string? WeaponPerk { get; set; } = "";
     }
     public class WeaponMethods
     {
         public class WeaponList
         {
-            public List<WeaponList> playerWeapons { get; set; }
+            public List<WeaponList>? playerWeapons { get; set; }
         }
 
         public static List<Weapon> FetchWeapons()
         {
-            // FIX - Directory
-            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
             string filename = "WeaponsList.json";
             List<Weapon> playerWeapons = new List<Weapon>();

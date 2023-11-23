@@ -12,7 +12,7 @@ namespace lilminirpg
     public class CharacterMaker
     {
         public static bool _characterCreation = false;
-        public void MakeCharacter()
+        public static void MakeCharacter()
         {
             // Starts the full player character creation process
             _characterCreation = true;
@@ -48,7 +48,7 @@ namespace lilminirpg
             return currentPlayer;
         }
 
-       public Player SetLevelOne(Player currentPlayer)
+       public static Player SetLevelOne(Player currentPlayer)
         {
             currentPlayer.CurrentLevel = 1;
             currentPlayer.CurrentStage = 1;

@@ -8,43 +8,46 @@ namespace lilminirpg
 {
     public class Character
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int CurrentStage { get; set; }
-        public int CurrentLevel { get; set; }
-        public int HealthPointsMax { get; set; }
-        public int HealthPointsCurrent { get; set; }
-        public int StatStrength { get; set; }
-        public int StatDexterity { get; set; }
-        public int StatIntelligence { get; set; }
-        public int StatLuck { get; set; }
-        public int StatMoveSpeed { get; set; }
-        public int StatAttackSpeed { get; set; }
+        public string? Name { get; set; } = "";
+        public string? Description { get; set; } = "";
+        public int CurrentStage { get; set; } = 0;
+        public int CurrentLevel { get; set; } = 0;
+        public int HealthPointsMax { get; set; } = 0;
+        public int HealthPointsCurrent { get; set; } = 0;
+        public int StatStrength { get; set; } = 0;
+        public int StatDexterity { get; set; } = 0;
+        public int StatIntelligence { get; set; } = 0;
+        public int StatLuck { get; set; } = 0;
+        public int StatMoveSpeed { get; set; } = 0;
+        public int StatAttackSpeed { get; set; } = 0;
     }
 
     public class Player : Character
     {
-        public int XPCurrent { get; set; }
-        public int XPToLevel { get; set; }
-        public Job PlayerJob { get; set; }
-        public Weapon WornWeapon { get; set; }
+        public int XPCurrent { get; set; } = 0;
+        public int XPToLevel { get; set; } = 0;
+        public int GoldCurrent { get; set; } = 0;
+        public int TilesMoved { get; set; } = 0;
+        public int MaximumStage { get; set; } = 0;
+        public Job? PlayerJob { get ; set; }
+        public Weapon? WornWeapon { get; set; }
 //        public DataLists.Clothing WornClothing { get; set; }
-        public Accessory WornAccessory { get; set; }
+        public Accessory? WornAccessory { get; set; }
     }
 
     public class Enemy : Character
     {
-        public int MonsterPerk1 { get; set; }
-        public int MonsterPerk2 { get; set; }
-        public int MonsterPerk3 { get; set; }
-        public int GoldDropped { get; set; }
-        public int XPDropped { get; set; }
-        public int MonsterFamily { get; set; }
-        public int MonsterEnvironment { get; set; }
-        public int MonsterRank { get; set; }
+        public int MonsterPerk1 { get; set; } = 0;
+        public int MonsterPerk2 { get; set; } = 0;
+        public int MonsterPerk3 { get; set; } = 0;
+        public int GoldDropped { get; set; } = 0;
+        public int XPDropped { get; set; } = 0;
+        public int MonsterFamily { get; set; } = 0;
+        public int MonsterEnvironment { get; set; } = 0;
+        public int MonsterRank { get; set; } = 0;
     }
     public class CharacterStatList
     {
-        public List<CharacterStatList> characterStats { get; set; }
+        public List<CharacterStatList>? CharacterStats { get; set; }
     }
 }

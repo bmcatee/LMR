@@ -9,26 +9,24 @@ namespace lilminirpg
 {
     public class Accessory
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int StatStrength { get; set; }
-        public int StatDexterity { get; set; }
-        public int StatIntelligence { get; set; }
-        public int StatLuck { get; set; }
-        public int MoveSpeed { get; set; }
-        public int AttackSpeed { get; set; }
-        public string AccessoryPerk { get; set; }
+        public string? Name { get; set; } = "";
+        public string? Description { get; set; } = "";
+        public int StatStrength { get; set; } = 0;
+        public int StatDexterity { get; set; } = 0;
+        public int StatIntelligence { get; set; } = 0;
+        public int StatLuck { get; set; } = 0;
+        public int MoveSpeed { get; set; } = 0;
+        public int AttackSpeed { get; set; } = 0;
+        public string? AccessoryPerk { get; set; } = "";
     }
     public class AccessoryMethods
     {
         public class AccessoryList
         {
-            public List<AccessoryList> playerAccessories { get; set; }
+            public List<AccessoryList>? PlayerAccessories { get; set; }
         }
         public static List<Accessory> FetchAccessories()
         {
-            // FIX - Directory
-            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
             string filename = "AccessoriesList.json";
             List<Accessory> playerAccessories = new List<Accessory>();

@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Scrap.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-	  <Content Include="json\**" >
+	  <Content Include="json\**">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> </Content>
   </ItemGroup>
 

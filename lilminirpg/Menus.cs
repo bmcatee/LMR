@@ -10,11 +10,10 @@ namespace lilminirpg
 {
     public class Menus
     {
-
         public async static Task MenuGeneric(string menuTracker)
         {
             Player currentPlayer = SaveLoad.LoadGame();
-                        UI userInterface = new();
+            UI userInterface = new();
 
             userInterface.MenuTracker = menuTracker;
             userInterface.MenuInput = "";
@@ -66,21 +65,39 @@ namespace lilminirpg
 
         public async static Task MenuSelection(int selectedoption)
         {
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\lmr_save_001.json";
+            string loadpath = folder + filename;
+
             switch (selectedoption)
-            {
+            { 
                 case 0:
-                    await QuestEngine.InitStageArray(SaveLoad.LoadGame());
+                    if (File.Exists(loadpath))
+                    {
+                        await QuestEngine.InitStageArray(SaveLoad.LoadGame());
+                        //Console.ReadLine();
+                    }
+                    else
+                    {
+                        CharacterMaker.MakeCharacter();
+                    }
                     break;
                 case 1:
-                    CharacterMaker _charactermaker = new CharacterMaker();
-                    _charactermaker.MakeCharacter();
+                    CharacterMaker.MakeCharacter();
                     break;
                 case 2:
                     SaveLoad.LoadGame();
                     MenuGeneric("MenuMain");
                     break;
                 case 3:
-                    EditCharacterMenu();
+                    if (File.Exists(loadpath))
+                    {
+                        EditCharacterMenu();
+                    }
+                    else
+                    {
+                        CharacterMaker.MakeCharacter();
+                    }
                     break;
                 case 4:
                     UI.InvalidSelection();
@@ -121,7 +138,7 @@ namespace lilminirpg
 
         public async static Task TestMenuSelection(int selectedoption)
         {
-            switch (selectedoption)
+            switch (selectedoption+5)
             {
                 case 0:
                     await QuestEngine.InitStageArray(SaveLoad.LoadGame());

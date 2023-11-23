@@ -16,9 +16,6 @@ namespace lilminirpg
         public static void SaveGame(Player newPlayer)
         {
             string savedata = JsonSerializer.Serialize<Player>(newPlayer, new JsonSerializerOptions { WriteIndented = true });
-
-            // FIX - Directory
-            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
             string filename = "\\lmr_save_001.json";
             string savepath = folder + filename;
@@ -33,19 +30,20 @@ namespace lilminirpg
         {
             Player loadPlayer = new Player();
             string loadData = JsonSerializer.Serialize<Player>(loadPlayer, new JsonSerializerOptions { WriteIndented = true });
-
-            // FIX - Directory
-            //string folder = Environment.CurrentDirectory;
             string folder = Environment.CurrentDirectory;
-            string filename = "lmr_save_001.json";
-            string line;
+            string filename = "\\lmr_save_001.json";
+            string loadpath = folder + filename;
 
-            using (StreamReader sr = new StreamReader(Path.Combine(folder, filename)))
+            // Make dummy if no save exists
+            if (File.Exists(loadpath))
             {
-                while (!sr.EndOfStream)
+                using (StreamReader sr = new StreamReader(loadpath))
                 {
-                    string json = sr.ReadToEnd();
-                    loadPlayer = JsonSerializer.Deserialize<Player>(json);
+                    while (!sr.EndOfStream)
+                    {
+                        string json = sr.ReadToEnd();
+                        loadPlayer = JsonSerializer.Deserialize<Player>(json);
+                    }
                 }
             }
             return loadPlayer;
