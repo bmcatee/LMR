@@ -7,19 +7,19 @@ using System.Xml.Serialization;
 
 namespace lilminirpg
 {
-
     internal class Movement
     {
         private static int _frame = 0;
         private static int _gameDelay = 30;
         private static int _playerPos = 0;
         private static int _length = 0;
-        private static int _playerAttackOriginal = 10;
+        private static int _playerAttackOriginal = 20;
         private static int _playerAttackCurrent = 0;
-        private static int _playerMoveOriginal = 10;
+        private static int _playerMoveOriginal = 20;
         private static int _playerMoveCurrent = 0;
-        private static int _enemyAttackOriginal = 25;
+        private static int _enemyAttackOriginal = 40;
         private static int _enemyAttackCurrent = 0;
+        private static bool _fightIntroText = false;
         private static Player _currentPlayer = new Player();
         // BAD HARDCODE ARRAY INIT, FIX
         // private static Enemy[] _stageEnemies = new Enemy[16];
@@ -46,7 +46,7 @@ namespace lilminirpg
                 {
                     if (_currentPlayer.HealthPointsCurrent > 0)
                     {
-                        _currentEnemy = enemiesonscreen[_playerPos];
+                        _currentEnemy = enemiesonscreen[_playerPos+1];
                         if (_currentEnemy.Name == "Empty Ground")
                         {
                             if (_playerMoveCurrent == _frame)
@@ -64,7 +64,11 @@ namespace lilminirpg
                             if (_playerAttackCurrent == _frame)
                             {
                                 Console.WriteLine($"{_currentPlayer.Name} the {_currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {enemiesonscreen[_playerPos + 1].Name}");
-
+                                if (!_fightIntroText)
+                                {
+                                    Console.WriteLine($"Fight!!!");
+                                }
+                                _fightIntroText = true;
                                 _playerMoveCurrent += _playerMoveOriginal;
                                 _playerAttackCurrent += _playerAttackOriginal;
                                 PlayerAttack();
@@ -73,10 +77,8 @@ namespace lilminirpg
                         // CHECK TO SEE IF PLAYER IS IN TILE NEXT TO MOB
                         if (_enemyAttackCurrent == _frame)
                         {
-                            //                        Console.WriteLine($"{_currentPlayer.Name} the {_currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {enemiesonscreen[_playerPos + 1].Name}");
-
                             _enemyAttackCurrent += _enemyAttackOriginal;
-                            if (_currentEnemy.Name != "Empty Ground")
+                            if (_currentEnemy.Name != "Empty Ground" && _currentEnemy.HealthPointsCurrent > 0)
                             {
                                 EnemyAttack();
                             }
@@ -125,6 +127,7 @@ namespace lilminirpg
                 _currentPlayer.GoldCurrent += _currentEnemy.GoldDropped;
                 SaveLoad.SaveGame(_currentPlayer);
                 Console.WriteLine($"{_currentPlayer.Name} the {_currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1}");
+                _fightIntroText = false;
                 ++_playerPos;
             }
         }

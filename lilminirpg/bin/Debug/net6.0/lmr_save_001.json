@@ -1,12 +1,12 @@
 {
-  "XPCurrent": 840,
+  "XPCurrent": 50,
   "XPToLevel": 0,
-  "GoldCurrent": 305,
+  "GoldCurrent": 20,
   "TilesMoved": 0,
-  "MaximumStage": 27,
+  "MaximumStage": 1,
   "PlayerJob": {
-    "Name": "Thief",
-    "Description": "Fast and stabby",
+    "Name": "Paladin",
+    "Description": "Crusader of faith",
     "HealthPointsGrowth": 10,
     "StrengthGrowth": 5,
     "DexterityGrowth": 5,
@@ -27,12 +27,12 @@
     "JobAbility010": ""
   },
   "WornWeapon": {
-    "Name": "Knife",
-    "Description": "Fast and nimble",
-    "AttackType": "Piercing",
+    "Name": "Claymore",
+    "Description": "Slow but packs a punch",
+    "AttackType": "Slashing",
     "ElementType": "Neutral",
-    "AttackStat1": "StatDexterity",
-    "AttackStat2": "StatIntelligence",
+    "AttackStat1": "StatStrength",
+    "AttackStat2": "StatDexterity",
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -42,8 +42,8 @@
     "WeaponPerk": ""
   },
   "WornAccessory": {
-    "Name": "Water Pendant",
-    "Description": "Has a high chance of your attack inflicting Water damage",
+    "Name": "Dancer\u0027s Shoes",
+    "Description": "Makes it easier to dodge attacks",
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -52,7 +52,7 @@
     "AttackSpeed": 5,
     "AccessoryPerk": ""
   },
-  "Name": "SADdj",
+  "Name": "Jarebhkafd",
   "Description": "",
   "CurrentStage": 1,
   "CurrentLevel": 1,
