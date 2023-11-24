@@ -35,17 +35,7 @@ namespace lilminirpg
         public Accessory? WornAccessory { get; set; }
     }
 
-    public class Enemy : Character
-    {
-        public int MonsterPerk1 { get; set; } = 0;
-        public int MonsterPerk2 { get; set; } = 0;
-        public int MonsterPerk3 { get; set; } = 0;
-        public int GoldDropped { get; set; } = 0;
-        public int XPDropped { get; set; } = 0;
-        public int MonsterFamily { get; set; } = 0;
-        public int MonsterEnvironment { get; set; } = 0;
-        public int MonsterRank { get; set; } = 0;
-    }
+
     public class CharacterStatList
     {
         public List<CharacterStatList>? CharacterStats { get; set; }

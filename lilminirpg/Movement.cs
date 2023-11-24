@@ -94,7 +94,16 @@ namespace lilminirpg
                 if (_currentPlayer.HealthPointsCurrent > 0)
                 {
                     _playerPos = 0;
+                    _frame = 0;
                     _currentPlayer.CurrentStage = _currentPlayer.CurrentStage + 1;
+                    _length = 0;
+                    _playerAttackOriginal = 20;
+                    _playerAttackCurrent = 0;
+                    _playerMoveOriginal = 20;
+                    _playerMoveCurrent = 0;
+                    _enemyAttackOriginal = 40;
+                    _enemyAttackCurrent = 0;
+                    _fightIntroText = false;
                     SaveLoad.SaveGame(_currentPlayer);
                     QuestEngine.InitStageArray(_currentPlayer);
                 }
@@ -102,6 +111,14 @@ namespace lilminirpg
                 {
                     _playerPos = 0;
                     _frame = 0;
+                    _length = 0;
+                    _playerAttackOriginal = 20;
+                    _playerAttackCurrent = 0;
+                    _playerMoveOriginal = 20;
+                    _playerMoveCurrent = 0;
+                    _enemyAttackOriginal = 40;
+                    _enemyAttackCurrent = 0;
+                    _fightIntroText = false;
                     Console.WriteLine("You lose! Game over!! Press Enter to continue");
                     _currentPlayer.CurrentStage = 1;
                     _currentPlayer.HealthPointsCurrent = _currentPlayer.HealthPointsMax;
@@ -116,8 +133,7 @@ namespace lilminirpg
         {
             Console.WriteLine($"Player HP: {_currentPlayer.HealthPointsCurrent} - Enemy HP: {_currentEnemy.HealthPointsCurrent} - PlayerPos: {_playerPos}");
 
-            DiceRoller _diceRoller = new DiceRoller();
-            int RollResults = (_diceRoller.RollDice(1, 5));
+            int RollResults = DiceRoller.RollDice(1, 5);
             _currentEnemy.HealthPointsCurrent = _currentEnemy.HealthPointsCurrent - RollResults;
             Console.WriteLine($"You attack with your {_currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {_currentEnemy.Name} now has {_currentEnemy.HealthPointsCurrent} HP.");
             if (_currentEnemy.HealthPointsCurrent < 1)
@@ -133,8 +149,7 @@ namespace lilminirpg
         }
         public static void EnemyAttack()
         {
-            DiceRoller _diceRoller = new DiceRoller();
-            int RollResults = (_diceRoller.RollDice(1, 5));
+            int RollResults = DiceRoller.RollDice(1, 5);
             _currentPlayer.HealthPointsCurrent = _currentPlayer.HealthPointsCurrent - RollResults;
             Console.WriteLine($"The {_currentEnemy.Name} attacks you for {RollResults} dmg! " +
             $"Your HP is {_currentPlayer.HealthPointsCurrent}/{_currentPlayer.HealthPointsMax} and the {_currentEnemy.Name} has {_currentEnemy.HealthPointsCurrent}/{_currentEnemy.HealthPointsMax} HP.");

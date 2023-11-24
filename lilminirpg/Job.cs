@@ -59,7 +59,7 @@ namespace lilminirpg
             userInterface.MenuInput = "";
             userInterface.CursorOffset = 4;
 
-            List<Job> _listPlayerJobs = JobMethods.FetchPlayerJobs();
+            List<Job> _listPlayerJobs = FetchPlayerJobs();
 
             UI.UICharacterInfo(currentPlayer);
 

@@ -10,7 +10,7 @@ namespace lilminirpg
     {
 
         Accessory _accessory = new Accessory();
-        public int RollDice(int min, int max)
+        public static int RollDice(int min, int max)
         {
             var random = new Random();
             int roll = random.Next(min, max);

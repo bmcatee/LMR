@@ -74,7 +74,7 @@ namespace lilminirpg
                 case 0:
                     if (File.Exists(loadpath))
                     {
-                        await QuestEngine.InitStageArray(SaveLoad.LoadGame());
+                        QuestEngine.InitStageArray(SaveLoad.LoadGame());
                         //Console.ReadLine();
                     }
                     else
@@ -141,7 +141,7 @@ namespace lilminirpg
             switch (selectedoption+5)
             {
                 case 0:
-                    await QuestEngine.InitStageArray(SaveLoad.LoadGame());
+                    QuestEngine.InitStageArray(SaveLoad.LoadGame());
                     Console.ReadLine();
                     break;
                 case 1:

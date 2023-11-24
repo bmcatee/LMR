@@ -81,5 +81,15 @@ namespace lilminirpg
             Console.ReadLine();
             Menus.MenuGeneric("MenuMain");
         }
+        public Player LevelUpPlayer(Player currentplayer)
+        {
+            currentplayer.CurrentLevel = currentplayer.CurrentLevel + 1;
+            currentplayer.HealthPointsMax += currentplayer.PlayerJob.HealthPointsGrowth;
+            currentplayer.StatStrength += currentplayer.PlayerJob.StrengthGrowth;
+            currentplayer.StatDexterity += currentplayer.PlayerJob.DexterityGrowth;
+            currentplayer.StatIntelligence += currentplayer.PlayerJob.IntelligenceGrowth;
+            currentplayer.StatLuck += currentplayer.PlayerJob.LuckGrowth;
+            return currentplayer;
+        }
     }
 }

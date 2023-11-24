@@ -48,7 +48,7 @@ namespace lilminirpg
             userInterface.MenuInput = "";
             userInterface.CursorOffset = 4;
 
-            List<Accessory> _listPlayerAccessories = AccessoryMethods.FetchAccessories();
+            List<Accessory> _listPlayerAccessories = FetchAccessories();
 
             UI.UICharacterInfo(currentPlayer);
 

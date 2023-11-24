@@ -9,7 +9,7 @@ namespace lilminirpg
 {
     internal class QuestEngine
     {
-        public async static Task InitStageArray(Player currentplayer)
+        public static void InitStageArray(Player currentplayer)
         {
             int currentStage = currentplayer.CurrentStage;
             Enemy[] enemiesOnScreen = CreateStageArray(currentStage);
@@ -23,49 +23,47 @@ namespace lilminirpg
             Movement.MoveThroughScreen(currentplayer,enemiesOnScreen);
         }
 
-        public static Enemy[] CreateStageArray(int gamestage)
+        public static Enemy[] CreateStageArray(int currentStage)
         {
             int[] currentGameScreen = new int[16];
             Enemy[] enemiesOnScreen = new Enemy[16];
             for (int i = 0; i < currentGameScreen.Length; ++i)
             {
-                DiceRoller _diceRoller = new DiceRoller();
-                int fillPositionRoll = _diceRoller.RollDice(0, 2);
-                int placeEnemyRoll = _diceRoller.RollDice(0, 100);
-                int selectEnemyRoll = _diceRoller.RollDice(0, DataLists.EnemiesList.GetLength(0));
-                EnemyMaker createdenemy = new EnemyMaker();
-//                Console.WriteLine($"Position Roll: {fillPositionRoll}");
-//                Console.WriteLine($"Enemy Roll: {placeEnemyRoll}");
+                int fillPositionRoll = DiceRoller.RollDice(0, 2);
+                //int placeEnemyRoll = DiceRoller.RollDice(0, 100);
+                //int selectEnemyRoll = DiceRoller.RollDice(0, DataLists.EnemiesList.GetLength(0));
+                Enemy dummyenemy = EnemyMethods.CreateDummy();
+                Enemy createdenemy = EnemyMethods.CreateRandomEnemy(currentStage);
+                //                Console.WriteLine($"Position Roll: {fillPositionRoll}");
+                //                Console.WriteLine($"Enemy Roll: {placeEnemyRoll}");
 
                 if (fillPositionRoll == 0 || i <= 3)
                 {
-                    enemiesOnScreen[i] = createdenemy.MakeEnemy(0);
-                    currentGameScreen[i] = 0;
+                    enemiesOnScreen[i] = dummyenemy;
                 }
                 else if (fillPositionRoll == 1 && i > 3)
                 {
-                    createdenemy = new EnemyMaker();
-
-                    switch (placeEnemyRoll)
-                    {
-                        case int n when (n > -1 && n < 31):
-                            enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
-                            currentGameScreen[i] = 1;
-                            break;
-                        case int n when (n > 30 && n < 61):
-                            enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
-                            currentGameScreen[i] = 2;
-                            break;
-                        case int n when (n > 60 && n <= 99):
-                            enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll);
-                            currentGameScreen[i] = 3;
-                            break;
-                        default:
-                            Console.WriteLine($"Roll: {placeEnemyRoll} - YOU SHOULD NOT BE HERE");
-                            enemiesOnScreen[i] = createdenemy.MakeEnemy(0);
-                            currentGameScreen[i] = 0;
-                            break;
-                    }
+                    enemiesOnScreen[i] = createdenemy;
+                    //switch (placeEnemyRoll)
+                    //{
+                    //    case int n when (n > -1 && n < 31):
+                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll, currentStage);
+                    //        currentGameScreen[i] = 1;
+                    //        break;
+                    //    case int n when (n > 30 && n < 61):
+                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll, currentStage);
+                    //        currentGameScreen[i] = 2;
+                    //        break;
+                    //    case int n when (n > 60 && n <= 99):
+                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll, currentStage);
+                    //        currentGameScreen[i] = 3;
+                    //        break;
+                    //    default:
+                    //        Console.WriteLine($"Roll: {placeEnemyRoll} - YOU SHOULD NOT BE HERE");
+                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(0, currentStage);
+                    //        currentGameScreen[i] = 0;
+                    //        break;
+                    //}
                 }
             }
                 return enemiesOnScreen;

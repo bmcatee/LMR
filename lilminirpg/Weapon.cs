@@ -53,7 +53,7 @@ namespace lilminirpg
             userInterface.MenuInput = "";
             userInterface.CursorOffset = 4;
 
-            List<Weapon> _listPlayerWeapons = WeaponMethods.FetchWeapons();
+            List<Weapon> _listPlayerWeapons = FetchWeapons();
 
             UI.UICharacterInfo(currentPlayer);
 
