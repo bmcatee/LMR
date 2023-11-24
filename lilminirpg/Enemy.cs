@@ -12,6 +12,8 @@ namespace lilminirpg
         public string MonsterPerk1 { get; set; } = "";
         public string MonsterPerk2 { get; set; } = "";
         public string MonsterPerk3 { get; set; } = "";
+        public string AttackStat1 { get; set; } = "";
+        public string AttackStat2 { get; set; } = "";
         public int GoldDropped { get; set; } = 0;
         public int XPDropped { get; set; } = 0;
         public string MonsterFamily { get; set; } = "";

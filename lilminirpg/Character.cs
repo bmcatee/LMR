@@ -25,7 +25,7 @@ namespace lilminirpg
     public class Player : Character
     {
         public int XPCurrent { get; set; } = 0;
-        public int XPToLevel { get; set; } = 0;
+        public int XPToLevel { get; set; } = 20;
         public int GoldCurrent { get; set; } = 0;
         public int TilesMoved { get; set; } = 0;
         public int MaximumStage { get; set; } = 0;
@@ -35,9 +35,24 @@ namespace lilminirpg
         public Accessory? WornAccessory { get; set; }
     }
 
-
-    public class CharacterStatList
+    public class PlayerMethods
     {
-        public List<CharacterStatList>? CharacterStats { get; set; }
+        public class CharacterStatList
+        {
+            public List<CharacterStatList>? CharacterStats { get; set; }
+        }
+
+        public static Player PlayerLevelUp(Player currentplayer)
+        {
+            currentplayer.XPCurrent = 0;
+            currentplayer.XPToLevel = currentplayer.XPToLevel * (currentplayer.CurrentLevel / 2);
+            currentplayer.HealthPointsMax += currentplayer.PlayerJob.HealthPointsGrowth;
+            currentplayer.HealthPointsCurrent = currentplayer.HealthPointsCurrent + currentplayer.PlayerJob.HealthPointsGrowth;
+            currentplayer.StatStrength += currentplayer.PlayerJob.StrengthGrowth;
+            currentplayer.StatDexterity += currentplayer.PlayerJob.DexterityGrowth;
+            currentplayer.StatIntelligence += currentplayer.PlayerJob.IntelligenceGrowth;
+            currentplayer.StatLuck += currentplayer.PlayerJob.LuckGrowth;
+            return currentplayer;
+        }
     }
 }

@@ -57,15 +57,27 @@ namespace lilminirpg
             UI userInterface = new();
             userInterface.SelectedOption = 0;
             userInterface.MenuInput = "";
-            userInterface.CursorOffset = 4;
 
             List<Job> _listPlayerJobs = FetchPlayerJobs();
 
             UI.UICharacterInfo(currentPlayer);
 
             userInterface.MenuLength = _listPlayerJobs.Count;
-            Console.WriteLine("Your Job choices are:");
-            Console.WriteLine("");
+            if (CharacterMaker._characterCreation == true)
+            {
+                userInterface.CursorOffset = 4;
+
+                Console.WriteLine("Your Job choices are:");
+                Console.WriteLine("");
+            }
+            else
+            {
+                userInterface.CursorOffset = 5;
+
+                Console.WriteLine("Your Job choices are: ");
+                Console.WriteLine("(NOTE: Your level & XP will be reset to zero! You will keep your current Gold.)");
+                Console.WriteLine("");
+            }
 
             for (int i = 0; i < _listPlayerJobs.Count; ++i)
             {
@@ -81,6 +93,7 @@ namespace lilminirpg
             if (userInterface.SelectedOption < _listPlayerJobs.Count)
             {
                 currentPlayer.PlayerJob = _listPlayerJobs[userInterface.SelectedOption];
+                currentPlayer = CharacterMaker.SetLevelOne(currentPlayer);
             }
             else
             {

@@ -30,12 +30,8 @@ namespace lilminirpg
             for (int i = 0; i < currentGameScreen.Length; ++i)
             {
                 int fillPositionRoll = DiceRoller.RollDice(0, 2);
-                //int placeEnemyRoll = DiceRoller.RollDice(0, 100);
-                //int selectEnemyRoll = DiceRoller.RollDice(0, DataLists.EnemiesList.GetLength(0));
                 Enemy dummyenemy = EnemyMethods.CreateDummy();
                 Enemy createdenemy = EnemyMethods.CreateRandomEnemy(currentStage);
-                //                Console.WriteLine($"Position Roll: {fillPositionRoll}");
-                //                Console.WriteLine($"Enemy Roll: {placeEnemyRoll}");
 
                 if (fillPositionRoll == 0 || i <= 3)
                 {
@@ -44,26 +40,6 @@ namespace lilminirpg
                 else if (fillPositionRoll == 1 && i > 3)
                 {
                     enemiesOnScreen[i] = createdenemy;
-                    //switch (placeEnemyRoll)
-                    //{
-                    //    case int n when (n > -1 && n < 31):
-                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll, currentStage);
-                    //        currentGameScreen[i] = 1;
-                    //        break;
-                    //    case int n when (n > 30 && n < 61):
-                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll, currentStage);
-                    //        currentGameScreen[i] = 2;
-                    //        break;
-                    //    case int n when (n > 60 && n <= 99):
-                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(selectEnemyRoll, currentStage);
-                    //        currentGameScreen[i] = 3;
-                    //        break;
-                    //    default:
-                    //        Console.WriteLine($"Roll: {placeEnemyRoll} - YOU SHOULD NOT BE HERE");
-                    //        enemiesOnScreen[i] = createdenemy.MakeEnemy(0, currentStage);
-                    //        currentGameScreen[i] = 0;
-                    //        break;
-                    //}
                 }
             }
                 return enemiesOnScreen;
