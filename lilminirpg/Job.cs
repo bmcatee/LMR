@@ -75,7 +75,7 @@ namespace lilminirpg
                 userInterface.CursorOffset = 5;
 
                 Console.WriteLine("Your Job choices are: ");
-                Console.WriteLine("(NOTE: Your level & XP will be reset to zero! You will keep your current Gold.)");
+                Console.WriteLine("(NOTE: Your level & XP will be reset to zero, but you will recieve Gold based on your gained XP!)");
                 Console.WriteLine("");
             }
 
@@ -88,7 +88,6 @@ namespace lilminirpg
             {
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
-                //                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
             }
             if (userInterface.SelectedOption < _listPlayerJobs.Count)
             {
@@ -101,6 +100,8 @@ namespace lilminirpg
             }
             if (CharacterMaker._characterCreation != true)
             {
+                currentPlayer.GoldCurrent += currentPlayer.XPBanked;
+                currentPlayer.XPBanked = 0;
                 SaveLoad.SaveGame(currentPlayer);
             }
             return currentPlayer.PlayerJob;

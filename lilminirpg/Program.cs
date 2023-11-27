@@ -11,23 +11,28 @@ namespace lilminirpg
         public async static Task Main()
         {
             // Goto main menu
-           // List<DataLists.Weapon> weaponlist = new DataLists.WeaponList();
             await Menus.MenuGeneric("MenuMain");
+            //using (var ctx = new PlayerMethods.PlayerContext())
+            //{
+            //    var playerone = new Player() { Name = "ADsada", PlayerJob = new Job(), WornAccessory = new Accessory(), WornWeapon = new Weapon() };
+            //    ctx.Player.Add(playerone);
+            //    ctx.SaveChanges();
+            //}
         }
 
         public async static Task PrintLists()
         {
-            for (int i = 0; i < DataLists.EnemiesList.GetLength(0); ++i)
-            {
-                for (int j = 0; j < DataLists.EnemiesList.GetLength(1); ++j)
-                {
-                    Console.Write($"{DataLists.EnemiesList[i, j]} - ");
-                }
-                Console.WriteLine("");
-            }
-            Console.WriteLine($"Press Enter to continue");
-            Console.ReadLine();
-            await Menus.TestMenu();
+            //for (int i = 0; i < DataLists.EnemiesList.GetLength(0); ++i)
+            //{
+            //    for (int j = 0; j < DataLists.EnemiesList.GetLength(1); ++j)
+            //    {
+            //        Console.Write($"{DataLists.EnemiesList[i, j]} - ");
+            //    }
+            //    Console.WriteLine("");
+            //}
+            //Console.WriteLine($"Press Enter to continue");
+            //Console.ReadLine();
+            //await Menus.TestMenu();
         }
         public static void PrintColorList()
         {
@@ -45,14 +50,3 @@ namespace lilminirpg
         }
     }
 }
-
-
-
-// TESTS
-
-// Console.WriteLine($"Doop!");
-// Console.ReadLine();
-// Console.WriteLine($"Doop! {characterCreation} + {characterCreationStage}");
-// Console.WriteLine($"local menutracker = {menutracker}");
-// Console.WriteLine($"curL: {Console.CursorLeft}, curT: {Console.CursorTop}");
-// Console.WriteLine($"UI.CursorOffset {UI.CursorOffset} | UI.MenuTracker {UI.MenuTracker} | UI.SelectedOption {UI.SelectedOption} | UI.MenuInput {UI.MenuInput} | UI.MenuLength {UI.MenuLength}");

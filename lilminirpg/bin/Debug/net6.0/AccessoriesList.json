@@ -2,6 +2,7 @@
   {
     "Name": "Shield",
     "Description": "A bit bulky, but keeps distance between You and Them",
+    "HealthPointsMax": 10,
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -13,6 +14,7 @@
   {
     "Name": "Pocket Sand",
     "Description": "May cause the enemy to become Blinded",
+    "HealthPointsMax": 10,
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -24,6 +26,7 @@
   {
     "Name": "Dancer's Shoes",
     "Description": "Makes it easier to dodge attacks",
+    "HealthPointsMax": 10,
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -35,6 +38,7 @@
   {
     "Name": "Water Pendant",
     "Description": "Has a high chance of your attack inflicting Water damage",
+    "HealthPointsMax": 10,
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -46,6 +50,7 @@
   {
     "Name": "Fire Ring",
     "Description": "Has a high chance of your attack inflicting Fire damage",
+    "HealthPointsMax": 10,
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,
@@ -57,6 +62,7 @@
   {
     "Name": "Lightning Brooch",
     "Description": "Has a high chance of your attack inflicting Lightning damage",
+    "HealthPointsMax": 10,
     "StatStrength": 5,
     "StatDexterity": 5,
     "StatIntelligence": 5,

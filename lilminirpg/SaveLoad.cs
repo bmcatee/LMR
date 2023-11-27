@@ -50,7 +50,3 @@ namespace lilminirpg
         }
     }
 }
-
-// TESTS
-// Console.WriteLine($"{path} - {folder} - {filename} - {savepath}");
-// Console.ReadLine();

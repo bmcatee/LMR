@@ -153,7 +153,6 @@ namespace lilminirpg
         {
             Console.WriteLine("");
             Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
-//          Console.WriteLine($"UI.CursorSymbol = {UI.CursorSymbol} || UI.MenuTracker = {UI.MenuTracker} || UI.SelectedOption = {UI.SelectedOption} || UI.MenuInput = {UI.MenuInput} || UI.MenuLength = {UI.MenuLength}");
         }
 
         // Default method for any invalid selections/bugs

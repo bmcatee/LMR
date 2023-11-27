@@ -14,7 +14,10 @@ namespace lilminirpg
         public string? AttackType { get; set; } = "";
         public string? ElementType { get; set; } = "";
         public string? AttackStat1 { get; set; } = "";
+        public int AttackPercent1 { get; set; } = 0;
         public string? AttackStat2 { get; set; } = "";
+        public int AttackPercent2 { get; set; } = 0;
+        public int HealthPointsMax { get; set; } = 0;
         public int StatStrength { get; set; } = 0;
         public int StatDexterity { get; set; } = 0;
         public int StatIntelligence { get; set; } = 0;
@@ -71,7 +74,6 @@ namespace lilminirpg
             {
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
-                //                Console.WriteLine($"CursorOffset {userInterface.CursorOffset} | MenuTracker {userInterface.MenuTracker} | SelectedOption {userInterface.SelectedOption} | MenuInput {userInterface.MenuInput} | MenuLength {userInterface.MenuLength}");
             }
             if (userInterface.SelectedOption < _listPlayerWeapons.Count)
             {

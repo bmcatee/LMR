@@ -11,43 +11,38 @@ namespace lilminirpg
     {
         public static void InitStageArray(Player currentplayer)
         {
-            int currentStage = currentplayer.CurrentStage;
-            Enemy[] enemiesOnScreen = CreateStageArray(currentStage);
+            Enemy[] enemiesOnScreen = CreateStageArray(currentplayer.CurrentStage);
             for (int i = 0; i < enemiesOnScreen.Length; i++)
             {
-                Console.WriteLine($"Level: {currentStage} - Enemy on Current Tile {i}: {enemiesOnScreen[i].Name} - HP = {enemiesOnScreen[i].HealthPointsMax}");
+                Console.WriteLine($"Level: {currentplayer.CurrentStage} - Enemy on Current Tile {i}: {enemiesOnScreen[i].Name} - HP = {enemiesOnScreen[i].HealthPointsMax}");
             }
             Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
-            int[] CurrentGameScreen = new int[16];
-            Movement.MoveThroughScreen(currentplayer,enemiesOnScreen);
+            Movement.MoveThroughScreen(currentplayer, enemiesOnScreen);
         }
 
         public static Enemy[] CreateStageArray(int currentStage)
         {
-            int[] currentGameScreen = new int[16];
             Enemy[] enemiesOnScreen = new Enemy[16];
-            for (int i = 0; i < currentGameScreen.Length; ++i)
-            {
-                int fillPositionRoll = DiceRoller.RollDice(0, 2);
-                Enemy dummyenemy = EnemyMethods.CreateDummy();
-                Enemy createdenemy = EnemyMethods.CreateRandomEnemy(currentStage);
+            // This is assuming the game screen is always 16; will want to make this non-hardcoded later
+            int totalMonsters = DiceRoller.RollDice(5, enemiesOnScreen.Length - 5);
 
-                if (fillPositionRoll == 0 || i <= 3)
+            for (int i = 0; i < enemiesOnScreen.Length; ++i)
+            {
+                enemiesOnScreen[i] = EnemyMethods.CreateDummy();
+            }
+
+            while (totalMonsters > 0)
+            {
+                int tile = DiceRoller.RollDice(5, enemiesOnScreen.Length -1);
+                if (enemiesOnScreen[tile].Name == "Empty Ground")
                 {
-                    enemiesOnScreen[i] = dummyenemy;
-                }
-                else if (fillPositionRoll == 1 && i > 3)
-                {
-                    enemiesOnScreen[i] = createdenemy;
+                    enemiesOnScreen[tile - 1] = EnemyMethods.CreateRandomEnemy(currentStage);
+                    enemiesOnScreen[tile - 1].StageTile = tile -1;
+                    --totalMonsters;
                 }
             }
-                return enemiesOnScreen;
+            return enemiesOnScreen;
         }
     }
 }
-
-// TESTS
-// Console.WriteLine($"Array filled with {CurrentGameScreen[i]}");
-// Console.WriteLine($"Roll Result was: {DiceRoller.RollResults} (0-70)");
-// Console.WriteLine($"Tile: {i} = {CurrentGameScreen[i]} || Enemy on Tile {i}: {EnemiesOnScreen[i].CharacterName}");

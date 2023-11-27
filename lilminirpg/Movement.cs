@@ -2,171 +2,166 @@
 {
     internal class Movement
     {
-        private static int _frame = 0;
         private static int _gameDelay = 30;
-        private static int _playerPos = 0;
-        private static int _length = 0;
-        private static int _playerAttackTimeOriginal = 20;
-        private static int _playerAttackTimeCurrent = 0;
-        private static int _playerMoveTimeOriginal = 20;
-        private static int _playerMoveTimeCurrent = 0;
-        private static int _enemyAttackTimeOriginal = 40;
-        private static int _enemyAttackTimeCurrent = 0;
-        private static bool _fightIntroText = false;
-        private static Player _currentPlayer = new Player();
-        // BAD HARDCODE ARRAY INIT, FIX
-        // private static Enemy[] _stageEnemies = new Enemy[16];
-        private static Enemy _currentEnemy = new Enemy();
-        private static Enemy _nextEnemy = new Enemy();
 
-        public static void MoveThroughScreen(Player currentplayer, Enemy[] enemiesonscreen)
+        public static void MoveThroughScreen(Player currentPlayer, Enemy[] currentStageArray)
         {
-
-            _playerMoveTimeCurrent = currentplayer.StatMoveSpeed;
-            _playerAttackTimeCurrent = currentplayer.StatAttackSpeed;
-            _enemyAttackTimeCurrent = _enemyAttackTimeOriginal;
-            _currentPlayer = currentplayer;
-            _length = enemiesonscreen.Length - 1;
-
-            if (_currentPlayer.MaximumStage < _currentPlayer.CurrentStage)
+            int frame = 0;
+            bool fightIntroText = true;
+            bool moveNoAttack = true;
+            ResetPlayerFrames(currentPlayer);
+            Enemy currentEnemy = new Enemy();
+            currentPlayer.StageTile = 0;
+            if (currentPlayer.MaximumStage < currentPlayer.CurrentStage)
             {
-                _currentPlayer.MaximumStage = _currentPlayer.CurrentStage;
+                currentPlayer.MaximumStage = currentPlayer.CurrentStage;
             }
-            SaveLoad.SaveGame(_currentPlayer);
+            SaveLoad.SaveGame(currentPlayer);
 
-            while (_currentPlayer.HealthPointsCurrent > 0)
+            while (currentPlayer.HealthPointsCurrent > 0)
             {
-                while (_playerPos < _length)
+                while (currentPlayer.StageTile < currentStageArray.Length - 1)
                 {
-                    if (_currentPlayer.HealthPointsCurrent > 0)
+                    if (currentPlayer.HealthPointsCurrent > 0)
                     {
-                        _currentEnemy = enemiesonscreen[_playerPos + 1];
-                        if (_playerPos < _length -1)
-                        {
-                            _nextEnemy = enemiesonscreen[_playerPos + 2];
-                        }
-                        else
-                        {
-                            _nextEnemy.Name = "New stage!";
-                        }
+                        ++frame;
+                        Enemy nextEnemy = UpcomingEnemy(currentStageArray);
+                        currentEnemy = currentStageArray[currentPlayer.StageTile + 1];
+                        currentEnemy = ResetEnemyFrames(currentEnemy);
 
-                        if (_currentEnemy.Name == "Empty Ground")
+                        if (currentEnemy.Name == "Empty Ground")
                         {
-                            if (_playerMoveTimeCurrent == _frame)
+                            if (frame % currentPlayer.FrameMove == 0 || frame == 2)
                             {
-                                Console.WriteLine($"{_currentPlayer.Name} the {_currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {enemiesonscreen[_playerPos + 1].Name}");
-
-                                _playerMoveTimeCurrent += _playerMoveTimeOriginal;
-                                _playerAttackTimeCurrent += _playerAttackTimeOriginal;
-                                ++_playerPos;
-                                SaveLoad.SaveGame(_currentPlayer);
+                                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
+                                fightIntroText = true;
+                                ++currentPlayer.StageTile;
+                                SaveLoad.SaveGame(currentPlayer);
                             }
                         }
                         else
                         {
-                            if (_playerAttackTimeCurrent == _frame)
+                            if (moveNoAttack)
                             {
-                                Console.WriteLine($"{_currentPlayer.Name} the {_currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {enemiesonscreen[_playerPos + 1].Name}");
-                                if (!_fightIntroText)
+                                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
+                                moveNoAttack = false;
+                            }
+                            if (frame % currentPlayer.FrameAttack == 0)
+                            {
+                                if (fightIntroText)
                                 {
                                     Console.WriteLine($"Fight!!!");
                                 }
-                                _fightIntroText = true;
-                                _playerMoveTimeCurrent += _playerMoveTimeOriginal;
-                                _playerAttackTimeCurrent += _playerAttackTimeOriginal;
-                                PlayerAttack();
+                                fightIntroText = false;
+                                (currentPlayer, currentEnemy, currentStageArray) = PlayerAttack(currentPlayer, currentEnemy, currentStageArray);
                             }
+
                         }
-                        // CHECK TO SEE IF PLAYER IS IN TILE NEXT TO MOB
-                        if (_enemyAttackTimeCurrent == _frame)
+
+                        if ( currentEnemy.Name != "Empty Ground" && frame % currentEnemy.FrameAttack == 0 && currentEnemy.HealthPointsCurrent > 0 && currentPlayer.StageTile == currentEnemy.StageTile - 1)
                         {
-                            _enemyAttackTimeCurrent += _enemyAttackTimeOriginal;
-                            if (_currentEnemy.Name != "Empty Ground" && _currentEnemy.HealthPointsCurrent > 0)
-                            {
-                                if (!_fightIntroText)
+                                if (fightIntroText)
                                 {
                                     Console.WriteLine($"Ambush attack!!!");
                                 }
-                                _fightIntroText = true;
-                                EnemyAttack();
-                            }
+                                fightIntroText = false;
+                                (currentPlayer, currentEnemy) = EnemyAttack(currentPlayer, currentEnemy, currentStageArray);
                         }
                         Thread.Sleep(TimeSpan.FromMilliseconds(_gameDelay));
-                        _frame++;
                     }
                     else
                     {
                         break;
                     }
                 }
-                if (_currentPlayer.HealthPointsCurrent > 0)
+                if (currentPlayer.HealthPointsCurrent > 0)
                 {
-                    _playerPos = 0;
-                    _frame = 0;
-                    _currentPlayer.CurrentStage = _currentPlayer.CurrentStage + 1;
-                    _length = 0;
-                    _playerAttackTimeOriginal = 20;
-                    _playerAttackTimeCurrent = 0;
-                    _playerMoveTimeOriginal = 20;
-                    _playerMoveTimeCurrent = 0;
-                    _enemyAttackTimeOriginal = 40;
-                    _enemyAttackTimeCurrent = 0;
-                    _fightIntroText = false;
-                    SaveLoad.SaveGame(_currentPlayer);
-                    QuestEngine.InitStageArray(_currentPlayer);
+                    ResetPlayerFrames(currentPlayer);
+                    ResetEnemyFrames(currentEnemy);
+                    ++currentPlayer.CurrentStage;
+                    SaveLoad.SaveGame(currentPlayer);
+                    QuestEngine.InitStageArray(currentPlayer);
                 }
                 else
                 {
-                    _playerPos = 0;
-                    _frame = 0;
-                    _length = 0;
-                    _playerAttackTimeOriginal = 20;
-                    _playerAttackTimeCurrent = 0;
-                    _playerMoveTimeOriginal = 20;
-                    _playerMoveTimeCurrent = 0;
-                    _enemyAttackTimeOriginal = 40;
-                    _enemyAttackTimeCurrent = 0;
-                    _fightIntroText = false;
+                    ResetPlayerFrames(currentPlayer);
+                    ResetEnemyFrames(currentEnemy);
                     Console.WriteLine("You lose! Game over!! Press Enter to continue");
-                    _currentPlayer.CurrentStage = 1;
-                    _currentPlayer.HealthPointsCurrent = _currentPlayer.HealthPointsMax;
-                    SaveLoad.SaveGame(_currentPlayer);
+                    currentPlayer.CurrentStage = 1;
+                    currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsMax;
+                    SaveLoad.SaveGame(currentPlayer);
                     Console.ReadKey();
                     Menus.MenuGeneric("MenuMain");
                 }
             }
         }
 
-        public static void PlayerAttack()
+        public static (Player Player, Enemy Enemy, Enemy[] StageArray) PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            Console.WriteLine($"Player HP: {_currentPlayer.HealthPointsCurrent} - Enemy HP: {_currentEnemy.HealthPointsCurrent} - PlayerPos: {_playerPos}");
-
-            int RollResults = DiceRoller.DamageRoller(_currentPlayer);
-            _currentEnemy.HealthPointsCurrent = _currentEnemy.HealthPointsCurrent - RollResults;
-            Console.WriteLine($"You attack with your {_currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {_currentEnemy.Name} now has {_currentEnemy.HealthPointsCurrent} HP.");
-            if (_currentEnemy.HealthPointsCurrent < 1)
+            Console.WriteLine($"Player HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
+            Enemy nextEnemy = UpcomingEnemy(currentStageArray);
+            int RollResults = DiceRoller.DamageRoller(currentPlayer);
+            currentEnemy.HealthPointsCurrent = currentEnemy.HealthPointsCurrent - RollResults;
+            Console.WriteLine($"You attack with your {currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {currentEnemy.Name} now has {currentEnemy.HealthPointsCurrent} HP.");
+            if (currentEnemy.HealthPointsCurrent < 1)
             {
-                Console.WriteLine($"You win! You gain {_currentEnemy.XPDropped} XP and {_currentEnemy.GoldDropped} GP!");
-                _currentPlayer.XPCurrent += _currentEnemy.XPDropped;
-                _currentPlayer.GoldCurrent += _currentEnemy.GoldDropped;
-                if (_currentPlayer.XPCurrent >= _currentPlayer.XPToLevel)
+                Console.WriteLine($"You win! You gain {currentEnemy.XPDropped} XP and {currentEnemy.GoldDropped} GP!");
+                currentPlayer.XPCurrent += currentEnemy.XPDropped;
+                currentPlayer.GoldCurrent += currentEnemy.GoldDropped;
+                if (currentPlayer.XPCurrent >= currentPlayer.XPToLevel)
                 {
-                    ++_currentPlayer.CurrentLevel;
-                    _currentPlayer = PlayerMethods.PlayerLevelUp( _currentPlayer );
-                    Console.WriteLine($"DING! YOU ARE NOW LEVEL {_currentPlayer.CurrentLevel}");
+                    ++currentPlayer.CurrentLevel;
+                    currentPlayer = PlayerMethods.PlayerLevelUp(currentPlayer);
+                    Console.WriteLine($"DING! YOU ARE NOW LEVEL {currentPlayer.CurrentLevel}");
                 }
-                SaveLoad.SaveGame(_currentPlayer);
-                Console.WriteLine($"{_currentPlayer.Name} the {_currentPlayer.PlayerJob.Name} at position {_playerPos}, moving to {_playerPos + 1} || Next tile contains: {_nextEnemy.Name}");
-                _fightIntroText = false;
-                ++_playerPos;
+                currentStageArray[currentEnemy.StageTile] = EnemyMethods.CreateDummy();
+                currentEnemy = EnemyMethods.CreateDummy();
+                nextEnemy = UpcomingEnemy(currentStageArray);
+                SaveLoad.SaveGame(currentPlayer);
+                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
+                ++currentPlayer.StageTile;
+                return (currentPlayer, currentEnemy, currentStageArray);
             }
+            return (currentPlayer, currentEnemy, currentStageArray);
         }
-        public static void EnemyAttack()
+        public static (Player Player, Enemy Enemy) EnemyAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            int RollResults = DiceRoller.DamageRoller(_currentEnemy);
-            _currentPlayer.HealthPointsCurrent = _currentPlayer.HealthPointsCurrent - RollResults;
-            Console.WriteLine($"The {_currentEnemy.Name} attacks you for {RollResults} dmg! " +
-            $"Your HP is {_currentPlayer.HealthPointsCurrent}/{_currentPlayer.HealthPointsMax} and the {_currentEnemy.Name} has {_currentEnemy.HealthPointsCurrent}/{_currentEnemy.HealthPointsMax} HP.");
+            int RollResults = DiceRoller.RollDice(1,10);
+            currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsCurrent - RollResults;
+            --currentPlayer.StageTile;
+            Console.WriteLine($"The {currentEnemy.Name} attacks you for {RollResults} dmg! It successfully knocks you back to position {currentPlayer.StageTile}! " +
+            $"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
+            return (currentPlayer, currentEnemy);
+        }
+        public static Player ResetPlayerFrames(Player currentplayer)
+        {
+            currentplayer.FrameMove = currentplayer.StatMoveSpeed;
+            currentplayer.FrameAttack = currentplayer.StatAttackSpeed;
+            return currentplayer;
+        }
+        public static Enemy ResetEnemyFrames(Enemy currentenemy)
+        {
+            currentenemy.FrameMove = currentenemy.StatMoveSpeed;
+            currentenemy.FrameAttack = currentenemy.StatAttackSpeed;
+            return currentenemy;
+        }
+        public static Enemy UpcomingEnemy(Enemy[] currentStageArray)
+        {
+            Enemy nextEnemy = new Enemy();
+            bool w = false;
+            while (w == false)
+            {
+                for (int i = 0; i < currentStageArray.Length - 1; ++i)
+                {
+                    if ((currentStageArray[i].Name != "Empty Ground"))
+                    {
+                        nextEnemy = currentStageArray[i];
+                        w = true;
+                        break;
+                    }
+                }
+            }
+            return nextEnemy;
         }
     }
 }

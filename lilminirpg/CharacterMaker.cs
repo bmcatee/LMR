@@ -52,6 +52,7 @@ namespace lilminirpg
         {
             currentPlayer.CurrentLevel = 1;
             currentPlayer.CurrentStage = 1;
+            currentPlayer.StageTile = 0;
             currentPlayer.XPCurrent = 0;
             currentPlayer.XPToLevel = 20;
             currentPlayer.HealthPointsMax = currentPlayer.PlayerJob.HealthPointsGrowth;

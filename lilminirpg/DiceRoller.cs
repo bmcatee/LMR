@@ -19,11 +19,8 @@ namespace lilminirpg
 
         public static int DamageRoller(Player player)
         {
-            int totalStr = player.StatStrength + player.WornWeapon.StatStrength + player.WornAccessory.StatStrength;
-            int totalDex = player.StatDexterity + player.WornWeapon.StatDexterity + player.WornAccessory.StatStrength;
-            int totalInt = player.StatIntelligence + player.WornWeapon.StatIntelligence + player.WornAccessory.StatStrength;
 
-            int BaseDamageDealt = BaseDamageRoll(player.WornWeapon.AttackStat1, 60) + BaseDamageRoll(player.WornWeapon.AttackStat2, 40);
+            int BaseDamageDealt = BaseDamageRoll(player.WornWeapon.AttackStat1, player.WornWeapon.AttackPercent1) + BaseDamageRoll(player.WornWeapon.AttackStat2, player.WornWeapon.AttackPercent2);
             int TotalDamageDealt = BonusDamageRoll(BaseDamageDealt);
 
             int BaseDamageRoll(string attackType, int amount)
@@ -32,13 +29,13 @@ namespace lilminirpg
                 switch (attackType)
                 {
                     case "StatStrength":
-                        damagedealt = amount * totalStr / 100;
+                        damagedealt = amount * (player.StatStrength + player.WornWeapon.StatStrength + player.WornAccessory.StatStrength) / 100;
                         break;
                     case "StatDexterity":
-                        damagedealt = amount * totalDex / 100;
+                        damagedealt = amount * (player.StatDexterity + player.WornWeapon.StatDexterity + player.WornAccessory.StatStrength) / 100;
                         break;
                     case "StatIntelligence":
-                        damagedealt = amount * totalInt / 100;
+                        damagedealt = amount * (player.StatIntelligence + player.WornWeapon.StatIntelligence + player.WornAccessory.StatStrength) / 100;
                         break;
                 }
                 if (damagedealt == 0)
@@ -82,7 +79,7 @@ namespace lilminirpg
         }
         public static int DamageRoller(Enemy enemy)
         {
-            int BaseDamageDealt = BaseDamageRoll(enemy.AttackStat1, 60) + BaseDamageRoll(enemy.AttackStat2, 40);
+            int BaseDamageDealt = BaseDamageRoll(enemy.AttackStat1, enemy.AttackPercent1) + BaseDamageRoll(enemy.AttackStat2, enemy.AttackPercent2);
             int TotalDamageDealt = BonusDamageRoll(BaseDamageDealt);
 
             int BaseDamageRoll(string attackType, int amount)
@@ -109,6 +106,10 @@ namespace lilminirpg
 
             int BonusDamageRoll(int basedamage)
             {
+                if (basedamage == 0)
+                {
+                    basedamage = 1;
+                }
                 int damagedealt = 0;
                 int damageMod = RollDice(0, 99);
                 switch (damageMod)
