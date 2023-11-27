@@ -3,12 +3,15 @@
     internal class Movement
     {
         private static int _gameDelay = 30;
+        private static bool _wasAttacked = false;
+        private static bool _didWin = false;
+
 
         public static void MoveThroughScreen(Player currentPlayer, Enemy[] currentStageArray)
         {
             int frame = 0;
             bool fightIntroText = true;
-            bool moveNoAttack = true;
+            bool stageIntroText = true;
             ResetPlayerFrames(currentPlayer);
             Enemy currentEnemy = new Enemy();
             currentPlayer.StageTile = 0;
@@ -25,27 +28,48 @@
                     if (currentPlayer.HealthPointsCurrent > 0)
                     {
                         ++frame;
-                        Enemy nextEnemy = UpcomingEnemy(currentStageArray);
+                        Enemy nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
                         currentEnemy = currentStageArray[currentPlayer.StageTile + 1];
                         currentEnemy = ResetEnemyFrames(currentEnemy);
+
+                        if (stageIntroText)
+                        {
+                            Console.WriteLine($"You begin your quest!");
+                            //Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
+                            stageIntroText = false;
+                        }
+
+                        while (_wasAttacked || _didWin)
+                        {
+                            if (frame % currentPlayer.FrameMove == 0)
+                            {
+                                _wasAttacked = false;
+                                _didWin = false;
+                                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
+                            }
+                            ++frame;
+                            Thread.Sleep(TimeSpan.FromMilliseconds(_gameDelay));
+                        }
 
                         if (currentEnemy.Name == "Empty Ground")
                         {
                             if (frame % currentPlayer.FrameMove == 0 || frame == 2)
                             {
-                                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
                                 fightIntroText = true;
                                 ++currentPlayer.StageTile;
+
+                                if (currentPlayer.StageTile < currentStageArray.Length - 1)
+                                {
+                                    currentEnemy = currentStageArray[currentPlayer.StageTile + 1];
+                                    currentEnemy = ResetEnemyFrames(currentEnemy);
+                                    Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
+                                }
+
                                 SaveLoad.SaveGame(currentPlayer);
                             }
                         }
                         else
                         {
-                            if (moveNoAttack)
-                            {
-                                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
-                                moveNoAttack = false;
-                            }
                             if (frame % currentPlayer.FrameAttack == 0)
                             {
                                 if (fightIntroText)
@@ -58,14 +82,14 @@
 
                         }
 
-                        if ( currentEnemy.Name != "Empty Ground" && frame % currentEnemy.FrameAttack == 0 && currentEnemy.HealthPointsCurrent > 0 && currentPlayer.StageTile == currentEnemy.StageTile - 1)
+                        if (currentEnemy.Name != "Empty Ground" && frame % currentEnemy.FrameAttack == 0 && currentEnemy.HealthPointsCurrent > 0 && currentPlayer.StageTile == currentEnemy.StageTile - 1)
                         {
-                                if (fightIntroText)
-                                {
-                                    Console.WriteLine($"Ambush attack!!!");
-                                }
-                                fightIntroText = false;
-                                (currentPlayer, currentEnemy) = EnemyAttack(currentPlayer, currentEnemy, currentStageArray);
+                            if (fightIntroText)
+                            {
+                                Console.WriteLine($"Ambush attack!!!");
+                            }
+                            fightIntroText = false;
+                            (currentPlayer, currentEnemy) = EnemyAttack(currentPlayer, currentEnemy, currentStageArray);
                         }
                         Thread.Sleep(TimeSpan.FromMilliseconds(_gameDelay));
                     }
@@ -99,7 +123,7 @@
         public static (Player Player, Enemy Enemy, Enemy[] StageArray) PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
             Console.WriteLine($"Player HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
-            Enemy nextEnemy = UpcomingEnemy(currentStageArray);
+            Enemy nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
             int RollResults = DiceRoller.DamageRoller(currentPlayer);
             currentEnemy.HealthPointsCurrent = currentEnemy.HealthPointsCurrent - RollResults;
             Console.WriteLine($"You attack with your {currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {currentEnemy.Name} now has {currentEnemy.HealthPointsCurrent} HP.");
@@ -116,19 +140,23 @@
                 }
                 currentStageArray[currentEnemy.StageTile] = EnemyMethods.CreateDummy();
                 currentEnemy = EnemyMethods.CreateDummy();
-                nextEnemy = UpcomingEnemy(currentStageArray);
+                nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
                 SaveLoad.SaveGame(currentPlayer);
-                Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
-                ++currentPlayer.StageTile;
+                _didWin = true;
+                //++currentPlayer.StageTile;
+                //currentEnemy = currentStageArray[currentPlayer.StageTile + 1];
+                //currentEnemy = ResetEnemyFrames(currentEnemy);
+                //Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
                 return (currentPlayer, currentEnemy, currentStageArray);
             }
             return (currentPlayer, currentEnemy, currentStageArray);
         }
         public static (Player Player, Enemy Enemy) EnemyAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            int RollResults = DiceRoller.RollDice(1,10);
+            int RollResults = DiceRoller.RollDice(1, 10);
             currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsCurrent - RollResults;
             --currentPlayer.StageTile;
+            _wasAttacked = true;
             Console.WriteLine($"The {currentEnemy.Name} attacks you for {RollResults} dmg! It successfully knocks you back to position {currentPlayer.StageTile}! " +
             $"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             return (currentPlayer, currentEnemy);
@@ -145,7 +173,7 @@
             currentenemy.FrameAttack = currentenemy.StatAttackSpeed;
             return currentenemy;
         }
-        public static Enemy UpcomingEnemy(Enemy[] currentStageArray)
+        public static Enemy UpcomingEnemy(Enemy[] currentStageArray, int tilePosition)
         {
             Enemy nextEnemy = new Enemy();
             bool w = false;
@@ -159,6 +187,12 @@
                         w = true;
                         break;
                     }
+                }
+                if (w == false)
+                {
+                    nextEnemy = EnemyMethods.CreateDummy();
+                    nextEnemy.StageTile = tilePosition;
+                    w = true;
                 }
             }
             return nextEnemy;
