@@ -5,7 +5,7 @@ Each Job has its own "Growth Values"; each time the player levels up, they will 
 
 At any time the player may change their Job via the main menu; doing so resets the player's XP to zero but converts a portion of the XP lost into Gold. Gold is (or at least will be) used to purchase new weapons & accessories, and upgrade the items the player already has.
 
-A player moves and attacks based on their MOV and ATK SPD stats (lower numbers are better [for now]!). Likewise, enemies automatically attack based on their own ATK SPD values. 
+A player moves and attacks based on their MOV and ATK SPD stats (lower numbers are better [for now]!). Likewise, enemies automatically attack based on their own ATK SPD values (note: if you are hit by an enemy, you will be knocked back by one tile!)
 
 Weapons and Accessories provide static bonuses to stats, as well as (in the future) offering unique perks that alter aspects of gameplay, such as increasing dodge chances, altering elemental damage type, and more. Weapons & Accessories will be able to be leveled up, increasing the static stat bonuses they provide.
 
