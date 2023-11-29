@@ -64,7 +64,7 @@ namespace lilminirpg
             Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
             CurrentCursorRow = 0;
             CurrentCursorColumn = 0;
-            Console.CursorVisible = true;
+            Console.CursorVisible = false;
         }
 
         // Handles movement of menus
@@ -128,6 +128,102 @@ namespace lilminirpg
         public int UIGetSelection()
         {
             return SelectedOption;
+        }
+
+        public void PrintItemInfo(List<Job> listPlayerJobs)
+        {
+            Console.CursorVisible = false;
+            // Sets cursor position to 0
+            CurrentCursorRow = Console.CursorLeft;
+            CurrentCursorColumn = Console.CursorTop;
+            Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
+
+            // Draws the cursor at the selected coordinates
+            for (int i = 0; i < MenuLength; ++i)
+            {
+                if (i == SelectedOption)
+                {
+                    Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name} - HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name} - MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name} - PERK: Coming soon!", 1, (MenuLength + CursorOffset + 5));
+                }
+                else if (i != SelectedOption)
+                {
+                }
+            }
+            Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
+            CurrentCursorRow = 0;
+            CurrentCursorColumn = 0;
+            Console.CursorVisible = false;
+        }
+        public void PrintItemInfo(List<Weapon> listPlayerWeapons)
+        {
+            Console.CursorVisible = false;
+            // Sets cursor position to 0
+            CurrentCursorRow = Console.CursorLeft;
+            CurrentCursorColumn = Console.CursorTop;
+            Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
+
+            // Draws the cursor at the selected coordinates
+            for (int i = 0; i < MenuLength; ++i)
+            {
+                if (i == SelectedOption)
+                {
+                    Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 7));
+
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - PERK: Coming soon!", 1, (MenuLength + CursorOffset + 7));
+                }
+                else if (i != SelectedOption)
+                {
+                }
+            }
+            Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
+            CurrentCursorRow = 0;
+            CurrentCursorColumn = 0;
+            Console.CursorVisible = false;
+        }
+        public void PrintItemInfo(List<Accessory> listPlayerAccessories)
+        {
+            Console.CursorVisible = false;
+            // Sets cursor position to 0
+            CurrentCursorRow = Console.CursorLeft;
+            CurrentCursorColumn = Console.CursorTop;
+            Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
+
+            // Draws the cursor at the selected coordinates
+            for (int i = 0; i < MenuLength; ++i)
+            {
+                if (i == SelectedOption)
+                {
+                    Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name} - HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name} - MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name} - PERK: Coming soon!", 1, (MenuLength + CursorOffset + 5));
+                }
+                else if (i != SelectedOption)
+                {
+                }
+            }
+            Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
+            CurrentCursorRow = 0;
+            CurrentCursorColumn = 0;
+            Console.CursorVisible = false;
         }
 
         // Header/footer

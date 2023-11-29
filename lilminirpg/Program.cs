@@ -11,13 +11,16 @@ namespace lilminirpg
         public async static Task Main()
         {
             // Goto main menu
-            await Menus.MenuGeneric("MenuMain");
-            //using (var ctx = new PlayerMethods.PlayerContext())
-            //{
-            //    var playerone = new Player() { Name = "ADsada", PlayerJob = new Job(), WornAccessory = new Accessory(), WornWeapon = new Weapon() };
-            //    ctx.Player.Add(playerone);
-            //    ctx.SaveChanges();
-            //}
+            using (var ctx = new PlayerMethods.PlayerContext())
+            {
+                //var playerone = ctx.Players.Single(b => b.CharacterKey == 1);
+                if (ctx.Players.Any() == false)
+                {
+                    Console.WriteLine("Initializing database, please wait.");
+                    SaveLoad.AddNewPlayerToDB();
+                }
+                await Menus.MenuGeneric("MenuMain");
+            }
         }
 
         public async static Task PrintLists()

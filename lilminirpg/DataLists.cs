@@ -27,7 +27,7 @@ namespace lilminirpg
         public static string[,] MenuTest =
         {
                     {"InitStageArray"},
-                    {"Check Player Status"},
+                    {"Check Players Status"},
                     {"PrintLists"},
                     {"PrintColorList"},
                     {"Exit to Main Menu"}

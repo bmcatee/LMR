@@ -84,9 +84,11 @@ namespace lilminirpg
                 Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerJobs[i].Name}: {_listPlayerJobs[i].Description}");
             }
             UI.UIFooterGeneric();
+            Console.WriteLine("");
             while (userInterface.MenuInput != "Enter")
             {
                 userInterface.PrintCursor();
+                userInterface.PrintItemInfo(_listPlayerJobs);
                 userInterface.UIMovement();
             }
             if (userInterface.SelectedOption < _listPlayerJobs.Count)

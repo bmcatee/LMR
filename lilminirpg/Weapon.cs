@@ -9,7 +9,7 @@ namespace lilminirpg
 {
     public class Weapon
     {
-        public string? Name { get; set; } = "";
+        public string? Name { get; set; } = " ";
         public string? Description { get; set; } = "";
         public string? AttackType { get; set; } = "";
         public string? ElementType { get; set; } = "";
@@ -70,9 +70,12 @@ namespace lilminirpg
             }
 
             UI.UIFooterGeneric();
+            Console.WriteLine("");
+
             while (userInterface.MenuInput != "Enter")
             {
                 userInterface.PrintCursor();
+                userInterface.PrintItemInfo(_listPlayerWeapons);
                 userInterface.UIMovement();
             }
             if (userInterface.SelectedOption < _listPlayerWeapons.Count)

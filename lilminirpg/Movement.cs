@@ -6,7 +6,6 @@
         private static bool _wasAttacked = false;
         private static bool _didWin = false;
 
-
         public static void MoveThroughScreen(Player currentPlayer, Enemy[] currentStageArray)
         {
             int frame = 0;
@@ -35,7 +34,6 @@
                         if (stageIntroText)
                         {
                             Console.WriteLine($"You begin your quest!");
-                            //Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
                             stageIntroText = false;
                         }
 
@@ -119,10 +117,9 @@
                 }
             }
         }
-
         public static (Player Player, Enemy Enemy, Enemy[] StageArray) PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            Console.WriteLine($"Player HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
+            Console.WriteLine($"Players HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
             Enemy nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
             int RollResults = DiceRoller.DamageRoller(currentPlayer);
             currentEnemy.HealthPointsCurrent = currentEnemy.HealthPointsCurrent - RollResults;
@@ -143,10 +140,6 @@
                 nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
                 SaveLoad.SaveGame(currentPlayer);
                 _didWin = true;
-                //++currentPlayer.StageTile;
-                //currentEnemy = currentStageArray[currentPlayer.StageTile + 1];
-                //currentEnemy = ResetEnemyFrames(currentEnemy);
-                //Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
                 return (currentPlayer, currentEnemy, currentStageArray);
             }
             return (currentPlayer, currentEnemy, currentStageArray);
@@ -157,7 +150,7 @@
             currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsCurrent - RollResults;
             --currentPlayer.StageTile;
             _wasAttacked = true;
-            Console.WriteLine($"The {currentEnemy.Name} attacks you for {RollResults} dmg! It successfully knocks you back to position {currentPlayer.StageTile}! " +
+            Console.WriteLine($"The {currentEnemy.Name} {currentEnemy.AttackWord} you for {RollResults} dmg! It successfully knocks you back to position {currentPlayer.StageTile}! " +
             $"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             return (currentPlayer, currentEnemy);
         }

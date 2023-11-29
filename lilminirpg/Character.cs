@@ -14,7 +14,7 @@ namespace lilminirpg
 
         [Key]
         public int CharacterKey { get; set; }
-        public string? Name { get; set; } = "";
+        public string? Name { get; set; } = " ";
         public string? Description { get; set; } = "";
         public int CurrentStage { get; set; } = 0;
         public int StageTile { get; set; } = 0;
@@ -29,6 +29,7 @@ namespace lilminirpg
         public int StatAttackSpeed { get; set; } = 0;
         public int FrameMove { get; set; } = 0;
         public int FrameAttack { get; set; } = 0;
+        public string? AttackWord { get; set; } = "";
     }
 
     public class Player : Character
@@ -58,7 +59,7 @@ namespace lilminirpg
             {
 
             }
-            public DbSet<Player> Player { get; set; }
+            public DbSet<Player> Players { get; set; }
         }
 
         public static Player PlayerLevelUp(Player currentplayer)

@@ -9,7 +9,7 @@ namespace lilminirpg
 {
     public class Accessory
     {
-        public string? Name { get; set; } = "";
+        public string? Name { get; set; } = " ";
         public string? Description { get; set; } = "";
         public int HealthPointsMax { get; set; } = 0;
         public int StatStrength { get; set; } = 0;
@@ -62,9 +62,11 @@ namespace lilminirpg
             }
 
             UI.UIFooterGeneric();
+            Console.WriteLine("");
             while (userInterface.MenuInput != "Enter")
             {
                 userInterface.PrintCursor();
+                userInterface.PrintItemInfo(_listPlayerAccessories);
                 userInterface.UIMovement();
             }
             if (userInterface.SelectedOption < _listPlayerAccessories.Count)
