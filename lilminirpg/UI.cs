@@ -147,9 +147,11 @@ namespace lilminirpg
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name} - HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name} - MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name} - PERK: Coming soon!", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 6));
                 }
                 else if (i != SelectedOption)
                 {
@@ -179,12 +181,13 @@ namespace lilminirpg
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 7));
-
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 6));
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name} - PERK: Coming soon!", 1, (MenuLength + CursorOffset + 7));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 8));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 7));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 8));
                 }
                 else if (i != SelectedOption)
                 {
@@ -212,9 +215,11 @@ namespace lilminirpg
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name} - HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name} - MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name} - PERK: Coming soon!", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name}:", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 6));
                 }
                 else if (i != SelectedOption)
                 {
@@ -234,11 +239,7 @@ namespace lilminirpg
         }
         public static void UICharacterInfo(Player currentPlayer)
         {
-            string folder = Environment.CurrentDirectory;
-            string filename = "\\lmr_save_001.json";
-            string loadpath = folder + filename;
-
-            if (File.Exists(loadpath))
+            if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
             {
                 Console.WriteLine($"Character: {currentPlayer.Name}, the Level {currentPlayer.CurrentLevel} {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name} || {currentPlayer.XPCurrent} XP, {currentPlayer.GoldCurrent} GP, max Stage: {currentPlayer.MaximumStage}");
                 Console.WriteLine("");
@@ -252,11 +253,11 @@ namespace lilminirpg
         }
 
         // Default method for any invalid selections/bugs
-        public static void InvalidSelection()
+        public async static void InvalidSelection()
         {
             Console.WriteLine("You have entered an invalid selection. Please press enter to restart.");
             Console.ReadLine();
-            Program.Main();
+            await Program.Main();
         }
     }
 }

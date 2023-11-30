@@ -9,7 +9,7 @@ namespace lilminirpg
 {
     public class Weapon
     {
-        public string? Name { get; set; } = " ";
+        public string? Name { get; set; } = "";
         public string? Description { get; set; } = "";
         public string? AttackType { get; set; } = "";
         public string? ElementType { get; set; } = "";
@@ -48,7 +48,7 @@ namespace lilminirpg
             }
             return playerWeapons;
         }
-        public static Weapon SetPlayerWeapon(Player currentPlayer)
+        public async static Task<Player> SetPlayerWeapon(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
@@ -88,9 +88,9 @@ namespace lilminirpg
             }
             if (CharacterMaker._characterCreation != true)
             {
-                SaveLoad.SaveGame(currentPlayer);
+                await SaveLoad.SaveGame(currentPlayer);
             }
-            return currentPlayer.WornWeapon;
+            return currentPlayer;
         }
     }
 }

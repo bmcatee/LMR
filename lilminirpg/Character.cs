@@ -14,7 +14,7 @@ namespace lilminirpg
 
         [Key]
         public int CharacterKey { get; set; }
-        public string? Name { get; set; } = " ";
+        public string? Name { get; set; } = "";
         public string? Description { get; set; } = "";
         public int CurrentStage { get; set; } = 0;
         public int StageTile { get; set; } = 0;

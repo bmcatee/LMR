@@ -12,24 +12,32 @@ namespace lilminirpg
     public class CharacterMaker
     {
         public static bool _characterCreation = false;
-        public static void MakeCharacter()
+        public async static Task MakeCharacter()
         {
+            Player newPlayer = SaveLoad.LoadGame();
+            Console.Clear();
+            if (newPlayer.PlayerJob != null || newPlayer.WornWeapon != null || newPlayer.WornAccessory != null)
+            {
+                Console.WriteLine($"NOTICE: You may only have one character save file at a time. Making a new character will overwrite your previously existing character!");
+                Console.WriteLine($"If you wish to proceed, select Yes and press Enter. If you wish to return to the main menu, select No and press Enter.");
+            }
+
             // Starts the full player character creation process
             _characterCreation = true;
-            Player newPlayer = new Player();
+            newPlayer.Name = "";
             newPlayer.PlayerJob = new Job();
             newPlayer.WornWeapon = new Weapon();
             newPlayer.WornAccessory = new Accessory();
-            newPlayer = SetCharacterName(newPlayer);
-            newPlayer.PlayerJob = JobMethods.SetPlayerJob(newPlayer);
-            newPlayer.WornWeapon = WeaponMethods.SetPlayerWeapon(newPlayer);
-            newPlayer.WornAccessory = AccessoryMethods.SetPlayerAccessory(newPlayer);
+            newPlayer = await SetCharacterName(newPlayer);
+            newPlayer = await JobMethods.SetPlayerJob(newPlayer);
+            newPlayer = await WeaponMethods.SetPlayerWeapon(newPlayer);
+            newPlayer = await AccessoryMethods.SetPlayerAccessory(newPlayer);
             newPlayer = SetLevelOne(newPlayer);
-            EndCharacterCreation(newPlayer);
+            await EndCharacterCreation(newPlayer);
         }
 
         // Set character name
-        public static Player SetCharacterName(Player currentPlayer)
+        public async static Task<Player> SetCharacterName(Player currentPlayer)
         {
             Console.Clear();
             Console.CursorVisible = true;
@@ -44,7 +52,7 @@ namespace lilminirpg
             };
 
             currentPlayer.Name = Console.ReadLine();
-            SaveLoad.SaveGame(currentPlayer);
+            await SaveLoad.SaveGame(currentPlayer);
             return currentPlayer;
         }
 
@@ -67,7 +75,7 @@ namespace lilminirpg
         }
 
         // Resets variables, prints selection, saves game, goes back to Main Menu
-        public static void EndCharacterCreation(Player newPlayer)
+        public async static Task EndCharacterCreation(Player newPlayer)
         {
             _characterCreation = false;
             Console.Clear();
@@ -78,11 +86,11 @@ namespace lilminirpg
             Console.WriteLine($"[*] Class: {newPlayer.PlayerJob.Name}");
             Console.WriteLine($"[*] Weapon: {newPlayer.WornWeapon.Name}");
             Console.WriteLine($"[*] Accessory: {newPlayer.WornAccessory.Name}");
-            SaveLoad.SaveGame(newPlayer);
+            await SaveLoad.SaveGame(newPlayer);
             Console.WriteLine("");
             Console.WriteLine("Please press Enter to continue.");
             Console.ReadLine();
-            Menus.MenuGeneric("MenuMain");
+            await Menus.MenuGeneric("MenuMain");
         }
         public Player LevelUpPlayer(Player currentplayer)
         {

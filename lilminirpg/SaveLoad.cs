@@ -15,19 +15,19 @@ namespace lilminirpg
     public class SaveLoad
     {
 
-        public static void AddNewPlayerToDB()
+        public async static Task AddNewPlayerToDB()
         {
             using (var ctx = new PlayerMethods.PlayerContext())
             {
-                var newPlayer = new Player() { Name = " ", PlayerJob = new Job(), WornAccessory = new Accessory(), WornWeapon = new Weapon() };
+                var newPlayer = new Player() { Name = "", PlayerJob = new Job(), WornAccessory = new Accessory(), WornWeapon = new Weapon() };
                 ctx.Players.Add(newPlayer);
                 bool hasChanges = ctx.ChangeTracker.HasChanges();
                 int updates = ctx.SaveChanges();
-                ctx.SaveChanges();
+                await ctx.SaveChangesAsync();
             }
         }
         // Save game method
-        public static void SaveGame(Player currentPlayer)
+        public async static Task SaveGame(Player currentPlayer)
         {
             //string savedata = JsonSerializer.Serialize<Player>(newPlayer, new JsonSerializerOptions { WriteIndented = true });
             //string folder = Environment.CurrentDirectory;
@@ -42,9 +42,8 @@ namespace lilminirpg
                 ctx.Players.AddOrUpdate(savePlayer);
                 bool hasChanges = ctx.ChangeTracker.HasChanges();
                 int updates = ctx.SaveChanges();
-                ctx.SaveChanges();
+                await ctx.SaveChangesAsync();
             }
-
 
             //Console.WriteLine("");
             //Console.WriteLine($"Your data has been saved to {Path.Combine(Directory.GetCurrentDirectory())}/{filename}!");       
@@ -74,12 +73,13 @@ namespace lilminirpg
             using (var ctx = new PlayerMethods.PlayerContext())
             {
                 var loadPlayer = ctx.Players.Single(b => b.CharacterKey == 1);
-                if (loadPlayer.Name != " ")
-                {
-                    Console.WriteLine($"Player {loadPlayer.Name} loaded.");
-                    Console.WriteLine($"Press Enter to continue.");
-                    Console.ReadLine();
-                }
+                //if (loadPlayer.Name != " ")
+                //{
+                //    Console.Clear();
+                //    Console.WriteLine($"Player {loadPlayer.Name} loaded.");
+                //    Console.WriteLine($"Press Enter to continue.");
+                //    Console.ReadLine();
+                //}
                 return loadPlayer;
             }
         }

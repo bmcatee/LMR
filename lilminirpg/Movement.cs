@@ -6,7 +6,7 @@
         private static bool _wasAttacked = false;
         private static bool _didWin = false;
 
-        public static void MoveThroughScreen(Player currentPlayer, Enemy[] currentStageArray)
+        public async static void MoveThroughScreen(Player currentPlayer, Enemy[] currentStageArray)
         {
             int frame = 0;
             bool fightIntroText = true;
@@ -18,7 +18,7 @@
             {
                 currentPlayer.MaximumStage = currentPlayer.CurrentStage;
             }
-            SaveLoad.SaveGame(currentPlayer);
+            await SaveLoad.SaveGame(currentPlayer);
 
             while (currentPlayer.HealthPointsCurrent > 0)
             {
@@ -63,7 +63,7 @@
                                     Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
                                 }
 
-                                SaveLoad.SaveGame(currentPlayer);
+                                await SaveLoad.SaveGame(currentPlayer);
                             }
                         }
                         else
@@ -72,10 +72,11 @@
                             {
                                 if (fightIntroText)
                                 {
+                                    Console.WriteLine();
                                     Console.WriteLine($"Fight!!!");
                                 }
                                 fightIntroText = false;
-                                (currentPlayer, currentEnemy, currentStageArray) = PlayerAttack(currentPlayer, currentEnemy, currentStageArray);
+                                (currentPlayer, currentEnemy, currentStageArray) = await PlayerAttack(currentPlayer, currentEnemy, currentStageArray);
                             }
 
                         }
@@ -84,6 +85,7 @@
                         {
                             if (fightIntroText)
                             {
+                                Console.WriteLine();
                                 Console.WriteLine($"Ambush attack!!!");
                             }
                             fightIntroText = false;
@@ -101,23 +103,24 @@
                     ResetPlayerFrames(currentPlayer);
                     ResetEnemyFrames(currentEnemy);
                     ++currentPlayer.CurrentStage;
-                    SaveLoad.SaveGame(currentPlayer);
+                    await SaveLoad.SaveGame(currentPlayer);
                     QuestEngine.InitStageArray(currentPlayer);
                 }
                 else
                 {
                     ResetPlayerFrames(currentPlayer);
                     ResetEnemyFrames(currentEnemy);
+                    Console.WriteLine();
                     Console.WriteLine("You lose! Game over!! Press Enter to continue");
                     currentPlayer.CurrentStage = 1;
                     currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsMax;
-                    SaveLoad.SaveGame(currentPlayer);
+                    await SaveLoad.SaveGame(currentPlayer);
                     Console.ReadKey();
-                    Menus.MenuGeneric("MenuMain");
+                    await Menus.MenuGeneric("MenuMain");
                 }
             }
         }
-        public static (Player Player, Enemy Enemy, Enemy[] StageArray) PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
+        public async static Task<(Player Player, Enemy Enemy, Enemy[] StageArray)> PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
             Console.WriteLine($"Players HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
             Enemy nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
@@ -126,6 +129,7 @@
             Console.WriteLine($"You attack with your {currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {currentEnemy.Name} now has {currentEnemy.HealthPointsCurrent} HP.");
             if (currentEnemy.HealthPointsCurrent < 1)
             {
+                Console.WriteLine();
                 Console.WriteLine($"You win! You gain {currentEnemy.XPDropped} XP and {currentEnemy.GoldDropped} GP!");
                 currentPlayer.XPCurrent += currentEnemy.XPDropped;
                 currentPlayer.GoldCurrent += currentEnemy.GoldDropped;
@@ -133,12 +137,13 @@
                 {
                     ++currentPlayer.CurrentLevel;
                     currentPlayer = PlayerMethods.PlayerLevelUp(currentPlayer);
+                    Console.WriteLine();
                     Console.WriteLine($"DING! YOU ARE NOW LEVEL {currentPlayer.CurrentLevel}");
                 }
                 currentStageArray[currentEnemy.StageTile] = EnemyMethods.CreateDummy();
                 currentEnemy = EnemyMethods.CreateDummy();
                 nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
-                SaveLoad.SaveGame(currentPlayer);
+                await SaveLoad.SaveGame(currentPlayer);
                 _didWin = true;
                 return (currentPlayer, currentEnemy, currentStageArray);
             }
@@ -146,12 +151,13 @@
         }
         public static (Player Player, Enemy Enemy) EnemyAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            int RollResults = DiceRoller.RollDice(1, 10);
+            int RollResults = DiceRoller.DamageRoller(currentEnemy);
             currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsCurrent - RollResults;
             --currentPlayer.StageTile;
             _wasAttacked = true;
-            Console.WriteLine($"The {currentEnemy.Name} {currentEnemy.AttackWord} you for {RollResults} dmg! It successfully knocks you back to position {currentPlayer.StageTile}! " +
-            $"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
+            Console.WriteLine($"The {currentEnemy.Name} {currentEnemy.AttackWord} you for {RollResults} dmg!");
+            Console.WriteLine($"KNOCKBACK! The {currentEnemy.Name} successfully knocks you back to position {currentPlayer.StageTile}!");
+            Console.WriteLine($"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             return (currentPlayer, currentEnemy);
         }
         public static Player ResetPlayerFrames(Player currentplayer)

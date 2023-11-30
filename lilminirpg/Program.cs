@@ -17,7 +17,7 @@ namespace lilminirpg
                 if (ctx.Players.Any() == false)
                 {
                     Console.WriteLine("Initializing database, please wait.");
-                    SaveLoad.AddNewPlayerToDB();
+                    await SaveLoad.AddNewPlayerToDB();
                 }
                 await Menus.MenuGeneric("MenuMain");
             }
@@ -37,7 +37,7 @@ namespace lilminirpg
             //Console.ReadLine();
             //await Menus.TestMenu();
         }
-        public static void PrintColorList()
+        public async static void PrintColorList()
         {
             ConsoleColor[] consoleColors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
             Console.WriteLine("List of available " + "Console Colors:");
@@ -49,7 +49,7 @@ namespace lilminirpg
             }
             Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
-            Menus.TestMenu();
+            await Menus.TestMenu();
         }
     }
 }

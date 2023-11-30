@@ -16,8 +16,8 @@ namespace lilminirpg
             {
                 Console.WriteLine($"Level: {currentplayer.CurrentStage} - Enemy on Current Tile {i}: {enemiesOnScreen[i].Name} - HP = {enemiesOnScreen[i].HealthPointsMax}");
             }
-            Console.WriteLine($"Press Enter to continue");
-            Console.ReadLine();
+            //Console.WriteLine($"Press Enter to continue");
+            //Console.ReadLine();
             Movement.MoveThroughScreen(currentplayer, enemiesOnScreen);
         }
 

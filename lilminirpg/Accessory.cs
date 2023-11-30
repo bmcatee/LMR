@@ -9,7 +9,7 @@ namespace lilminirpg
 {
     public class Accessory
     {
-        public string? Name { get; set; } = " ";
+        public string? Name { get; set; } = "";
         public string? Description { get; set; } = "";
         public int HealthPointsMax { get; set; } = 0;
         public int StatStrength { get; set; } = 0;
@@ -41,7 +41,7 @@ namespace lilminirpg
             }
             return playerAccessories;
         }
-        public static Accessory SetPlayerAccessory(Player currentPlayer)
+        public async static Task<Player> SetPlayerAccessory(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
@@ -79,9 +79,9 @@ namespace lilminirpg
             }
             if (CharacterMaker._characterCreation != true)
             {
-                SaveLoad.SaveGame(currentPlayer);
+                await SaveLoad.SaveGame(currentPlayer);
             }
-            return currentPlayer.WornAccessory;
+            return currentPlayer;
         }
     }
 }

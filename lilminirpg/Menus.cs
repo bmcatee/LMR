@@ -32,22 +32,22 @@ namespace lilminirpg
                     }
                     break;
                 case "MenuEdit":
-                    EditCharacterMenu();
+                    await EditCharacterMenu();
                     break;
                 case "MenuTest":
                     await TestMenu();
                     break;
                 case "MenuPlayerName":
-                    CharacterMaker.SetCharacterName(currentPlayer);
+                    await CharacterMaker.SetCharacterName(currentPlayer);
                     break;
                 case "MenuPlayerClass":
-                    JobMethods.SetPlayerJob(currentPlayer);
+                    await JobMethods.SetPlayerJob(currentPlayer);
                     break;
                 case "MenuPlayerWeapon":
-                    WeaponMethods.SetPlayerWeapon(currentPlayer);
+                    await WeaponMethods.SetPlayerWeapon(currentPlayer);
                     break;
                 case "MenuPlayerAccessory":
-                    AccessoryMethods.SetPlayerAccessory(currentPlayer);
+                    await AccessoryMethods.SetPlayerAccessory(currentPlayer);
                     break;
                 default:
                     UI.InvalidSelection();
@@ -65,38 +65,41 @@ namespace lilminirpg
 
         public async static Task MenuSelection(int selectedoption)
         {
-            string folder = Environment.CurrentDirectory;
-            string filename = "\\lmr_save_001.json";
-            string loadpath = folder + filename;
+
+            // CHANGE THIS TO CHECK THE DB INSTEAD
+            //string folder = Environment.CurrentDirectory;
+            //string filename = "\\lmr_save_001.json";
+            //string loadpath = folder + filename;
+            Player currentPlayer = SaveLoad.LoadGame();
 
             switch (selectedoption)
-            { 
+            {
                 case 0:
-                    if (File.Exists(loadpath))
+                    if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
                     {
                         QuestEngine.InitStageArray(SaveLoad.LoadGame());
                         //Console.ReadLine();
                     }
                     else
                     {
-                        CharacterMaker.MakeCharacter();
+                        await CharacterMaker.MakeCharacter();
                     }
                     break;
                 case 1:
-                    CharacterMaker.MakeCharacter();
+                    await CharacterMaker.MakeCharacter();
                     break;
                 case 2:
                     SaveLoad.LoadGame();
-                    MenuGeneric("MenuMain");
+                    await MenuGeneric("MenuMain");
                     break;
                 case 3:
-                    if (File.Exists(loadpath))
+                    if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
                     {
-                        EditCharacterMenu();
+                        await EditCharacterMenu();
                     }
                     else
                     {
-                        CharacterMaker.MakeCharacter();
+                        await CharacterMaker.MakeCharacter();
                     }
                     break;
                 case 4:
@@ -138,27 +141,30 @@ namespace lilminirpg
 
         public async static Task TestMenuSelection(int selectedoption)
         {
-            switch (selectedoption+5)
+            switch (selectedoption + 5)
             {
                 case 0:
                     QuestEngine.InitStageArray(SaveLoad.LoadGame());
                     Console.ReadLine();
                     break;
                 case 1:
-                    Program.PrintLists();
+                    Console.WriteLine("Not implemented yet");
                     break;
                 case 2:
-                    Program.PrintColorList();
+                    await Program.PrintLists();
                     break;
                 case 3:
-                    Menus.MenuGeneric("MenuMain");
+                    Program.PrintColorList();
+                    break;
+                case 4:
+                    await MenuGeneric("MenuMain");
                     break;
                 default:
                     UI.InvalidSelection();
                     break;
             }
         }
-        public static void EditCharacterMenu()
+        public async static Task EditCharacterMenu()
         {
             UI userInterface = new();
             Player currentPlayer = SaveLoad.LoadGame();
@@ -181,32 +187,32 @@ namespace lilminirpg
                 userInterface.PrintCursor();
                 userInterface.UIMovement();
             }
-            EditMenuSelection(userInterface.SelectedOption);
+            await EditMenuSelection(userInterface.SelectedOption);
         }
 
-        public static void EditMenuSelection(int selectedoption)
+        public async static Task EditMenuSelection(int selectedoption)
         {
             Player currentPlayer = SaveLoad.LoadGame();
             switch (selectedoption)
             {
                 case 0:
-                    currentPlayer = CharacterMaker.SetCharacterName(currentPlayer);
-                    EditCharacterMenu();
+                    currentPlayer = await CharacterMaker.SetCharacterName(currentPlayer);
+                    await EditCharacterMenu();
                     break;
                 case 1:
-                    currentPlayer.PlayerJob = JobMethods.SetPlayerJob(currentPlayer);
-                    EditCharacterMenu();
+                    currentPlayer = await JobMethods.SetPlayerJob(currentPlayer);
+                    await EditCharacterMenu();
                     break;
                 case 2:
-                    currentPlayer.WornWeapon = WeaponMethods.SetPlayerWeapon(currentPlayer);
-                    EditCharacterMenu();
+                    currentPlayer = await WeaponMethods.SetPlayerWeapon(currentPlayer);
+                    await EditCharacterMenu();
                     break;
                 case 3:
-                    currentPlayer.WornAccessory = AccessoryMethods.SetPlayerAccessory(currentPlayer);
-                    EditCharacterMenu();
+                    currentPlayer = await AccessoryMethods.SetPlayerAccessory(currentPlayer);
+                    await EditCharacterMenu();
                     break;
                 case 4:
-                    Menus.MenuGeneric("MenuMain");
+                    await MenuGeneric("MenuMain");
                     break;
                 default:
                     UI.InvalidSelection();

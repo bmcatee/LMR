@@ -51,7 +51,7 @@ namespace lilminirpg
             }
             return playerJobs;
         }
-        public static Job SetPlayerJob(Player currentPlayer)
+        public async static Task<Player> SetPlayerJob(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
@@ -104,9 +104,9 @@ namespace lilminirpg
             {
                 currentPlayer.GoldCurrent += currentPlayer.XPBanked;
                 currentPlayer.XPBanked = 0;
-                SaveLoad.SaveGame(currentPlayer);
+                await SaveLoad.SaveGame(currentPlayer);
             }
-            return currentPlayer.PlayerJob;
+            return currentPlayer;
         }
     }
 }
