@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static lilminirpg.DataLists;
 
 namespace lilminirpg
@@ -19,7 +20,12 @@ namespace lilminirpg
             if (newPlayer.PlayerJob != null || newPlayer.WornWeapon != null || newPlayer.WornAccessory != null)
             {
                 Console.WriteLine($"NOTICE: You may only have one character save file at a time. Making a new character will overwrite your previously existing character!");
-                Console.WriteLine($"If you wish to proceed, select Yes and press Enter. If you wish to return to the main menu, select No and press Enter.");
+                Console.WriteLine($"If you wish to proceed, press Y. If you wish to return to the main menu, press any other key.");
+                string input = Console.ReadKey(true).Key.ToString();
+                if (input != "y" && input != "Y")
+                {
+                    await Menus.MenuGeneric("MenuMain");
+                }
             }
 
             // Starts the full player character creation process
@@ -39,24 +45,35 @@ namespace lilminirpg
         // Set character name
         public async static Task<Player> SetCharacterName(Player currentPlayer)
         {
-            Console.Clear();
             Console.CursorVisible = true;
             UI.UIHeaderGeneric();
-            if (_characterCreation == true)
+            currentPlayer.Name = "";
+            while (currentPlayer.Name == "")
             {
-                Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
+                if (_characterCreation == true)
+            {
+                    Console.Clear();
+                    Console.WriteLine("Welcome new player! Please type your character's name and press Enter:");
             }
             else
             {
-                Console.WriteLine("Please type your character's name and press Enter:");
+                    Console.Clear();
+                    Console.WriteLine("Please type your character's name and press Enter:");
             };
 
-            currentPlayer.Name = Console.ReadLine();
+                currentPlayer.Name = Console.ReadLine();
+                if (String.IsNullOrWhiteSpace(currentPlayer.Name))
+                {
+                    currentPlayer.Name = "";
+                    Console.WriteLine("Your name is invalid. Please press Enter to try again.");
+                    Console.ReadLine();
+                }
+            }
             await SaveLoad.SaveGame(currentPlayer);
             return currentPlayer;
         }
 
-       public static Player SetLevelOne(Player currentPlayer)
+        public static Player SetLevelOne(Player currentPlayer)
         {
             currentPlayer.CurrentLevel = 1;
             currentPlayer.CurrentStage = 1;

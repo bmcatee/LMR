@@ -156,6 +156,7 @@
             --currentPlayer.StageTile;
             _wasAttacked = true;
             Console.WriteLine($"The {currentEnemy.Name} {currentEnemy.AttackWord} you for {RollResults} dmg!");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"KNOCKBACK! The {currentEnemy.Name} successfully knocks you back to position {currentPlayer.StageTile}!");
             Console.WriteLine($"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             return (currentPlayer, currentEnemy);

@@ -13,8 +13,15 @@ namespace lilminirpg
         public static int RollDice(int min, int max)
         {
             var random = new Random();
-            int roll = random.Next(min, max);
-            return roll;
+            try
+            {
+                int roll = random.Next(min, max);
+                return roll;
+            }
+            catch (Exception ex) when (Program.LogException(ex))
+            {
+                return -1;
+            }
         }
 
         public static int DamageRoller(Player player)
@@ -26,17 +33,23 @@ namespace lilminirpg
             int BaseDamageRoll(string attackType, int amount)
             {
                 int damagedealt = 0;
-                switch (attackType)
+                try
                 {
-                    case "StatStrength":
-                        damagedealt = amount * (player.StatStrength + player.WornWeapon.StatStrength + player.WornAccessory.StatStrength) / 100;
-                        break;
-                    case "StatDexterity":
-                        damagedealt = amount * (player.StatDexterity + player.WornWeapon.StatDexterity + player.WornAccessory.StatStrength) / 100;
-                        break;
-                    case "StatIntelligence":
-                        damagedealt = amount * (player.StatIntelligence + player.WornWeapon.StatIntelligence + player.WornAccessory.StatStrength) / 100;
-                        break;
+                    switch (attackType)
+                    {
+                        case "StatStrength":
+                            damagedealt = amount * (player.StatStrength + player.WornWeapon.StatStrength + player.WornAccessory.StatStrength) / 100;
+                            break;
+                        case "StatDexterity":
+                            damagedealt = amount * (player.StatDexterity + player.WornWeapon.StatDexterity + player.WornAccessory.StatStrength) / 100;
+                            break;
+                        case "StatIntelligence":
+                            damagedealt = amount * (player.StatIntelligence + player.WornWeapon.StatIntelligence + player.WornAccessory.StatStrength) / 100;
+                            break;
+                    }
+                }
+                catch (Exception ex) when (Program.LogException(ex))
+                {
                 }
                 if (damagedealt == 0)
                 {
@@ -44,39 +57,53 @@ namespace lilminirpg
                 }
                 return damagedealt;
             }
+
+
 
             int BonusDamageRoll(int basedamage)
             {
                 int damagedealt = 0;
                 int damageMod = RollDice(0, 99);
-                switch (damageMod)
+                try
                 {
-                    case int n when (n < 26):
-                        // Min damage
-                        damagedealt = basedamage + (RollDice(1, 25 * basedamage / 100));
-                        break;
-                    case int n when (n > 25 && n < 51):
-                        // Max damage
-                        damagedealt = basedamage + (RollDice(1, 50 * basedamage / 100));
-                        break;
-                    case int n when (n > 50 && n < 76):
-                        // Crit success damage
-                        damagedealt = basedamage + (RollDice(1, 75 * basedamage / 100));
-                        break;
-                    case int n when (n > 75):
-                        // Crit failure damage
-                        damagedealt = basedamage - (RollDice(1, 50 * basedamage / 100));
-                        break;
+                    switch (damageMod)
+                    {
+                        case int n when (n < 26):
+                            // Min damage
+                            damagedealt = basedamage + (RollDice(1, 25 * basedamage / 100));
+                            break;
+                        case int n when (n > 25 && n < 51):
+                            // Max damage
+                            damagedealt = basedamage + (RollDice(1, 50 * basedamage / 100));
+                            break;
+                        case int n when (n > 50 && n < 76):
+                            // Crit success damage
+                            damagedealt = basedamage + (RollDice(1, 75 * basedamage / 100));
+                            break;
+                        case int n when (n > 75):
+                            // Crit failure damage
+                            damagedealt = basedamage - (RollDice(1, 50 * basedamage / 100));
+                            break;
+                        default:
+                            string location = "EditCharacterMenu";
+                            Program.LogException(damageMod, location);
+                            UI.InvalidSelection();
+                            break;
+                    }
                 }
+                catch (Exception ex) when (Program.LogException(ex))
+                {
+                }
+
                 if (damagedealt == 0)
                 {
                     damagedealt = 1;
                 }
                 return damagedealt;
             }
-
             return TotalDamageDealt;
         }
+
         public static int DamageRoller(Enemy enemy)
         {
             int BaseDamageDealt = BaseDamageRoll(enemy.AttackStat1, enemy.AttackPercent1) + BaseDamageRoll(enemy.AttackStat2, enemy.AttackPercent2);
@@ -85,6 +112,8 @@ namespace lilminirpg
             int BaseDamageRoll(string attackType, int amount)
             {
                 int damagedealt = 0;
+                try 
+                { 
                 switch (attackType)
                 {
                     case "StatStrength":
@@ -97,8 +126,12 @@ namespace lilminirpg
                         damagedealt = amount * enemy.StatIntelligence / 100;
                         break;
                 }
+                }
+                catch (Exception ex) when (Program.LogException(ex))
+                {
+                }
                 if (damagedealt == 0)
-                { 
+                {
                     damagedealt = 1;
                 }
                 return damagedealt;
@@ -112,6 +145,8 @@ namespace lilminirpg
                 }
                 int damagedealt = 0;
                 int damageMod = RollDice(0, 99);
+                try
+                { 
                 switch (damageMod)
                 {
                     case int n when (n < 26):
@@ -131,6 +166,10 @@ namespace lilminirpg
                         damagedealt = basedamage - (RollDice(1, 50 * basedamage / 100));
                         break;
                 }
+                }
+                catch (Exception ex) when (Program.LogException(ex))
+                {
+                }
                 if (damagedealt == 0)
                 {
                     damagedealt = 1;
@@ -141,7 +180,7 @@ namespace lilminirpg
             return TotalDamageDealt;
         }
     }
- }
+}
 
 
 

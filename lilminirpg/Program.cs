@@ -10,17 +10,41 @@ namespace lilminirpg
     { 
         public async static Task Main()
         {
+            Console.WriteLine("Initializing database, please wait.");
             // Goto main menu
-            using (var ctx = new PlayerMethods.PlayerContext())
+            try
             {
-                //var playerone = ctx.Players.Single(b => b.CharacterKey == 1);
-                if (ctx.Players.Any() == false)
+                using (var ctx = new PlayerMethods.PlayerContext())
                 {
-                    Console.WriteLine("Initializing database, please wait.");
-                    await SaveLoad.AddNewPlayerToDB();
+                    if (ctx.Players.Any() == false)
+                    {
+                        await SaveLoad.AddNewPlayerToDB();
+                    }
+                    await Menus.MenuGeneric("MenuMain");
                 }
-                await Menus.MenuGeneric("MenuMain");
             }
+            catch (Exception ex) when (LogException(ex))
+            {
+            }
+        }
+
+        public static bool LogException(Exception e)
+        {
+            string savedata = $"{DateTimeOffset.Now} - {e.ToString()} \n\t In the log routine, caught {e.GetType()} \n\t Message: {e.Message}";
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\lmr_error_log.log";
+            string savepath = folder + filename;
+            File.AppendAllText(savepath, savedata);
+            return false;
+        }
+        public static bool LogException(int o, string e)
+        {
+            string savedata = $"{DateTimeOffset.Now} - {e.ToString()} \n\t Error - Related string: {e}; Related int: {o}";
+            string folder = Environment.CurrentDirectory;
+            string filename = "\\lmr_error_log.log";
+            string savepath = folder + filename;
+            File.AppendAllText(savepath, savedata);
+            return false;
         }
 
         public async static Task PrintLists()

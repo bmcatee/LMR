@@ -50,6 +50,8 @@ namespace lilminirpg
                     await AccessoryMethods.SetPlayerAccessory(currentPlayer);
                     break;
                 default:
+                    string location = "MenuGeneric" + $" {userInterface.MenuTracker}";
+                    Program.LogException(userInterface.SelectedOption, location);
                     UI.InvalidSelection();
                     break;
             }
@@ -65,11 +67,6 @@ namespace lilminirpg
 
         public async static Task MenuSelection(int selectedoption)
         {
-
-            // CHANGE THIS TO CHECK THE DB INSTEAD
-            //string folder = Environment.CurrentDirectory;
-            //string filename = "\\lmr_save_001.json";
-            //string loadpath = folder + filename;
             Player currentPlayer = SaveLoad.LoadGame();
 
             switch (selectedoption)
@@ -78,7 +75,6 @@ namespace lilminirpg
                     if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
                     {
                         QuestEngine.InitStageArray(SaveLoad.LoadGame());
-                        //Console.ReadLine();
                     }
                     else
                     {
@@ -89,7 +85,11 @@ namespace lilminirpg
                     await CharacterMaker.MakeCharacter();
                     break;
                 case 2:
-                    SaveLoad.LoadGame();
+                    Player loadedPlayer = SaveLoad.LoadGame();
+                    Console.Clear();
+                    Console.WriteLine($"Player {loadedPlayer.Name} loaded.");
+                    Console.WriteLine($"Press Enter to continue.");
+                    Console.ReadLine();
                     await MenuGeneric("MenuMain");
                     break;
                 case 3:
@@ -109,6 +109,8 @@ namespace lilminirpg
                     await Menus.TestMenu();
                     break;
                 default:
+                    string location = "MenuSelection";
+                    Program.LogException(selectedoption, location);
                     UI.InvalidSelection();
                     break;
             }
@@ -141,7 +143,7 @@ namespace lilminirpg
 
         public async static Task TestMenuSelection(int selectedoption)
         {
-            switch (selectedoption + 5)
+            switch (selectedoption +5)
             {
                 case 0:
                     QuestEngine.InitStageArray(SaveLoad.LoadGame());
@@ -160,6 +162,8 @@ namespace lilminirpg
                     await MenuGeneric("MenuMain");
                     break;
                 default:
+                    string location = "TestMenu";
+                    Program.LogException(selectedoption, location);
                     UI.InvalidSelection();
                     break;
             }
@@ -215,6 +219,8 @@ namespace lilminirpg
                     await MenuGeneric("MenuMain");
                     break;
                 default:
+                    string location = "EditCharacterMenu";
+                    Program.LogException(selectedoption, location);
                     UI.InvalidSelection();
                     break;
             }

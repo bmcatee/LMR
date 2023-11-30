@@ -98,6 +98,8 @@ namespace lilminirpg
             }
             else
             {
+                string location = "AccessoryMenu";
+                Program.LogException(userInterface.SelectedOption, location);
                 UI.InvalidSelection();
             }
             if (CharacterMaker._characterCreation != true)
