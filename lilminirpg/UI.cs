@@ -139,20 +139,25 @@ namespace lilminirpg
 
             for (int i = 0; i < MenuLength; ++i)
             {
-                if (i == SelectedOption)
+                if (SelectedOption < listPlayerJobs.Count)
                 {
                     Console.WriteLine("");
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 1));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 1));
-                    WriteFromTop($"HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 2));
-                    WriteFromTop($"MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 5));
                 }
-                else if (i != SelectedOption)
+                else if (SelectedOption >= listPlayerJobs.Count)
                 {
+                    Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
                 }
             }
             Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
@@ -169,24 +174,31 @@ namespace lilminirpg
 
             for (int i = 0; i < MenuLength; ++i)
             {
-                if (i == SelectedOption)
+                if (SelectedOption < listPlayerWeapons.Count)
                 {
                     Console.WriteLine("");
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 1));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 1));
-                    WriteFromTop($"ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 2));
-                    WriteFromTop($"ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 7));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 7));
                 }
-                else if (i != SelectedOption)
+                else if (SelectedOption >= listPlayerWeapons.Count)
                 {
+                    Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 7));
                 }
             }
             Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
@@ -203,20 +215,25 @@ namespace lilminirpg
 
             for (int i = 0; i < MenuLength; ++i)
             {
-                if (i == SelectedOption)
+                if (SelectedOption < listPlayerAccessories.Count)
                 {
                     Console.WriteLine("");
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 1));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name}:", 1, (MenuLength + CursorOffset + 1));
-                    WriteFromTop($"HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 2));
-                    WriteFromTop($"MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name}:", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 5));
                 }
-                else if (i != SelectedOption)
+                else if (SelectedOption >= listPlayerAccessories.Count)
                 {
+                    Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
                 }
             }
             Console.SetCursorPosition(CurrentCursorRow, CurrentCursorColumn);
@@ -242,7 +259,7 @@ namespace lilminirpg
     public static void UIFooterGeneric()
         {
             Console.WriteLine("");
-            Console.WriteLine("(Use the arrow keys + Enter to make your selection)");
+            Console.WriteLine("Use the arrow keys + Enter to make your selection");
         }
 
         // Default method for any invalid selections/bugs

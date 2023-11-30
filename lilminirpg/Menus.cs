@@ -95,7 +95,8 @@ namespace lilminirpg
                         Player loadedPlayer = SaveLoad.LoadGame();
                         Console.Clear();
                         Console.WriteLine($"Player {loadedPlayer.Name} loaded.");
-                        Program.PrintLists(loadedPlayer);
+                        DataLists.PrintCharacterInfo(loadedPlayer);
+                        Console.WriteLine("");
                         Console.WriteLine($"Press Enter to continue.");
                         Console.ReadLine();
                         await MenuGeneric("MenuMain");
@@ -139,7 +140,7 @@ namespace lilminirpg
             }
         }
 
-        // Test/debug menu; needs cleanup, not all options work atm
+        // Test/debug menu
         public async static Task TestMenu()
         {
             UI userInterface = new();
@@ -176,18 +177,22 @@ namespace lilminirpg
                     Console.ReadLine();
                     break;
                 case 1:
-                    Console.WriteLine("Not implemented yet");
+                    Player loadedPlayer = SaveLoad.LoadGame();
+                    Console.Clear();
+                    Console.WriteLine($"Player {loadedPlayer.Name} loaded.");
+                    DataLists.PrintCharacterInfo(loadedPlayer);
+                    Console.WriteLine("");
+                    Console.WriteLine($"Press Enter to continue.");
+                    Console.ReadLine();
+                    await MenuGeneric("MenuTest");
                     break;
                 case 2:
-                    await Program.PrintLists(SaveLoad.LoadGame());
-                    break;
-                case 3:
                     Program.PrintColorList();
                     break;
-                case 4:
+                case 3:
                     await MenuGeneric("MenuMain");
                     break;
-                default:
+                 default:
                     string location = "TestMenu";
                     Program.LogException(selectedoption, location);
                     UI.InvalidSelection();

@@ -65,10 +65,10 @@ namespace lilminirpg
             Console.WriteLine("");
             UI.UICharacterInfo(currentPlayer);
 
-            userInterface.MenuLength = _listPlayerJobs.Count;
             if (CharacterMaker._characterCreation == true)
             {
                 userInterface.CursorOffset = 8;
+                userInterface.MenuLength = _listPlayerJobs.Count;
 
                 Console.WriteLine("Your Job choices are:");
                 Console.WriteLine("");
@@ -76,6 +76,7 @@ namespace lilminirpg
             else
             {
                 userInterface.CursorOffset = 9;
+                userInterface.MenuLength = _listPlayerJobs.Count + 1;
 
                 Console.WriteLine("Your Job choices are: ");
                 Console.WriteLine("(NOTE: Your level & XP will be reset to zero, but you will recieve Gold based on your gained XP!)");
@@ -85,6 +86,10 @@ namespace lilminirpg
             for (int i = 0; i < _listPlayerJobs.Count; ++i)
             {
                 Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerJobs[i].Name}: {_listPlayerJobs[i].Description}");
+            }
+            if (!CharacterMaker._characterCreation)
+            {
+                Console.WriteLine($"[ ] Return to Character Menu");
             }
             UI.UIFooterGeneric();
             Console.WriteLine("");
@@ -99,8 +104,12 @@ namespace lilminirpg
                 currentPlayer.PlayerJob = _listPlayerJobs[userInterface.SelectedOption];
                 currentPlayer = CharacterMaker.SetLevelOne(currentPlayer);
             }
-            else
+            else if (userInterface.SelectedOption < _listPlayerJobs.Count + 1)
             {
+                await Menus.EditCharacterMenu();
+            }
+            else 
+            { 
                 string location = "JobsMenu";
                 Program.LogException(userInterface.SelectedOption, location);
                 UI.InvalidSelection();

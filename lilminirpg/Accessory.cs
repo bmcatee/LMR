@@ -58,12 +58,28 @@ namespace lilminirpg
             Console.WriteLine("");
             UI.UICharacterInfo(currentPlayer);
 
-            userInterface.MenuLength = _listPlayerAccessories.Count;
+            if (CharacterMaker._characterCreation)
+            {
+                userInterface.MenuLength = _listPlayerAccessories.Count;
+            }
+            else
+            {
+                userInterface.MenuLength = _listPlayerAccessories.Count + 1;
+            }
+
             Console.WriteLine("Please choose an Accessory:");
             Console.WriteLine("");
             for (int i = 0; i < _listPlayerAccessories.Count; ++i)
             {
                 Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerAccessories[i].Name}: {_listPlayerAccessories[i].Description}");
+            }
+            if (!CharacterMaker._characterCreation)
+            {
+                Console.WriteLine($"[ ] Return to Character Menu");
+            }
+            else
+            {
+
             }
 
             UI.UIFooterGeneric();
@@ -78,8 +94,11 @@ namespace lilminirpg
             {
                 currentPlayer.WornAccessory = _listPlayerAccessories[userInterface.SelectedOption];
             }
-            else
+            else if (userInterface.SelectedOption < _listPlayerAccessories.Count + 1)
             {
+                await Menus.EditCharacterMenu();
+            }
+            else {
                 string location = "AccessoryMenu";
                 Program.LogException(userInterface.SelectedOption, location);
                 UI.InvalidSelection();

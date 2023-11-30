@@ -64,13 +64,29 @@ namespace lilminirpg
             Console.WriteLine("");
             UI.UICharacterInfo(currentPlayer);
 
-            userInterface.MenuLength = _listPlayerWeapons.Count;
+            if (CharacterMaker._characterCreation)
+            {
+                userInterface.MenuLength = _listPlayerWeapons.Count;
+            }
+            else
+            {
+                userInterface.MenuLength = _listPlayerWeapons.Count + 1;
+            }
+
             Console.WriteLine("Your Weapon choices are:");
             Console.WriteLine("");
 
             for (int i = 0; i < _listPlayerWeapons.Count; ++i)
             {
                 Console.WriteLine($"[{userInterface.CursorSymbol}] {_listPlayerWeapons[i].Name}: {_listPlayerWeapons[i].Description}");
+            }
+            if (!CharacterMaker._characterCreation)
+            {
+                Console.WriteLine($"[ ] Return to Character Menu");
+            }
+            else
+            {
+
             }
 
             UI.UIFooterGeneric();
@@ -85,6 +101,10 @@ namespace lilminirpg
             if (userInterface.SelectedOption < _listPlayerWeapons.Count)
             {
                 currentPlayer.WornWeapon = _listPlayerWeapons[userInterface.SelectedOption];
+            }
+            else if(userInterface.SelectedOption < _listPlayerWeapons.Count + 1)
+            {
+                await Menus.EditCharacterMenu();
             }
             else
             {
