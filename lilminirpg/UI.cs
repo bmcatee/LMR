@@ -26,6 +26,7 @@ namespace lilminirpg
 
         }
 
+        // Writes at a specific area in the console window
         public static void WriteFromTop(string s, int x, int y)
         {
             try
@@ -33,10 +34,8 @@ namespace lilminirpg
                 Console.SetCursorPosition(consoleWindowTopColumn + x, consoleWindowTopRow + y);
                 Console.Write(s);
             }
-            catch (ArgumentOutOfRangeException e)
+            catch (Exception ex) when (Program.LogException(ex))
             {
-                Console.Clear();
-                Console.WriteLine(e.Message);
             }
         }
 
@@ -130,28 +129,27 @@ namespace lilminirpg
             return SelectedOption;
         }
 
+        // The PrintItemInfo methods display information about the selected items in their respective menus
         public void PrintItemInfo(List<Job> listPlayerJobs)
         {
             Console.CursorVisible = false;
-            // Sets cursor position to 0
             CurrentCursorRow = Console.CursorLeft;
             CurrentCursorColumn = Console.CursorTop;
             Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
 
-            // Draws the cursor at the selected coordinates
             for (int i = 0; i < MenuLength; ++i)
             {
                 if (i == SelectedOption)
                 {
                     Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 1));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
-                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"{listPlayerJobs[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 1));
+                    WriteFromTop($"HP GROWTH: {listPlayerJobs[SelectedOption].HealthPointsGrowth} || STR GROWTH: {listPlayerJobs[SelectedOption].StrengthGrowth} || DEX GROWTH: {listPlayerJobs[SelectedOption].DexterityGrowth} || INT GROWTH: {listPlayerJobs[SelectedOption].IntelligenceGrowth} || LUCK GROWTH: {listPlayerJobs[SelectedOption].LuckGrowth}", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"MOV: {listPlayerJobs[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerJobs[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 4));
                 }
                 else if (i != SelectedOption)
                 {
@@ -165,29 +163,27 @@ namespace lilminirpg
         public void PrintItemInfo(List<Weapon> listPlayerWeapons)
         {
             Console.CursorVisible = false;
-            // Sets cursor position to 0
             CurrentCursorRow = Console.CursorLeft;
             CurrentCursorColumn = Console.CursorTop;
             Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
 
-            // Draws the cursor at the selected coordinates
             for (int i = 0; i < MenuLength; ++i)
             {
                 if (i == SelectedOption)
                 {
                     Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 1));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 7));
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 8));
-                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 6));
-                    WriteFromTop($"MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 7));
-                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 8));
+                    WriteFromTop($"{listPlayerWeapons[SelectedOption].Name}", 1, (MenuLength + CursorOffset + 1));
+                    WriteFromTop($"ATK TYPE: {listPlayerWeapons[SelectedOption].AttackType} || ELEMENT: {listPlayerWeapons[SelectedOption].ElementType}", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"ATK STAT 1: {listPlayerWeapons[SelectedOption].AttackStat1} ({listPlayerWeapons[SelectedOption].AttackPercent1}%) || ATK STAT 2: {listPlayerWeapons[SelectedOption].AttackStat2} ({listPlayerWeapons[SelectedOption].AttackPercent2}%)", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"HP: {listPlayerWeapons[SelectedOption].HealthPointsMax} || STR: {listPlayerWeapons[SelectedOption].StatStrength} || DEX: {listPlayerWeapons[SelectedOption].StatDexterity} || INT: {listPlayerWeapons[SelectedOption].StatIntelligence} || LUCK: {listPlayerWeapons[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 4));
+                    WriteFromTop($"MOV: {listPlayerWeapons[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerWeapons[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 5));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 6));
                 }
                 else if (i != SelectedOption)
                 {
@@ -201,25 +197,23 @@ namespace lilminirpg
         public void PrintItemInfo(List<Accessory> listPlayerAccessories)
         {
             Console.CursorVisible = false;
-            // Sets cursor position to 0
             CurrentCursorRow = Console.CursorLeft;
             CurrentCursorColumn = Console.CursorTop;
             Console.SetCursorPosition(consoleWindowTopColumn, consoleWindowTopRow);
 
-            // Draws the cursor at the selected coordinates
             for (int i = 0; i < MenuLength; ++i)
             {
                 if (i == SelectedOption)
                 {
                     Console.WriteLine("");
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 1));
+                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 2));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 3));
                     WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"                                                                                                                                                                                                                                                                                  ", 1, (MenuLength + CursorOffset + 6));
-                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name}:", 1, (MenuLength + CursorOffset + 3));
-                    WriteFromTop($"HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 4));
-                    WriteFromTop($"MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 5));
-                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 6));
+                    WriteFromTop($"{listPlayerAccessories[SelectedOption].Name}:", 1, (MenuLength + CursorOffset + 1));
+                    WriteFromTop($"HP: {listPlayerAccessories[SelectedOption].HealthPointsMax} ||STR: {listPlayerAccessories[SelectedOption].StatStrength} || DEX: {listPlayerAccessories[SelectedOption].StatDexterity} || INT: {listPlayerAccessories[SelectedOption].StatIntelligence} || LUCK: {listPlayerAccessories[SelectedOption].StatLuck}", 1, (MenuLength + CursorOffset + 2));
+                    WriteFromTop($"MOV: {listPlayerAccessories[SelectedOption].MoveSpeed} || ATK SPD: {listPlayerAccessories[SelectedOption].AttackSpeed}", 1, (MenuLength + CursorOffset + 3));
+                    WriteFromTop($"PERK: Coming soon!", 1, (MenuLength + CursorOffset + 4));
                 }
                 else if (i != SelectedOption)
                 {
@@ -234,8 +228,7 @@ namespace lilminirpg
         // Header/footer
         public static void UIHeaderGeneric()
         {
-            Console.WriteLine("Now playing: lil mini rpg");
-            Console.WriteLine("");
+            Console.WriteLine("+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~+\n| little        mini        rpg |\n+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~+");
         }
         public static void UICharacterInfo(Player currentPlayer)
         {

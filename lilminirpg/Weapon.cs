@@ -32,7 +32,7 @@ namespace lilminirpg
         {
             public List<WeaponList>? playerWeapons { get; set; }
         }
-
+        // As mentioned elsewhere these lists should all be moved into the DB later
         public static List<Weapon> FetchWeapons()
         {
             string folder = Environment.CurrentDirectory;
@@ -48,16 +48,20 @@ namespace lilminirpg
             }
             return playerWeapons;
         }
+
+        // Sets the player's active weapon
         public async static Task<Player> SetPlayerWeapon(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
             userInterface.SelectedOption = 0;
             userInterface.MenuInput = "";
-            userInterface.CursorOffset = 4;
+            userInterface.CursorOffset = 8;
 
             List<Weapon> _listPlayerWeapons = FetchWeapons();
 
+            UI.UIHeaderGeneric();
+            Console.WriteLine("");
             UI.UICharacterInfo(currentPlayer);
 
             userInterface.MenuLength = _listPlayerWeapons.Count;
@@ -84,7 +88,7 @@ namespace lilminirpg
             }
             else
             {
-                string location = "AccessoryMenu";
+                string location = "WeaponMenu";
                 Program.LogException(userInterface.SelectedOption, location);
                 UI.InvalidSelection();
             }

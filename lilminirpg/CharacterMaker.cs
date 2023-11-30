@@ -12,12 +12,15 @@ namespace lilminirpg
 {
     public class CharacterMaker
     {
+        // Keeps track of whether or not character creation is underway; is checked for by other classes
         public static bool _characterCreation = false;
+
+        // Initialize the character creation process from scratch
         public async static Task MakeCharacter()
         {
             Player newPlayer = SaveLoad.LoadGame();
             Console.Clear();
-            if (newPlayer.PlayerJob != null || newPlayer.WornWeapon != null || newPlayer.WornAccessory != null)
+            if (newPlayer.Name != null && newPlayer.PlayerJob.Name != "" && newPlayer.WornWeapon.Name != "" && newPlayer.WornAccessory.Name != "")
             {
                 Console.WriteLine($"NOTICE: You may only have one character save file at a time. Making a new character will overwrite your previously existing character!");
                 Console.WriteLine($"If you wish to proceed, press Y. If you wish to return to the main menu, press any other key.");
@@ -27,8 +30,6 @@ namespace lilminirpg
                     await Menus.MenuGeneric("MenuMain");
                 }
             }
-
-            // Starts the full player character creation process
             _characterCreation = true;
             newPlayer.Name = "";
             newPlayer.PlayerJob = new Job();
@@ -47,6 +48,7 @@ namespace lilminirpg
         {
             Console.CursorVisible = true;
             UI.UIHeaderGeneric();
+            Console.WriteLine("");
             currentPlayer.Name = "";
             while (currentPlayer.Name == "")
             {
@@ -73,6 +75,7 @@ namespace lilminirpg
             return currentPlayer;
         }
 
+        // Sets the player to level 1, along with the general game triggers (stage, etc) 
         public static Player SetLevelOne(Player currentPlayer)
         {
             currentPlayer.CurrentLevel = 1;
@@ -97,6 +100,7 @@ namespace lilminirpg
             _characterCreation = false;
             Console.Clear();
             UI.UIHeaderGeneric();
+            Console.WriteLine("");
             Console.WriteLine("You have selected:");
             Console.WriteLine("");
             Console.WriteLine($"[*] Name: {newPlayer.Name}");
@@ -108,16 +112,6 @@ namespace lilminirpg
             Console.WriteLine("Please press Enter to continue.");
             Console.ReadLine();
             await Menus.MenuGeneric("MenuMain");
-        }
-        public Player LevelUpPlayer(Player currentplayer)
-        {
-            currentplayer.CurrentLevel = currentplayer.CurrentLevel + 1;
-            currentplayer.HealthPointsMax += currentplayer.PlayerJob.HealthPointsGrowth;
-            currentplayer.StatStrength += currentplayer.PlayerJob.StrengthGrowth;
-            currentplayer.StatDexterity += currentplayer.PlayerJob.DexterityGrowth;
-            currentplayer.StatIntelligence += currentplayer.PlayerJob.IntelligenceGrowth;
-            currentplayer.StatLuck += currentplayer.PlayerJob.LuckGrowth;
-            return currentplayer;
         }
     }
 }

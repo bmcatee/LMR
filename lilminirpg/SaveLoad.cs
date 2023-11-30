@@ -51,7 +51,8 @@ namespace lilminirpg
             {
             }
         }
-
+        
+        // Load game method
         public static Player LoadGame()
         {
             try

@@ -51,6 +51,7 @@ namespace lilminirpg
             }
             return playerJobs;
         }
+        // Sets the player's job - notably, if the player has gained XP, their XP will be reset but converted into GP
         public async static Task<Player> SetPlayerJob(Player currentPlayer)
         {
             Console.Clear();
@@ -60,19 +61,21 @@ namespace lilminirpg
 
             List<Job> _listPlayerJobs = FetchPlayerJobs();
 
+            UI.UIHeaderGeneric();
+            Console.WriteLine("");
             UI.UICharacterInfo(currentPlayer);
 
             userInterface.MenuLength = _listPlayerJobs.Count;
             if (CharacterMaker._characterCreation == true)
             {
-                userInterface.CursorOffset = 4;
+                userInterface.CursorOffset = 8;
 
                 Console.WriteLine("Your Job choices are:");
                 Console.WriteLine("");
             }
             else
             {
-                userInterface.CursorOffset = 5;
+                userInterface.CursorOffset = 9;
 
                 Console.WriteLine("Your Job choices are: ");
                 Console.WriteLine("(NOTE: Your level & XP will be reset to zero, but you will recieve Gold based on your gained XP!)");
@@ -98,7 +101,7 @@ namespace lilminirpg
             }
             else
             {
-                string location = "AccessoryMenu";
+                string location = "JobsMenu";
                 Program.LogException(userInterface.SelectedOption, location);
                 UI.InvalidSelection();
             }

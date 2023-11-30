@@ -61,7 +61,7 @@ namespace lilminirpg
             }
             public DbSet<Player> Players { get; set; }
         }
-
+        // Increases the current player's level & related stats by 1
         public static Player PlayerLevelUp(Player currentplayer)
         {
             currentplayer.XPBanked += currentplayer.XPCurrent;

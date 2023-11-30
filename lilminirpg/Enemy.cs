@@ -43,6 +43,7 @@ namespace lilminirpg
             }
             return playerEnemies;
         }
+        // This makes a random enemy out of all the enemies available in the list; eventually this will spawn enemies based on groupings (family, rank, environment, etc.)
         public static Enemy CreateRandomEnemy(int stagelevel)
         {
             List<Enemy> enemieslist = FetchEnemies();
@@ -52,12 +53,14 @@ namespace lilminirpg
             currentenemy = SetEnemyStats(currentenemy, stagelevel);
             return currentenemy;
         }
+        // Makes a patch of "Empty Ground" dummy data
         public static Enemy CreateDummy()
         {
             List<Enemy> enemieslist = FetchEnemies();
             Enemy currentenemy = enemieslist[0];
             return currentenemy;
         }
+        // Sets the enemy's stats & level to the current stage level
         public static Enemy SetEnemyStats(Enemy currentenemy, int stagelevel)
         {
             currentenemy.CurrentLevel = stagelevel;

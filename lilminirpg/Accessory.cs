@@ -26,6 +26,8 @@ namespace lilminirpg
         {
             public List<AccessoryList>? PlayerAccessories { get; set; }
         }
+        
+        // Creates a list of accessories from the json
         public static List<Accessory> FetchAccessories()
         {
             string folder = Environment.CurrentDirectory;
@@ -41,16 +43,19 @@ namespace lilminirpg
             }
             return playerAccessories;
         }
+        // Sets an accessory to the player object; this should all be moved into the DB
         public async static Task<Player> SetPlayerAccessory(Player currentPlayer)
         {
             Console.Clear();
             UI userInterface = new();
             userInterface.SelectedOption = 0;
             userInterface.MenuInput = "";
-            userInterface.CursorOffset = 4;
+            userInterface.CursorOffset = 8;
 
             List<Accessory> _listPlayerAccessories = FetchAccessories();
 
+            UI.UIHeaderGeneric();
+            Console.WriteLine("");
             UI.UICharacterInfo(currentPlayer);
 
             userInterface.MenuLength = _listPlayerAccessories.Count;

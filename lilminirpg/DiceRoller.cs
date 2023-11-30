@@ -8,8 +8,7 @@ namespace lilminirpg
 {
     internal class DiceRoller
     {
-
-        Accessory _accessory = new Accessory();
+        // Basic dice roller
         public static int RollDice(int min, int max)
         {
             var random = new Random();
@@ -24,10 +23,12 @@ namespace lilminirpg
             }
         }
 
+        // Rolls damage for the player
         public static int DamageRoller(Player player)
         {
-
+            // This is the base damage, gathered from the player's combined Job+Weapon+Accessory stats
             int BaseDamageDealt = BaseDamageRoll(player.WornWeapon.AttackStat1, player.WornWeapon.AttackPercent1) + BaseDamageRoll(player.WornWeapon.AttackStat2, player.WornWeapon.AttackPercent2);
+            // This is the final damage, after receiving any bonus modifiers
             int TotalDamageDealt = BonusDamageRoll(BaseDamageDealt);
 
             int BaseDamageRoll(string attackType, int amount)
@@ -51,6 +52,7 @@ namespace lilminirpg
                 catch (Exception ex) when (Program.LogException(ex))
                 {
                 }
+                // Damage is always set to 1 at a minimum to help keep the dice roller happy
                 if (damagedealt == 0)
                 {
                     damagedealt = 1;
@@ -58,10 +60,9 @@ namespace lilminirpg
                 return damagedealt;
             }
 
-
-
             int BonusDamageRoll(int basedamage)
             {
+                // The odds of landing success/failure here will eventually be determined by the character's stats vs. the enemy's stats; for now it's just a hardcoded coin flip
                 int damagedealt = 0;
                 int damageMod = RollDice(0, 99);
                 try
@@ -104,6 +105,7 @@ namespace lilminirpg
             return TotalDamageDealt;
         }
 
+        // Same as above, but for enemies
         public static int DamageRoller(Enemy enemy)
         {
             int BaseDamageDealt = BaseDamageRoll(enemy.AttackStat1, enemy.AttackPercent1) + BaseDamageRoll(enemy.AttackStat2, enemy.AttackPercent2);

@@ -9,6 +9,8 @@ namespace lilminirpg
 {
     internal class QuestEngine
     {
+
+        // Creates the array of 16 tiles the player must traverse through, and then sends it to the Movement class
         public static void InitStageArray(Player currentplayer)
         {
             Enemy[] enemiesOnScreen = CreateStageArray(currentplayer.CurrentStage);
@@ -21,6 +23,7 @@ namespace lilminirpg
             Movement.MoveThroughScreen(currentplayer, enemiesOnScreen);
         }
 
+        // Fills the above array with enemies/empty ground
         public static Enemy[] CreateStageArray(int currentStage)
         {
             Enemy[] enemiesOnScreen = new Enemy[16];

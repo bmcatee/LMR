@@ -2,10 +2,12 @@
 {
     internal class Movement
     {
+        // _gameDelay variable allows control of game speed; currently set to 30fps
         private static int _gameDelay = 30;
         private static bool _wasAttacked = false;
         private static bool _didWin = false;
 
+        // This is where the player moves through the stage tiles; if the player encounters an enemy, the attack methods are called
         public async static void MoveThroughScreen(Player currentPlayer, Enemy[] currentStageArray)
         {
             int frame = 0;
@@ -20,6 +22,7 @@
             }
             await SaveLoad.SaveGame(currentPlayer);
 
+            // Will exit to a Game Over if the player has 0 HP
             while (currentPlayer.HealthPointsCurrent > 0)
             {
                 while (currentPlayer.StageTile < currentStageArray.Length - 1)
@@ -48,7 +51,7 @@
                             ++frame;
                             Thread.Sleep(TimeSpan.FromMilliseconds(_gameDelay));
                         }
-
+                        // If upcoming tile contains "Empty Ground" then move
                         if (currentEnemy.Name == "Empty Ground")
                         {
                             if (frame % currentPlayer.FrameMove == 0 || frame == 2)
@@ -66,6 +69,7 @@
                                 await SaveLoad.SaveGame(currentPlayer);
                             }
                         }
+                        // If upcoming tile contains anything else, then fight
                         else
                         {
                             if (frame % currentPlayer.FrameAttack == 0)
@@ -80,7 +84,7 @@
                             }
 
                         }
-
+                        // If the enemy's attack frame lands before the player's, it's an ambush attack; these may do more damage or something in the future
                         if (currentEnemy.Name != "Empty Ground" && frame % currentEnemy.FrameAttack == 0 && currentEnemy.HealthPointsCurrent > 0 && currentPlayer.StageTile == currentEnemy.StageTile - 1)
                         {
                             if (fightIntroText)
@@ -98,6 +102,7 @@
                         break;
                     }
                 }
+                // If the player survived, it's on to the next stage
                 if (currentPlayer.HealthPointsCurrent > 0)
                 {
                     ResetPlayerFrames(currentPlayer);
@@ -106,6 +111,7 @@
                     await SaveLoad.SaveGame(currentPlayer);
                     QuestEngine.InitStageArray(currentPlayer);
                 }
+                // Or if they died, it's game over
                 else
                 {
                     ResetPlayerFrames(currentPlayer);
@@ -120,6 +126,7 @@
                 }
             }
         }
+        // Here the player attacks; if the enemy's HP reaches 0 the player "wins" and gains XP/GP
         public async static Task<(Player Player, Enemy Enemy, Enemy[] StageArray)> PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
             Console.WriteLine($"Players HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
@@ -149,6 +156,9 @@
             }
             return (currentPlayer, currentEnemy, currentStageArray);
         }
+
+        // Enemy attacks are on an independent timer from the player, and may happen at any moment, but may only hit a player if they are in the tile adjecent to the enemy
+        // If the enemy lands a hit, the player is knocked back by one tile and must move forward again
         public static (Player Player, Enemy Enemy) EnemyAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
             int RollResults = DiceRoller.DamageRoller(currentEnemy);
@@ -161,6 +171,8 @@
             Console.WriteLine($"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             return (currentPlayer, currentEnemy);
         }
+
+        // These keep the move & attack frames updated and in line with the timer
         public static Player ResetPlayerFrames(Player currentplayer)
         {
             currentplayer.FrameMove = currentplayer.StatMoveSpeed;
@@ -173,6 +185,8 @@
             currentenemy.FrameAttack = currentenemy.StatAttackSpeed;
             return currentenemy;
         }
+        
+        // This lets us know what the next available enemy in the stage will be
         public static Enemy UpcomingEnemy(Enemy[] currentStageArray, int tilePosition)
         {
             Enemy nextEnemy = new Enemy();

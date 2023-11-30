@@ -1,6 +1,7 @@
 ﻿using lilminirpg;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -10,6 +11,9 @@ namespace lilminirpg
 {
     public class Menus
     {
+        // This is a little bit of a mess ngl
+        // I may port this to Godot or Unity so refactoring the menus hasn't been a top priority atm
+        // Anyway - this is the main menu, essentially
         public async static Task MenuGeneric(string menuTracker)
         {
             Player currentPlayer = SaveLoad.LoadGame();
@@ -20,11 +24,12 @@ namespace lilminirpg
             Console.Clear();
 
             UI.UIHeaderGeneric();
+            Console.WriteLine("");
 
             switch (userInterface.MenuTracker)
             {
                 case "MenuMain":
-                    userInterface.CursorOffset = 2;
+                    userInterface.CursorOffset = 4;
                     userInterface.MenuLength = DataLists.MenuMain.GetLength(0);
                     for (int i = 0; i < DataLists.MenuMain.GetLength(0); ++i)
                     {
@@ -64,7 +69,7 @@ namespace lilminirpg
             }
             await MenuSelection(userInterface.SelectedOption);
         }
-
+        // And this is the menu selection method
         public async static Task MenuSelection(int selectedoption)
         {
             Player currentPlayer = SaveLoad.LoadGame();
@@ -72,7 +77,7 @@ namespace lilminirpg
             switch (selectedoption)
             {
                 case 0:
-                    if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
+                    if (currentPlayer.Name != "" && currentPlayer.PlayerJob.Name != "" && currentPlayer.WornWeapon.Name != "" && currentPlayer.WornAccessory.Name != "")
                     {
                         QuestEngine.InitStageArray(SaveLoad.LoadGame());
                     }
@@ -85,12 +90,24 @@ namespace lilminirpg
                     await CharacterMaker.MakeCharacter();
                     break;
                 case 2:
-                    Player loadedPlayer = SaveLoad.LoadGame();
-                    Console.Clear();
-                    Console.WriteLine($"Player {loadedPlayer.Name} loaded.");
-                    Console.WriteLine($"Press Enter to continue.");
-                    Console.ReadLine();
-                    await MenuGeneric("MenuMain");
+                    if (currentPlayer.Name != "" && currentPlayer.PlayerJob.Name != "" && currentPlayer.WornWeapon.Name != "" && currentPlayer.WornAccessory.Name != "")
+                    {
+                        Player loadedPlayer = SaveLoad.LoadGame();
+                        Console.Clear();
+                        Console.WriteLine($"Player {loadedPlayer.Name} loaded.");
+                        Program.PrintLists(loadedPlayer);
+                        Console.WriteLine($"Press Enter to continue.");
+                        Console.ReadLine();
+                        await MenuGeneric("MenuMain");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please make a character first!");
+                        Console.WriteLine("Press Enter to return to the main menu.");
+                        Console.ReadLine();
+                        await MenuGeneric("MenuMain");
+                    }
                     break;
                 case 3:
                     if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
@@ -103,9 +120,15 @@ namespace lilminirpg
                     }
                     break;
                 case 4:
-                    UI.InvalidSelection();
+                    Console.Clear();
+                    DataLists.HowToPlay();
+                    Console.ReadLine();
+                    await MenuGeneric("MenuMain");
                     break;
                 case 5:
+                    Environment.Exit(0);
+                    break;
+                case 6:
                     await Menus.TestMenu();
                     break;
                 default:
@@ -115,16 +138,19 @@ namespace lilminirpg
                     break;
             }
         }
+
+        // Test/debug menu; needs cleanup, not all options work atm
         public async static Task TestMenu()
         {
             UI userInterface = new();
             Player currentPlayer = SaveLoad.LoadGame();
 
-            userInterface.CursorOffset = 2;
+            userInterface.CursorOffset = 4;
             userInterface.SelectedOption = 0;
             Console.Clear();
             userInterface.MenuInput = "";
             UI.UIHeaderGeneric();
+            Console.WriteLine("");
             userInterface.MenuLength = DataLists.MenuTest.GetLength(0);
             for (int i = 0; i < DataLists.MenuTest.GetLength(0); ++i)
             {
@@ -143,7 +169,7 @@ namespace lilminirpg
 
         public async static Task TestMenuSelection(int selectedoption)
         {
-            switch (selectedoption +5)
+            switch (selectedoption)
             {
                 case 0:
                     QuestEngine.InitStageArray(SaveLoad.LoadGame());
@@ -153,7 +179,7 @@ namespace lilminirpg
                     Console.WriteLine("Not implemented yet");
                     break;
                 case 2:
-                    await Program.PrintLists();
+                    await Program.PrintLists(SaveLoad.LoadGame());
                     break;
                 case 3:
                     Program.PrintColorList();
@@ -168,16 +194,19 @@ namespace lilminirpg
                     break;
             }
         }
+
+        // Edit character menu; sets job/weapon/accessory and name
         public async static Task EditCharacterMenu()
         {
             UI userInterface = new();
             Player currentPlayer = SaveLoad.LoadGame();
 
-            userInterface.CursorOffset = 2;
+            userInterface.CursorOffset = 4;
             userInterface.SelectedOption = 0;
             Console.Clear();
             userInterface.MenuInput = "";
             UI.UIHeaderGeneric();
+            Console.WriteLine("");
             userInterface.MenuLength = DataLists.MenuEdit.GetLength(0);
             for (int i = 0; i < DataLists.MenuEdit.GetLength(0); ++i)
             {
