@@ -38,10 +38,10 @@
   {
     "Name": "Lucky Clover",
     "Description": "Not very lucky for the clover",
-    "HealthPointsMax": 7,
+    "HealthPointsMax": 0,
     "StatStrength": 0,
     "StatDexterity": 7,
-    "StatIntelligence": 0,
+    "StatIntelligence": 7,
     "StatLuck": 7,
     "MoveSpeed": -5,
     "AttackSpeed": -5,
@@ -68,7 +68,7 @@
     "StatIntelligence": 10,
     "StatLuck": 2,
     "MoveSpeed": -20,
-    "AttackSpeed": 0,
+    "AttackSpeed": -10,
     "AccessoryPerk": ""
   }
 ]

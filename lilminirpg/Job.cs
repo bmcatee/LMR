@@ -67,7 +67,7 @@ namespace lilminirpg
 
             if (CharacterMaker._characterCreation == true)
             {
-                userInterface.CursorOffset = 8;
+                userInterface.CursorOffset = 9;
                 userInterface.MenuLength = _listPlayerJobs.Count;
 
                 Console.WriteLine("Your Job choices are:");
@@ -75,7 +75,7 @@ namespace lilminirpg
             }
             else
             {
-                userInterface.CursorOffset = 9;
+                userInterface.CursorOffset = 10;
                 userInterface.MenuLength = _listPlayerJobs.Count + 1;
 
                 Console.WriteLine("Your Job choices are: ");

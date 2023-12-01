@@ -4,7 +4,7 @@
     {
         // _gameDelay variable allows control of game speed; currently set to 30fps
         private static int _gameDelay = 30;
-        private static bool _wasAttacked = false;
+        private static bool _wasKB = false;
         private static bool _didWin = false;
 
         // This is where the player moves through the stage tiles; if the player encounters an enemy, the attack methods are called
@@ -40,11 +40,11 @@
                             stageIntroText = false;
                         }
 
-                        while (_wasAttacked || _didWin)
+                        while (_wasKB || _didWin)
                         {
                             if (frame % currentPlayer.FrameMove == 0)
                             {
-                                _wasAttacked = false;
+                                _wasKB = false;
                                 _didWin = false;
                                 Console.WriteLine($"{currentPlayer.Name} the {currentPlayer.PlayerJob.Name} at tile {currentPlayer.StageTile}, moving to {currentPlayer.StageTile + 1} || Next tile contains: {currentEnemy.Name}, next enemy is {nextEnemy.Name} at tile {nextEnemy.StageTile}.");
                             }
@@ -129,7 +129,7 @@
         // Here the player attacks; if the enemy's HP reaches 0 the player "wins" and gains XP/GP
         public async static Task<(Player Player, Enemy Enemy, Enemy[] StageArray)> PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            Console.WriteLine($"Players HP: {currentPlayer.HealthPointsCurrent} - Enemy HP: {currentEnemy.HealthPointsCurrent} - PlayerPos: {currentPlayer.StageTile}");
+            Console.WriteLine($"Player HP: {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} - Enemy HP: {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} - PlayerPos: {currentPlayer.StageTile}");
             Enemy nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
             int RollResults = DiceRoller.DamageRoller(currentPlayer);
             currentEnemy.HealthPointsCurrent = currentEnemy.HealthPointsCurrent - RollResults;
@@ -163,13 +163,17 @@
         {
             int RollResults = DiceRoller.DamageRoller(currentEnemy);
             currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsCurrent - RollResults;
-            --currentPlayer.StageTile;
-            _wasAttacked = true;
             Console.WriteLine($"The {currentEnemy.Name} {currentEnemy.AttackWord} you for {RollResults} dmg!");
+            int coinflip = DiceRoller.RollDice(0, 4);
+            if (coinflip == 0) 
+            {
+            _wasKB = true;
+            --currentPlayer.StageTile;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"KNOCKBACK!");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"The {currentEnemy.Name} successfully knocks you back to position {currentPlayer.StageTile}!");
+            }
             Console.WriteLine($"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             return (currentPlayer, currentEnemy);
         }

@@ -32,6 +32,9 @@ namespace lilminirpg
             }
             _characterCreation = true;
             newPlayer.Name = "";
+            newPlayer.GoldCurrent = 0;
+            newPlayer.MaximumStage = 1;
+            newPlayer.CurrentLevel = 1;
             newPlayer.PlayerJob = new Job();
             newPlayer.WornWeapon = new Weapon();
             newPlayer.WornAccessory = new Accessory();
@@ -83,7 +86,7 @@ namespace lilminirpg
             currentPlayer.StageTile = 0;
             currentPlayer.XPCurrent = 0;
             currentPlayer.XPToLevel = 20;
-            currentPlayer.HealthPointsMax = currentPlayer.PlayerJob.HealthPointsGrowth;
+            currentPlayer.HealthPointsMax = PlayerMethods.CalculateTotalHP(currentPlayer);
             currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsMax;
             currentPlayer.StatStrength = currentPlayer.PlayerJob.StrengthGrowth;
             currentPlayer.StatDexterity = currentPlayer.PlayerJob.DexterityGrowth;

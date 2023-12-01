@@ -50,7 +50,7 @@ namespace lilminirpg
         {
             List<Enemy> enemieslist = FetchEnemies();
             Enemy currentenemy = new Enemy();
-            int enemylistposition = DiceRoller.RollDice(0, enemieslist.Count);
+            int enemylistposition = DiceRoller.RollDice(1, enemieslist.Count);
             currentenemy = enemieslist[enemylistposition];
             currentenemy = SetEnemyStats(currentenemy, stagelevel);
             return currentenemy;

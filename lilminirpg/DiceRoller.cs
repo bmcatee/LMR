@@ -64,6 +64,8 @@ namespace lilminirpg
             {
                 // The odds of landing success/failure here will eventually be determined by the character's stats vs. the enemy's stats; for now it's just a hardcoded coin flip
                 int damagedealt = 0;
+                // 'newint' is a failsafe against getting any exception errors in the dice roller; it's hacky and I don't like it but it works
+                int newint = 0;
                 int damageMod = RollDice(0, 99);
                 try
                 {
@@ -71,19 +73,39 @@ namespace lilminirpg
                     {
                         case int n when (n < 26):
                             // Min damage
-                            damagedealt = basedamage + (RollDice(1, 25 * basedamage / 100));
+                            newint = 25 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage + (RollDice(1, newint));
                             break;
                         case int n when (n > 25 && n < 51):
                             // Max damage
-                            damagedealt = basedamage + (RollDice(1, 50 * basedamage / 100));
+                            newint = 50 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage + (RollDice(1, newint));
                             break;
                         case int n when (n > 50 && n < 76):
                             // Crit success damage
-                            damagedealt = basedamage + (RollDice(1, 75 * basedamage / 100));
+                            newint = 75 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage + (RollDice(1, newint));
                             break;
                         case int n when (n > 75):
                             // Crit failure damage
-                            damagedealt = basedamage - (RollDice(1, 50 * basedamage / 100));
+                            newint = 50 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage - (RollDice(1, newint));
                             break;
                         default:
                             string location = "EditCharacterMenu";
@@ -146,26 +168,47 @@ namespace lilminirpg
                     basedamage = 1;
                 }
                 int damagedealt = 0;
+                int newint = 0;
                 int damageMod = RollDice(0, 99);
                 try
                 { 
                 switch (damageMod)
                 {
                     case int n when (n < 26):
-                        // Min damage
-                        damagedealt = basedamage + (RollDice(1, 25 * basedamage / 100));
+                            // Min damage
+                            newint = 25 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                        damagedealt = basedamage + (RollDice(1, newint));
                         break;
                     case int n when (n > 25 && n < 51):
-                        // Max damage
-                        damagedealt = basedamage + (RollDice(1, 50 * basedamage / 100));
+                            // Max damage
+                            newint = 50 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage + (RollDice(1, newint));
                         break;
                     case int n when (n > 50 && n < 76):
-                        // Crit success damage
-                        damagedealt = basedamage + (RollDice(1, 75 * basedamage / 100));
+                            // Crit success damage
+                            newint = 75 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage + (RollDice(1, newint));
                         break;
                     case int n when (n > 75):
-                        // Crit failure damage
-                        damagedealt = basedamage - (RollDice(1, 50 * basedamage / 100));
+                            // Crit failure damage
+                            newint = 50 * basedamage / 100;
+                            if (newint == 0)
+                            {
+                                newint = 1;
+                            }
+                            damagedealt = basedamage - (RollDice(1, newint));
                         break;
                 }
                 }

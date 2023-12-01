@@ -1,0 +1,16 @@
+
+
+12/1/2023 2:54:53 AM -06:00 - System.ArgumentOutOfRangeException: 'minValue' cannot be greater than maxValue. (Parameter 'minValue')
+   at System.Random.ThrowMinMaxValueSwapped()
+   at System.Random.Next(Int32 minValue, Int32 maxValue)
+   at lilminirpg.DiceRoller.RollDice(Int32 min, Int32 max) in C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\DiceRoller.cs:line 17 
+	 In the log routine, caught System.ArgumentOutOfRangeException 
+	 Message: 'minValue' cannot be greater than maxValue. (Parameter 'minValue')
+
+12/1/2023 2:54:53 AM -06:00 - System.ArgumentOutOfRangeException: 'minValue' cannot be greater than maxValue. (Parameter 'minValue')
+   at System.Random.ThrowMinMaxValueSwapped()
+   at System.Random.Next(Int32 minValue, Int32 maxValue)
+   at lilminirpg.DiceRoller.RollDice(Int32 min, Int32 max) in C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\DiceRoller.cs:line 17
+   at lilminirpg.DiceRoller.<DamageRoller>g__BonusDamageRoll|2_1(Int32 basedamage) in C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\DiceRoller.cs:line 156 
+	 In the log routine, caught System.ArgumentOutOfRangeException 
+	 Message: 'minValue' cannot be greater than maxValue. (Parameter 'minValue')

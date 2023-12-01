@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace lilminirpg
 {
@@ -67,13 +68,18 @@ namespace lilminirpg
             currentplayer.XPBanked += currentplayer.XPCurrent;
             currentplayer.XPCurrent = 0;
             currentplayer.XPToLevel = 20 * currentplayer.CurrentLevel;
-            currentplayer.HealthPointsMax += currentplayer.PlayerJob.HealthPointsGrowth;
-            currentplayer.HealthPointsCurrent = currentplayer.HealthPointsCurrent + currentplayer.PlayerJob.HealthPointsGrowth;
+            currentplayer.HealthPointsMax = CalculateTotalHP(currentplayer);
+            currentplayer.HealthPointsCurrent += currentplayer.PlayerJob.HealthPointsGrowth;
             currentplayer.StatStrength += currentplayer.PlayerJob.StrengthGrowth;
             currentplayer.StatDexterity += currentplayer.PlayerJob.DexterityGrowth;
             currentplayer.StatIntelligence += currentplayer.PlayerJob.IntelligenceGrowth;
             currentplayer.StatLuck += currentplayer.PlayerJob.LuckGrowth;
             return currentplayer;
+        }
+        public static int CalculateTotalHP(Player currentPlayer)
+        {
+            int totalhp = (currentPlayer.PlayerJob.HealthPointsGrowth * currentPlayer.CurrentLevel) + currentPlayer.WornAccessory.HealthPointsMax + currentPlayer.WornWeapon.HealthPointsMax;
+            return totalhp;
         }
     }
 }

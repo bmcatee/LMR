@@ -251,7 +251,8 @@ namespace lilminirpg
         {
             if (currentPlayer.Name != "" || currentPlayer.PlayerJob.Name != "" || currentPlayer.WornWeapon.Name != "" || currentPlayer.WornAccessory.Name != "")
             {
-                Console.WriteLine($"Character: {currentPlayer.Name}, the Level {currentPlayer.CurrentLevel} {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name} || {currentPlayer.XPCurrent} XP, {currentPlayer.GoldCurrent} GP, max Stage: {currentPlayer.MaximumStage}");
+                Console.WriteLine($"Character: {currentPlayer.Name}, the Level {currentPlayer.CurrentLevel} {currentPlayer.PlayerJob.Name} || Weapon: {currentPlayer.WornWeapon.Name} || Accessory: {currentPlayer.WornAccessory.Name}");
+                Console.WriteLine($"Current/Max HP: {currentPlayer.HealthPointsCurrent}/{PlayerMethods.CalculateTotalHP(currentPlayer)} || {currentPlayer.XPCurrent} XP, {currentPlayer.GoldCurrent} GP || Current/Max Stage: {currentPlayer.CurrentStage}/{currentPlayer.MaximumStage}");
                 Console.WriteLine("");
             }
         }

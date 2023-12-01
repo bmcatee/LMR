@@ -60,6 +60,7 @@ namespace lilminirpg
             using (var ctx = new PlayerMethods.PlayerContext())
             {
                 var loadPlayer = ctx.Players.Single(b => b.CharacterKey == 1);
+                    loadPlayer.HealthPointsMax = PlayerMethods.CalculateTotalHP(loadPlayer);
                 return loadPlayer;
             }
             }
