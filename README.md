@@ -3,7 +3,7 @@
 
 An in-game menu gives more details on the mechanics of the game and how it is played. You must create a character before you are allowed to play the game; attempting to select "Play Game" (or most other menu functions) without creating a character first will take you to character creation.
 
-There should be no special requirements for running the game; cloning the repository and opening the solution in Visual Studio should work just fine.
+There should be no special requirements for running the game; cloning the repository and opening the solution in Visual Studio should work just fine. Note that the database may take some time to initialize, particularly on first startup; please be patient!
 
 Feature requirements list:
 * Player data is saved to a local database (currently there is only one save slot, by design)

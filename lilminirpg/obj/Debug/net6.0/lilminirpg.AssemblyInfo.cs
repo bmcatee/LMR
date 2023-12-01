@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lilminirpg")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ba4949b6461fa6554d7b7115d5b56f8d8271646")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23af5d61573472ec81ace1172e2251dfe9aa05b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("lilminirpg")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lilminirpg")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
