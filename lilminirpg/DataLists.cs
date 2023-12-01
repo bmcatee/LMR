@@ -20,7 +20,7 @@ namespace lilminirpg
         {
                     {"Play Game"},
                     {"Make New Character"},
-                    {"Load Character Info"},
+                    {"Show Character Info"},
                     {"Edit Character & Equipment"},
                     {"How to Play"},
                     {"Exit"},
@@ -143,8 +143,8 @@ namespace lilminirpg
             Console.WriteLine($"Total LUK: {currentPlayer.StatLuck} ({currentPlayer.PlayerJob.Name} base) + {currentPlayer.WornWeapon.StatLuck} ({currentPlayer.WornWeapon.Name}) + {currentPlayer.WornAccessory.StatLuck} ({currentPlayer.WornAccessory.Name}) = {currentPlayer.StatLuck + currentPlayer.WornWeapon.StatLuck + currentPlayer.WornAccessory.StatLuck} (total)");
             Console.WriteLine($"Growth: {currentPlayer.PlayerJob.StrengthGrowth} STR - {currentPlayer.PlayerJob.DexterityGrowth} DEX - {currentPlayer.PlayerJob.IntelligenceGrowth} INT - {currentPlayer.PlayerJob.LuckGrowth} LUK");
             Console.WriteLine("");
-            Console.WriteLine($"MOV SPD: {currentPlayer.PlayerJob.MoveSpeed} ({currentPlayer.PlayerJob.Name} base) + {currentPlayer.WornWeapon.MoveSpeed} ({currentPlayer.WornWeapon.Name}) + {currentPlayer.WornAccessory.MoveSpeed} ({currentPlayer.WornAccessory.Name}) = {currentPlayer.PlayerJob.MoveSpeed - currentPlayer.WornWeapon.MoveSpeed - currentPlayer.WornAccessory.MoveSpeed} (total) - (remember lower speed is better!)");
-            Console.WriteLine($"ATK SPD: {currentPlayer.PlayerJob.AttackSpeed} ({currentPlayer.PlayerJob.Name} base) + {currentPlayer.WornWeapon.AttackSpeed} ({currentPlayer.WornWeapon.Name}) + {currentPlayer.WornAccessory.AttackSpeed} ({currentPlayer.WornAccessory.Name}) = {currentPlayer.PlayerJob.AttackSpeed - currentPlayer.WornWeapon.AttackSpeed - currentPlayer.WornAccessory.AttackSpeed} (total) - (remember lower speed is better!)");
+            Console.WriteLine($"MOV SPD: {currentPlayer.PlayerJob.MoveSpeed} ({currentPlayer.PlayerJob.Name} base) + {currentPlayer.WornWeapon.MoveSpeed} ({currentPlayer.WornWeapon.Name}) + {currentPlayer.WornAccessory.MoveSpeed} ({currentPlayer.WornAccessory.Name}) = {currentPlayer.PlayerJob.MoveSpeed + currentPlayer.WornWeapon.MoveSpeed + currentPlayer.WornAccessory.MoveSpeed} (total) - (remember lower speed is better!)");
+            Console.WriteLine($"ATK SPD: {currentPlayer.PlayerJob.AttackSpeed} ({currentPlayer.PlayerJob.Name} base) + {currentPlayer.WornWeapon.AttackSpeed} ({currentPlayer.WornWeapon.Name}) + {currentPlayer.WornAccessory.AttackSpeed} ({currentPlayer.WornAccessory.Name}) = {currentPlayer.PlayerJob.AttackSpeed + currentPlayer.WornWeapon.AttackSpeed + currentPlayer.WornAccessory.AttackSpeed} (total) - (remember lower speed is better!)");
             Console.WriteLine("");
             Console.WriteLine($"Weapon: {currentPlayer.WornWeapon.Name} - Attack Type: {currentPlayer.WornWeapon.AttackType} damage - Elemental Type: {currentPlayer.WornWeapon.ElementType} - Attacks with {currentPlayer.WornWeapon.AttackStat1}/{currentPlayer.WornWeapon.AttackPercent1}% & {currentPlayer.WornWeapon.AttackStat2}/{currentPlayer.WornWeapon.AttackPercent2}% - Perk: Not Yet Implemented!");
             Console.WriteLine("");

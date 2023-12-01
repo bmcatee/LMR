@@ -177,8 +177,8 @@
         // These keep the move & attack frames updated and in line with the timer
         public static Player ResetPlayerFrames(Player currentplayer)
         {
-            currentplayer.FrameMove = currentplayer.StatMoveSpeed;
-            currentplayer.FrameAttack = currentplayer.StatAttackSpeed;
+            currentplayer.FrameMove = currentplayer.StatMoveSpeed + currentplayer.WornWeapon.MoveSpeed + currentplayer.WornAccessory.MoveSpeed;
+            currentplayer.FrameAttack = currentplayer.StatAttackSpeed + currentplayer.WornWeapon.AttackSpeed + currentplayer.WornAccessory.AttackSpeed;
             return currentplayer;
         }
         public static Enemy ResetEnemyFrames(Enemy currentenemy)

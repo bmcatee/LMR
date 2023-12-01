@@ -22,7 +22,6 @@ namespace lilminirpg
             userInterface.MenuTracker = menuTracker;
             userInterface.MenuInput = "";
             Console.Clear();
-
             UI.UIHeaderGeneric();
             Console.WriteLine("");
 
