@@ -28,7 +28,7 @@ namespace lilminirpg
         {
             Enemy[] enemiesOnScreen = new Enemy[16];
             // This is assuming the game screen is always 16; will want to make this non-hardcoded later
-            int totalMonsters = DiceRoller.RollDice(5, enemiesOnScreen.Length - 5);
+            int totalMonsters = DiceRoller.RollDice(4, enemiesOnScreen.Length - 7);
 
             for (int i = 0; i < enemiesOnScreen.Length; ++i)
             {
@@ -40,8 +40,8 @@ namespace lilminirpg
                 int tile = DiceRoller.RollDice(5, enemiesOnScreen.Length -1);
                 if (enemiesOnScreen[tile].Name == "Empty Ground")
                 {
-                    enemiesOnScreen[tile - 1] = EnemyMethods.CreateRandomEnemy(currentStage);
-                    enemiesOnScreen[tile - 1].StageTile = tile -1;
+                    enemiesOnScreen[tile] = EnemyMethods.CreateRandomEnemy(currentStage);
+                    enemiesOnScreen[tile].StageTile = tile;
                     --totalMonsters;
                 }
             }

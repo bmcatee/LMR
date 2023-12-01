@@ -36,7 +36,9 @@
 
                         if (stageIntroText)
                         {
+                            Console.WriteLine();
                             Console.WriteLine($"You begin your quest!");
+                            Console.WriteLine();
                             stageIntroText = false;
                         }
 
@@ -129,15 +131,16 @@
         // Here the player attacks; if the enemy's HP reaches 0 the player "wins" and gains XP/GP
         public async static Task<(Player Player, Enemy Enemy, Enemy[] StageArray)> PlayerAttack(Player currentPlayer, Enemy currentEnemy, Enemy[] currentStageArray)
         {
-            Console.WriteLine($"Player HP: {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} - Enemy HP: {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} - PlayerPos: {currentPlayer.StageTile}");
+            Console.WriteLine($"Player HP: {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} - Enemy HP: {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} - Player Tile: {currentPlayer.StageTile}, Enemy Tile: {currentEnemy.StageTile}");
             Enemy nextEnemy = UpcomingEnemy(currentStageArray, currentPlayer.StageTile + 1);
             int RollResults = DiceRoller.DamageRoller(currentPlayer);
             currentEnemy.HealthPointsCurrent = currentEnemy.HealthPointsCurrent - RollResults;
-            Console.WriteLine($"You attack with your {currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {currentEnemy.Name} now has {currentEnemy.HealthPointsCurrent} HP.");
+            Console.WriteLine($"You attack with your {currentPlayer.WornWeapon.Name} for {RollResults} dmg! The {currentEnemy.Name} now has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
             if (currentEnemy.HealthPointsCurrent < 1)
             {
                 Console.WriteLine();
                 Console.WriteLine($"You win! You gain {currentEnemy.XPDropped} XP and {currentEnemy.GoldDropped} GP!");
+                Console.WriteLine();
                 currentPlayer.XPCurrent += currentEnemy.XPDropped;
                 currentPlayer.GoldCurrent += currentEnemy.GoldDropped;
                 if (currentPlayer.XPCurrent >= currentPlayer.XPToLevel)
@@ -146,6 +149,7 @@
                     currentPlayer = PlayerMethods.PlayerLevelUp(currentPlayer);
                     Console.WriteLine();
                     Console.WriteLine($"DING! YOU ARE NOW LEVEL {currentPlayer.CurrentLevel}");
+                    Console.WriteLine();
                 }
                 currentStageArray[currentEnemy.StageTile] = EnemyMethods.CreateDummy();
                 currentEnemy = EnemyMethods.CreateDummy();
@@ -175,6 +179,7 @@
             Console.WriteLine($"The {currentEnemy.Name} successfully knocks you back to position {currentPlayer.StageTile}!");
             }
             Console.WriteLine($"Your HP is {currentPlayer.HealthPointsCurrent}/{currentPlayer.HealthPointsMax} and the {currentEnemy.Name} has {currentEnemy.HealthPointsCurrent}/{currentEnemy.HealthPointsMax} HP.");
+
             return (currentPlayer, currentEnemy);
         }
 
