@@ -49,7 +49,7 @@ namespace lilminirpg
         }
 
         // Prints character information
-        public async static Task PrintLists(Player currentPlayer)
+        public static void PrintLists(Player currentPlayer)
         {
 
         }
@@ -65,6 +65,7 @@ namespace lilminirpg
                 Console.ForegroundColor = consoleColors[i];
                 Console.WriteLine($"Hello, World: {consoleColors[i]}");
             }
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"Press Enter to continue");
             Console.ReadLine();
             await Menus.TestMenu();

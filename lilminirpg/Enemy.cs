@@ -43,7 +43,9 @@ namespace lilminirpg
             }
             return playerEnemies;
         }
-        // This makes a random enemy out of all the enemies available in the list; eventually this will spawn enemies based on groupings (family, rank, environment, etc.)
+        // This makes a random enemy out of all the enemies available in the list
+        // Eventually this will spawn enemies based on groupings (family, rank, environment, etc.)
+        // This also should be moved into the DB
         public static Enemy CreateRandomEnemy(int stagelevel)
         {
             List<Enemy> enemieslist = FetchEnemies();

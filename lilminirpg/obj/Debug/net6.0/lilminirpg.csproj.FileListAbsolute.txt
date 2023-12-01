@@ -34,3 +34,4 @@ C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net
 C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.csproj.AssemblyReference.cache
 C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.csproj.CopyComplete
+C:\Users\bmcat\Documents\Projects\lilminirpg\lilminirpg\lilminirpg\obj\Debug\net6.0\lilminirpg.sourcelink.json

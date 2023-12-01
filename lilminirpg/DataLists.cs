@@ -75,15 +75,20 @@ namespace lilminirpg
             Console.WriteLine("\tJobs:");
             Console.WriteLine("");
             Console.WriteLine("- A \"Job\" is your character's class, and determines many things.");
-            Console.WriteLine("First, your stats - each job has its own growth (more on that later), meaning each job is better at different things as they gain levels.");
-            Console.WriteLine("Secondly, each Job has its own (coming soon!) unique set of perks, that change how your character progresses through the game.");
-            Console.WriteLine("And also, certain combinations of Weapons and Accessories with specific jobs may unlock hidden, secret bonuses - it pays to experiment!");
+            Console.WriteLine("- First, your stats - each job has its own growth (more on that later), meaning each job is better at different things");
+            Console.WriteLine("as they gain levels.");
+            Console.WriteLine("- Secondly, each Job has its own (coming soon!) unique set of perks, that change how your character progresses through");
+            Console.WriteLine("the game.");
+            Console.WriteLine("- And also, certain combinations of Weapons and Accessories with specific jobs may unlock hidden, secret bonuses - it");
+            Console.WriteLine("pays to experiment!");
             Console.WriteLine("");
             Console.WriteLine("\tWeapons:");
             Console.WriteLine("");
             Console.WriteLine("- A weapon is what your character attacks with.");
-            Console.WriteLine("- Each weapon has its own unique Damage Type (Slashing, Bashing, Piercing, Ranged or Magical), and may or may not have an Elemental type.");
-            Console.WriteLine("- Certain Jobs have better proficiency in weapons with certain Damage or Elemental types, so it can be worth experimenting with different combinations.");
+            Console.WriteLine("- Each weapon has its own unique Damage Type (Slashing, Bashing, Piercing, Ranged or Magical), and may or may not have");
+            Console.WriteLine("an Elemental type.");
+            Console.WriteLine("- Certain Jobs have better proficiency in weapons with certain Damage or Elemental types, so it can be worth");
+            Console.WriteLine("experimenting with different combinations.");
             Console.WriteLine("- Weapons also provide additional stats to the player, and can convey unique perk abilities as well.");
             Console.WriteLine("");
             Console.WriteLine("\tAccessories:");
@@ -113,6 +118,7 @@ namespace lilminirpg
             Console.WriteLine("- When you level up, you gain stats equal to your Job Growth stats. Using Bob as our example again:");
             Console.WriteLine("  * If Bob has 30 STR at level 5, and a growth of 5 STR, at level 6 Bob will have 35 STR; at level 7, 40 STR.");
             Console.WriteLine("- Each Job has its own set of growth stats, making some jobs better at certain stats than others.");
+            Console.WriteLine("");
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
             Console.Clear();
@@ -130,7 +136,7 @@ namespace lilminirpg
             Console.WriteLine("");
             Console.WriteLine("Press Enter to return the main menu.");
         }
-        public async static Task PrintCharacterInfo(Player currentPlayer)
+        public static void PrintCharacterInfo(Player currentPlayer)
         {
             Console.WriteLine($"{currentPlayer.Name} the Level {currentPlayer.CurrentLevel} {currentPlayer.PlayerJob.Name}");
             Console.WriteLine($"Maximum HP: {currentPlayer.HealthPointsMax}");

@@ -5,11 +5,8 @@ An in-game menu gives more details on the mechanics of the game and how it is pl
 
 There should be no special requirements for running the game; cloning the repository and opening the solution in Visual Studio should work just fine.
 
-- Player data is saved to a local database; currently there is only one save slot, by design.
-- The font choice for this application is Consolas, for both readability and compatibility purposes.
-- Colors utilize a monochrome / 16 color palette, fitting overall with the retro aesthetic of the title.
-
 Feature requirements list:
-* Dictionary/list usage
+* Player data is saved to a local database (currently there is only one save slot, by design)
+* List usage
 * Async implementation for save/load
 * Error logging, saved to a .log file ("lmr_error_log.log")
