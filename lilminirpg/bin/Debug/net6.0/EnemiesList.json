@@ -73,7 +73,7 @@
         "AttackPercent1": 60,
 		"AttackStat2": "StatStrength",
 		"AttackPercent2": 40,
-        "GoldDropped": 5,
+        "GoldDropped": 7,
         "XPDropped": 5,
         "MonsterFamily": "Slime",
         "MonsterEnvironment": "",
@@ -101,7 +101,7 @@
 		"AttackStat2": "StatLuck",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 10,
         "MonsterFamily": "Slime",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -155,7 +155,7 @@
 		"AttackStat2": "StatDexterity",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 7,
         "MonsterFamily": "Goblin",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -182,7 +182,7 @@
 		"AttackStat2": "StatLuck",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 10,
         "MonsterFamily": "Goblin",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -236,7 +236,7 @@
 		"AttackStat2": "StatLuck",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 3,
         "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -263,7 +263,7 @@
 		"AttackStat2": "StatDexterity",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 7,
         "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -290,7 +290,7 @@
 		"AttackStat2": "StatDexterity",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 4,
         "MonsterFamily": "Animal",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -317,7 +317,7 @@
 		"AttackStat2": "StatIntelligence",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 6,
         "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -371,7 +371,7 @@
 		"AttackStat2": "StatStrength",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 7,
         "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -398,7 +398,7 @@
 		"AttackStat2": "StatLuck",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 7,
         "MonsterFamily": "Vegetable",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -425,7 +425,7 @@
 		"AttackStat2": "StatDexterity",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 10,
         "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -452,7 +452,7 @@
 		"AttackStat2": "StatLuck",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 7,
         "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -479,7 +479,7 @@
 		"AttackStat2": "StatLuck",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 6,
         "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -506,7 +506,7 @@
 		"AttackStat2": "StatStrength",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 8,
         "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": ""
@@ -533,7 +533,7 @@
 		"AttackStat2": "StatDexterity",
 		"AttackPercent2": 40,
         "GoldDropped": 5,
-        "XPDropped": 5,
+        "XPDropped": 7,
         "MonsterFamily": "Magic",
         "MonsterEnvironment": "",
         "MonsterRank": ""

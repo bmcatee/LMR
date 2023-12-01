@@ -10,3 +10,5 @@ Feature requirements list:
 * List usage
 * Async implementation for save/load
 * Error logging, saved to a .log file ("lmr_error_log.log")
+
+Note: There are still issues with game balance; not all job/item combos will be as successful as others in this build. Please let the author know if there are any egregious examples you come across!
