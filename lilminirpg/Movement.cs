@@ -168,7 +168,7 @@
             int RollResults = DiceRoller.DamageRoller(currentEnemy);
             currentPlayer.HealthPointsCurrent = currentPlayer.HealthPointsCurrent - RollResults;
             Console.WriteLine($"The {currentEnemy.Name} {currentEnemy.AttackWord} you for {RollResults} dmg!");
-            int coinflip = DiceRoller.RollDice(0, 4);
+            int coinflip = DiceRoller.RollDice(0, 3);
             if (coinflip == 0) 
             {
             _wasKB = true;
